@@ -56,11 +56,11 @@ class Home extends Site_Controller
 	    $data['applicant_statuses'] = $this->applicant->getStatuses(true);
 
 		// add breadcrumbs
-		$this->breadcrumbs->push('Application Forms Management', 'home/');
+//		$this->breadcrumbs->push('Application Forms Management', 'home/');
 		
 		$data['navAdd'] = array('link'=>'home/save', 'title'=>'Add New');
 		$data['PAGE_TITLE'] = 'eKYC - Application Forms Management';
-		$data['BODY_CLASS'] = "sts";
+		$data['BODY_CLASS'] = "home";
 		$data['CONTENT']='home/index';
 		$this->load->view('layout/layout_st', $data);
         

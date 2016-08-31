@@ -1,272 +1,427 @@
-<div id="ticket_filter" class="panel panel-default">
-	<div class="panel-heading">
-		<button class="btn btn-link padding-0 pull-left" data-toggle="collapse" data-target="#frm_filter"><i class="icomoon icon-binoculars"></i> Filter <b class="caret"></b></button>
-		<div class="clearfix"></div>
-	</div>
-	<?php echo form_open(current_url(), array('id'=>'frm_filter','name'=>'frm_filter','class'=>'form-horizontal tickets-filter collapse in')); ?>
-	<div id="filter_holder" class="panel-body">
-		<div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="serial_number" class="control-label col-xs-5">Serial Number</label>
-					<div class="col-xs-7"><input id="serial_number" name="serial_number" class="form-control input-sm" type="search" value="<?php echo set_value('serial_number', ''); ?>" /></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="phone_number" class="control-label col-xs-5">Phone Number</label>
-					<div class="col-xs-7"><input id="phone_number" name="phone_number" class="form-control input-sm" type="search" value="<?php echo set_value('phone_number', ''); ?>" /></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="applicant_status_id" class="control-label col-xs-5">Status</label>
-					<div class="col-xs-7"><?php echo form_dropdown('applicant_status_id', $applicant_statuses, (!empty($filter['applicant_status_id'])? $filter['applicant_status_id']:''), 'id="applicant_status_id" class="form-control input-sm"');?></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="dealer_id" class="control-label col-xs-5">Dealer</label>
-					<div class="col-xs-7"><?php echo form_dropdown('dealer_id', $dealers, (!empty($filter['dealer_id'])? $filter['dealer_id']:''), 'id="dealer_id" class="form-control input-sm"');?></div>
-                </div>
-            </div>
-            
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="subscriber_name" class="control-label col-xs-5">Subscriber Name</label>
-					<div class="col-xs-7"><input id="subscriber_name" name="subscriber_name" class="form-control input-sm" type="search" value="<?php echo set_value('subscriber_name', ''); ?>" /></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="subscriber_type" class="control-label col-xs-5">Subscriber Type</label>
-					<div class="col-xs-7"><?php echo form_dropdown('subscriber_type', array_replace(array(''=>'---'), Applicant_model::$SUBSCRIBER_TYPES), (!empty($filter['subscriber_type'])? $filter['subscriber_type']:''), 'id="subscriber_type" class="form-control input-sm"');?></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="city_id" class="control-label col-xs-5">City</label>
-					<div class="col-xs-7"><?php echo form_dropdown('city_id', $cities, (!empty($filter['city_id'])?$filter['city_id']:''), 'id="city_id" class="form-control input-sm"');?></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group no-gutter">
-                    <label for="sales_id" class="control-label col-xs-5">Saller ID</label>
-                    
-					<div class="col-xs-7"><?php echo form_dropdown('sales_id', $sallers_list, $default = (!empty($filter['sales_id'])?$filter['sales_id']:''), 'id="sales_id" class="form-control"'); ?></div>
-                </div>
-            </div>
-        </div>
-	</div><!-- end filter panel body -->
-	<div class="panel-footer text-right">
-		<button type="reset" class="btn btn-sm btn-link"><i class="fa fa-times"></i> Reset</button>
-		<button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-search"></i> Search</button>
-	</div>
-	<?php echo form_close(); ?> 
-</div><!-- end panel filter tickets -->
-
-<div id="" class="panel panel-default">
-	<div class="panel-heading"><i class="fa fa-list-ul"></i> Applications List <div class="pull-right"><a href="" onclick="bootbox.alert('This feature is Under Construction');return false;"><i class="icomoon icon-file-excel"></i> Export</a></div></div>
-	<div class="table-responsive">
-	<?php if (isset($items)) {?>
-	 <a class="btn btn-success btn-xs" href="<?php echo site_url('home/approve_ajax/');?>" class="text-success" onclick="bootbox.alert('This feature is Under Construction');return false;"><i class="fa fa-check"></i> Approve</a>
-     <a class="btn btn-danger btn-xs" data-toggle="modal" data-rejectappid="-1" href="#" class="text-danger" onclick="bootbox.alert('This feature is Under Construction');return false;"><i class="glyphicon glyphicon-remove"></i> Reject</a>
-                
-	<table id="app_list" class="thead-green display table-condensed table table-bordered table-striped dataTable-applicants">
-	<thead>
-		<tr><th class="nosort text-center" style="width:20px;"><input id="checkAll" type="checkbox" class="mass-action" name="applicants[-1]" value="-1" /> <label for="checkAll">All/No</label></th>
-			<th class="nosort">SIM Number</th>
-			<th class="nosort fit-size">Phone Number</th>
-			<th class="fit-size">Status</th>
-			<th class="nosort">Date</th>
-			<th class="nosort fit-size">Dealer Name</th>
-			<th class="nosort fit-size">Sales ID</th>
-			<th class="nosort fit-size">Subcriber Type</th>
-			<th class="nosort fit-size">Contact Person</th>
-			<th class="nosort fit-size">Date of Birth</th>
-			
-			<th class="nosort">No.</th>
-			<th class="nosort">St.</th>
-			<th class="nosort">Sangkat/Commune</th>
-			<th class="nosort">Khan/District</th>
-			<th class="nosort">Citiy/Province</th>
-			
-			<th class="nosort">Contact Phone</th>
-			<th class="nosort">Fax Number</th>
-			<th class="nosort">E-mail</th>
-			
-			<th class="nosort">Cambodian/Foreigner</th>
-			<th class="nosort">Attached Document</th>
-			<th class="nosort">File 1</th>
-			<th class="nosort">File 2</th>
-			<th class="nosort">Document Number</th>
-			<th class="nosort" title="Document Date of Issue">Document Issue</th>
-			
-			<th class="nosort">GPS</th>
-			<th class="nosort" style="width: 250px; padding-right: 0;">Actions</th>
-		</tr>
-	</thead>   
-	<tbody>
-	<?php foreach($items as $item) :?>
-		<tr><td class="text-center"><input type="checkbox" class="mass-action" name="applicants[<?php echo $item['applicant_id'];?>]" value="<?php echo $item['applicant_id'];?>" /></td>
-			<td><a href="<?php echo site_url('home/save/'.$item['applicant_id']);?>"><?php echo $item['serial_number'];?></a></td>
-			<td><?php echo $item['phone_number'];?></td>
-			<td class="text-center">
-				<?php if ($item['applicant_status_id'] == '1') {?>
-				<div class="text-warning"><i class="icon32 icon-gray icon-clock"></i> <?php echo $item['applicant_status_name'];?></div>
-				<?php } elseif ($item['applicant_status_id'] == '2') { ?>
-				<div class="text-success"><i class="fa fa-check"></i> <?php echo $item['applicant_status_name'];?></div>
-				<?php } elseif ($item['applicant_status_id'] == '3') { ?>
-				<div class="text-danger"><i class="fa fa-check"></i> <?php echo $item['applicant_status_name'];?></div>
-				<?php } elseif ($item['applicant_status_id'] == '4') { ?>
-				<div class="text-info"><i class="fa fa-check"></i> <?php echo $item['applicant_status_name'];?></div>
-				<?php }?>
-			</td>
-			<td><?php echo date('d-M-Y', strtotime($item['created_at']));?></td>
-			<td><a href="<?php echo site_url('dealer/profile/'.$item['dealer_id']);?>"><?php echo $item['dealer_name'];?></a></td>
-			<td><?php echo $item['salesID'];?></td>
-			<td><?php echo (isset(Applicant_model::$SUBSCRIBER_TYPES[$item['subscriber_type']])? Applicant_model::$SUBSCRIBER_TYPES[$item['subscriber_type']]: '');?></td>
-			<td><?php echo ucfirst($item['gender']) . ' ' . $item['contact_name'];?></td>
-			<td><?php echo $item['date_of_birth'];?></td>
-			
-			<td><?php echo $item['house_number'];?></td>
-			<td><?php echo $item['street'];?></td>
-			<td><?php echo $item['commune_name'];?></td>
-			<td><?php echo $item['district_name'];?></td>
-			<td><?php echo $item['city_name'];?></td>
-			
-			<td><?php echo $item['contact_number'];?></td>
-			<td><?php echo $item['fax_number'];?></td>
-			<td><?php echo $item['email'];?></td>
-			
-			<td><?php echo ((isset(Applicant_model::$FOREIGNER_TYPES[$item['is_foreigner']]))? Applicant_model::$FOREIGNER_TYPES[$item['is_foreigner']]: 'N/A');?></td>
-			<td><?php echo ((isset(Applicant_model::$DOCUMENT_TYPES[$item['document_type']]))? Applicant_model::$DOCUMENT_TYPES[$item['document_type']]: 'N/A');?></td>
-			<td><?php 
-				if ($item['photo_1']) {
-					$img_src = base_url("assets/upload/{$item['photo_1']}");
-					echo '<a href="'.$img_src.'" target="_blank"><img width="60" height="36" src="'.$img_src.'" />';
-				}
-				?>
-			</td>
-			<td><?php if ($item['photo_2']) {
-					$img_src = base_url("assets/upload/{$item['photo_2']}");
-					echo '<a href="'.$img_src.'" target="_blank"><img width="60" height="36" src="'.$img_src.'" />';
-				}?></td>
-			<td><?php echo $item['document_number'];?></td>
-			<td><?php echo (!empty($item['document_issue_date'])? date('d-M-Y', strtotime($item['document_issue_date'])): 'N/A');?></td>
-			
-			<td class="center"><?php echo $item['GPS_Lat']. ', '.$item['GPS_Lon'];?></td>
-            <td class="center fit-size" style="text-align: center;" data-appid="<?php echo $item['applicant_id'];?>">
-            	<?php if ($item['applicant_status_id'] == '1' || $item['applicant_status_id'] == '4') {?>
-                <a class="approve_form btn btn-success btn-xs action-btn" href="<?php echo site_url('home/approve_ajax/'.$item['applicant_id']);?>" class="text-success"><i class="fa fa-check"></i> Approve</a>
-                <a class="reject_form btn btn-danger btn-xs action-btn" data-toggle="modal" data-rejectappid="<?php echo $item['applicant_id'];?>" href="#" class="text-danger"><i class="glyphicon glyphicon-remove"></i> Reject</a><br />
-                <?php }?>
-                <a href="<?php echo site_url('home/save/'.$item['applicant_id']);?>"><i class="fa fa-pencil-square-o"></i> Edit</a>
-            </td>
-		</tr>
-		<?php endforeach;?>
-	</tbody>
-	</table>
-	<?php } //end if table?>
-	</div>
-</div>
-<div id="new_reject" class="modal" data-keyboard="false" data-backdrop="static">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4 class="modal-title text-warning">Please specify reject reason</h4>
+<!--we can use class img-circle and width&height on img instead of my scripts-->
+<div class="container">
+	<div class="row circles-holder">
+		<div class="col-md-4 text-center">
+			<div class="circle-block">
+				<div class="circle-inner img-terms"></div>
 			</div>
-			<form method="post" action="<?php echo site_url('/home/reject_ajax/')?>" id="frm_reject" name="frm_reject" class="form">
-				<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
-				<input type="hidden" name="reject_applicant_id" value="" />
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="type" class="control-label">Message:</label>
-						<textarea id="reason" name="reason"></textarea>
-					</div>
-				</div>
-				
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
-					<button type="submit" id="send_button" class="btn btn-success btn-xs"><i class="cus-email-go"></i> OK</button>
-				</div>
-			</form>
+			<div class="title-circle">
+				<h2>Сроки</h2>
+				<h4>Сдача работы без задержек</h4>
+			</div>
+		</div>
+		<div class="col-md-4 text-center">
+			<div class="circle-block">
+				<div class="circle-inner img-quality"></div>
+			</div>
+			<div class="title-circle">
+				<h2>Качество</h2>
+				<h4>Соблюдение технологий</h4>
+			</div>
+		</div>
+		<div class="col-md-4 text-center">
+			<div class="circle-block">
+				<div class="circle-inner img-result"></div>
+			</div>
+			<div class="title-circle">
+				<h2>Результат</h2>
+				<h4>Удовлетворенность клиента</h4>
+			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(e) {
 
-	$("#checkAll").change(function () {
-	    $("input:checkbox.mass-action").prop('checked', $(this).prop("checked"));
-	});
-	
-	$("form#frm_reject").validate({
-        rules: {	
-        	reason:{required: true,minlength:2, maxlength:10000}
-        },
-        errorElement: 'span',
-        errorClass: 'text-danger',
-    });
-    	
-	$('.reject_form').click(function(e){
-		e.preventDefault();
-		var rejectappid = $(this).data('rejectappid');
-		$('input[name="reject_applicant_id"]').val(rejectappid);
-		$('#new_reject').modal('show');
-    });
+<div class="container-fluid">
+	<div class="row design-holder">
+		<div class="col-sm-12 title text-center">
+			<h1>Состав дизайн проекта</h1>
+		</div>
+	</div>
+	<div class="row design-holder-blue">
+		<div class="row-md-height">
+			<div class="col-xs-12 col-md-5 col-md-height col-middle">
+				<div class="inside">
+					<div class="content question-block text-center">
+						<h1 class="bonuses">+ Бонус</h1>
+						<p>2 выезда дизайнера во время работы!</p>
+						<a href="#clientQuestion" class="app-btn btn-orange">Задать вопрос</a>
+					</div>
+				</div>
+			</div><!--
+            --><div class="col-xs-12 col-md-7 col-md-height col-top">
+				<div class="inside">
+					<div class="content facility-block">
+						<ul class="services-list">
+							<li>Обмерный чертеж помещения</li>
+							<li>План после перепланировки с экспликацией помещений</li>
+							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
+							<li>План демонтажа перегородок</li>
+							<li>Монтажный план перегородок</li>
+							<li>План с расстоновкой мебели</li>
+							<li>План пола с указанием типов покрытий</li>
+							<li>План потолка</li>
+							<li>Разрезы потолка с указанием высот</li>
+							<li>План привязки приборов освещения</li>
+							<li>План привязки приборов освещения и выключателей по группам</li>
+							<li>План привязки элетротехнических изделий, совмещенный с мебелью</li>
+							<li>План теплых полов</li>
+							<li>Ведомость отделки по помещениям с указанием площадей, примеров, объемов</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Projects slider block -->
+<div id="projectsCarusel" class="container-fluid">
+	<div class="row projects-holder">
+		<div class="col-sm-12 title text-center">
+			<h1>Проекты</h1>
+		</div>
+	</div>
+	<div class="row projects-holder-slider">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for Slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<!-- Set the first background image using inline CSS below. -->
+					<div class="fill" style="background-image:url('/public/img/project_1.png');"><img src="/public/img/project_1.png" /></div>
+					<!--<div class="carousel-caption"><h2>Caption 1</h2></div>-->
+				</div>
+				<div class="item">
+					<!-- Set the second background image using inline CSS below. -->
+					<div class="fill" style="background-image:url('/public/img/project_1.png')"><img src="/public/img/project_1.png" /></div>
+				</div>
+				<div class="item">
+					<!-- Set the third background image using inline CSS below. -->
+					<div class="fill" style="background-image:url('/public/img/project_1.png');"><img src="/public/img/project_1.png" /></div>
+				</div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<i class="fa fa-arrow-left"></i>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next">
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</div><!-- end of carusel-->
+	</div>
+</div><!-- end Projects slider block -->
 
-	$('.approve_form').click(function(e){
-		e.preventDefault();
-		var applicant_id = $(this).parent('td').data('appid');
-		var $this = $(this);
-		console.log(applicant_id);
+<!-- Prices block -->
+<div id="priceBlock" class="container-fluid">
+	<div class="row preices-holder">
+		<div class="col-sm-12 title text-center">
+			<h1>Цэны</h1>
+		</div>
+	</div>
+	<div class="row preices-holder-content">
+		<div class="col-md-12">
+			<div class="container price-pack-holder">
+				<div class="row">
+					<div class="col-sm-8">
+						<ul class="services-list">
+							<li>Обмерный чертеж помещения</li>
+							<li>План после перепланировки с экспликацией помещений</li>
+							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
+							<li>План демонтажа перегородок</li>
+						</ul>
+					</div>
+					<div class="col-sm-4 text-right">
+						<h1>800 <span>руб./м<sup>2</sup></span></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-8">
+						<ul class="services-list">
+							<li>Обмерный чертеж помещения</li>
+							<li>План после перепланировки с экспликацией помещений</li>
+							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
+							<li>План демонтажа перегородок</li>
+						</ul>
+					</div>
+					<div class="col-sm-4 text-right">
+						<h1>1500 <span>руб.</span></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-8">
+						<ul class="services-list">
+							<li>Регулярные выезды автора проекта на объект.</li>
+							<li>Регулярные выезды автора проекта в магазины.</li>
+							<li>Консультации строителей и поставщиков.</li>
+							<li>Своевременное внесение в проект изменений с согласия заказчика.</li>
+							<li>Консультация заказчика по выбору декоративных и отделочных материалов.</li>
+						</ul>
+					</div>
+					<div class="col-sm-4 text-right">
+						<h1>1500 <span>руб.</span></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 price-list text-right">
+						<a class="app-btn btn-orange" href="">Прай-лист</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- end Projects prices block -->
+<!-- Projects feedback block -->
+<div id="clientReviews" class="container-fluid">
+	<div class="row reviews-holder">
+		<div class="col-sm-12 title text-center">
+			<h1 class="color-orange">Отзывы</h1>
+		</div>
+	</div>
+	<div class="row reviews-holder-slider">
+		<div id="myCarousel2" class="carousel slide" data-ride="carousel">
+			<!-- Wrapper for Slides -->
+			<div class="container">
+				<div class="carousel-inner">
+					<div class="item active">
+						<!-- Set the first background image using inline CSS below. -->
+						<div class="row circles-holder">
+							<div class="col-sm-3 col-sm-offset-1 review-img-block">
+								<div class="circle-block">
+									<div class="circle-inner img-review"></div>
+								</div>
+							</div>
+							<div class="col-sm-7 review-content-block">
+								<h1>Юля Студеникина</h1>
+								<div class="quoted"><p>Для меня было истинным удовольствие работать с Екатериной Петровой. Она талантливый, креативный, яркий человек. Энергичная и жизнерадостная! Каждая ее работа не похожа на предыдущую, стили неповторимы. Она тонко чувствует Ваши потребности и предпочтения. Результат превосходит все ожидания!<br />Всем рекомендую!</p></div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<!-- Set the first background image using inline CSS below. -->
+						<div class="row circles-holder">
+							<div class="col-sm-3 col-sm-offset-1 review-img-block">
+								<div class="circle-block">
+									<div class="circle-inner img-review"></div>
+								</div>
+							</div>
+							<div class="col-sm-7 review-content-block">
+								<h1>Юля Студеникина</h1>
+								<div class="quoted"><p>Для меня было истинным удовольствие работать с Екатериной Петровой. Она талантливый, креативный, яркий человек. Энергичная и жизнерадостная! Каждая ее работа не похожа на предыдущую, стили неповторимы. Она тонко чувствует Ваши потребности и предпочтения. Результат превосходит все ожидания!<br />Всем рекомендую!</p></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#myCarousel2" data-slide="prev">
+				<i class="fa fa-arrow-left"></i>
+			</a>
+			<a class="right carousel-control" href="#myCarousel2" data-slide="next">
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</div><!-- end of carusel-->
+		<div class="container text-right">
+			<a href="/reviews/" class="app-btn btn-orange">Отзывы клиентов</a>
+		</div>
+	</div>
+</div><!-- end Projects slider block -->
+<!-- Projects video feedback block -->
+<div class="container-fluid bg-gray">
+	<div class="row reviews-holder">
+		<div class="col-sm-12 title text-center">
+			<h1 class="color-orange">Видео Отзывы</h1>
+		</div>
+	</div>
+	<div class="row vreviews-holder-slider">
+		<div id="myCarousel3" class="carousel slide" data-ride="carousel">
+			<!-- Wrapper for Slides -->
+			<div class="container">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="row circles-holder">
+							<div class="col-sm-3 col-sm-offset-1 review-img-block">
+								<div class="circle-block">
+									<div class="circle-inner img-vreview"></div>
+								</div>
+							</div>
+							<div class="col-sm-7 review-content-block">
+								<h1>Уолтер Брюс Уиллис</h1>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<!-- Set the first background image using inline CSS below. -->
+						<div class="row circles-holder">
+							<div class="col-sm-3 col-sm-offset-1 review-img-block">
+								<div class="circle-block">
+									<div class="circle-inner img-review"></div>
+								</div>
+							</div>
+							<div class="col-sm-7 review-content-block">
+								<h1>Юля Студеникина</h1>
+							</div>
+						</div>
+					</div>
+				</div><!-- end carousel-inner -->
+			</div><!-- end container -->
+			<!-- Controls -->
+			<a class="left carousel-control" href="#myCarousel3" data-slide="prev">
+				<i class="fa fa-arrow-left"></i>
+			</a>
+			<a class="right carousel-control" href="#myCarousel3" data-slide="next">
+				<i class="fa fa-arrow-right"></i>
+			</a>
+		</div><!-- end of carusel-->
+		<div class="container text-right">
+			<a href="{!! URL::to('reviews/#video') !!}" class="app-btn btn-orange">Отзывы клиентов</a>
+		</div>
+	</div>
+</div><!-- end Projects slider block -->
+<!-- Client question block -->
+<div class="container-fluid question-holder">
+	<div class="row">
+		<div class="col-sm-12 title text-center">
+			<h1>Вопросы</h1>
+		</div>
+	</div>
+	<div class="row question-holder-content">
+		<div class="col-md-12">
+			<div class="container price-pack-holder">
+				<div class="row">
+					<div class="col-sm-12">
+						<h2 class="q-title">Остались вопросы?</h2>
+						<span class="sub-qtitle">Задать их нашему специалисту</span>
+					</div>
+				</div>
+				<div class="row q-form">
+					<form class="form-horizontal">
+						<div class="col-sm-8">
+							<div class="row">
+								<div class="col-sm-6">
+									<input type="text" name="q_name" class="form-control" id="q_name" placeholder="Ваше имя" />
+								</div>
+								<div class="col-sm-6">
+									<input type="text" name="q_phone" class="form-control" id="q_phone" placeholder="Номер телефона">
+								</div>
+							</div>
+							<div class="row q-text">
+								<div class="col-sm-12">
+									<textarea class="form-control" rows="3" placeholder="Ваш вопрос"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 q-action">
+							<div class="row">
+								<div class="col-sm-12">
+									<button type="submit" class="btn app-btn btn-orange btn-block">Задать вопрос</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- end Projects slider block -->
+<!-- Question block -->
+<div class="container-fluid map-holder">
+	<div class="row">
+		<div class="col-sm-12 title text-center">
+			<h1>Где мы находимся</h1>
+		</div>
+	</div>
+	<div class="row map-content">
+		<div class="col-md-12">
+			<div id="map" style="width: 100%; height: 400px"></div>
+		</div>
+	</div>
+</div><!-- end Projects slider block -->
+<!-- Question block -->
 
-		bootbox.confirm("Are You sure want to approve this applicantion form?", function(result) {
-			if (result == true) {
-				generalPopUp.show(true);
-		        $.ajax({
-			        url: $this.attr("href"),  
-			        data: {applicant_id: applicant_id},  
-					type: "POST",  
-			        success:function(data){
-				        $('td[data-appid="'+applicant_id+'"]').children('.action-btn').remove();
-			        	generalPopUp.hide();
-		        	}  
-		        });
-			}
-		});
-		
-    });
-	
-	$(document).on("submit", 'form#frm_reject', function(e){ 
-// 		if (confirm('You are sure to reject this ticket?') == false) return false;
-		e.preventDefault();
-		var $this = $(this);
-		bootbox.confirm("You are sure to reject this applicantion form?", function(result) {
-			if (result == true) {
-				$('#new_reject').modal('hide');
-				generalPopUp.show(true);
-		        $.ajax({
-			        url: $this.attr("action"),  
-			        data: $this.serialize(),  
-					type: "POST",  
-			        success:function(data){
-				        var reject_applicant_id = $('input[name="reject_applicant_id"]').val();
-				        $('td[data-appid="'+reject_applicant_id+'"]').children('.action-btn').remove();
+<!-- Login block -->
+<div id="client_login" class="container-fluid stages-holder">
+	<div class="row">
+		<div class="col-sm-12 title text-center">
+			<h1>Этапы работ</h1>
+		</div>
+	</div>
+	<div class="row u-form">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="row">
+					<form class="form-horizontal">
+						<div class="col-sm-8">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" name="u_name" class="form-control" id="u_name" placeholder="Имя клиента" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" name="u_phone" class="form-control" id="u_phone" placeholder="Номер телефона">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 q-action">
+							<div class="row">
+								<div class="col-sm-12">
+									<button type="submit" class="btn app-btn btn-orange btn-block">Войти</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row stages-content">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Responsive calendar - START -->
+								<div class="responsive-calendar">
+									<div class="controls">
+										<a class="pull-left" data-go="prev"><i class="fa fa-arrow-left"></i></a>
+										<h4><span data-head-year></span> <span data-head-month></span></h4>
+										<a class="pull-right" data-go="next"><i class="fa fa-arrow-right"></i></a>
+									</div><div class="clearfix"></div>
+									<div class="day-headers">
+										<div class="day header">П</div>
+										<div class="day header">В</div>
+										<div class="day header">С</div>
+										<div class="day header">Ч</div>
+										<div class="day header">П</div>
+										<div class="day header">С</div>
+										<div class="day header">В</div>
+									</div>
+									<div class="days" data-group="days">
 
-			        	$('textarea[name="reason"]').val('');
-			        	$('input[name="reject_applicant_id"]').val('');
-			        	generalPopUp.hide();
-		        	}  
-		        });
-			}
-		});
-	});
-}); //end ready()
-</script>
-<style>
-form textarea {width: 100%;height:100px;}
-form {margin:0;}
-</style>
+									</div>
+								</div>
+								<!-- Responsive calendar - END -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 u-details">
+								<h2 class="color-orange">Валерий</h2>
+								<div class="text-muted">Графский переулок, дом 14, корпус 2, 4 этаж</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<a href="#" class="stage-img center-block"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- end Projects slider block -->
