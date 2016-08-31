@@ -1,0 +1,116 @@
+------>http://10.12.5.205:7080/CRM/CBSInterface_AR_Services
+----API: QueryInvoice
+
+-------------------Request----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ars="http://www.huawei.com/bme/cbsinterface/arservices" xmlns:cbs="http://www.huawei.com/bme/cbsinterface/cbscommon" xmlns:arc="http://cbs.huawei.com/ar/wsservice/arcommon">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ars:QueryInvoiceRequestMsg>
+         <RequestHeader>
+         <cbs:Version>1</cbs:Version>
+	<cbs:BusinessCode>1</cbs:BusinessCode><cbs:MessageSeq>1</cbs:MessageSeq>
+	<cbs:OwnershipInfo>
+	<cbs:BEID>101</cbs:BEID>
+	</cbs:OwnershipInfo>
+	<cbs:AccessSecurity>
+	<cbs:LoginSystemCode>5060</cbs:LoginSystemCode>
+	<cbs:Password>r8q0a5WwGNboj9I35XzNcQ==</cbs:Password>
+	</cbs:AccessSecurity>
+         </RequestHeader>
+         <QueryInvoiceRequest>
+            <ars:AcctAccessCode>
+               <!--You have a CHOICE of the next 3 items at this level-->
+               <arc:PrimaryIdentity>10212648</arc:PrimaryIdentity>
+   
+       
+            </ars:AcctAccessCode>
+            <!--You have a CHOICE of the next 3 items at this level-->
+             <ars:TimePeriod>
+               <ars:StartTime>20150901000000</ars:StartTime>
+               <ars:EndTime>20151020000000</ars:EndTime>
+            </ars:TimePeriod>
+
+  
+         </QueryInvoiceRequest>
+      </ars:QueryInvoiceRequestMsg>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ars:QueryInvoiceResultMsg xmlns:ars="http://www.huawei.com/bme/cbsinterface/arservices" xmlns:cbs="http://www.huawei.com/bme/cbsinterface/cbscommon">
+         <ResultHeader>
+            <cbs:Version>1</cbs:Version>
+            <cbs:ResultCode>0</cbs:ResultCode>
+            <cbs:MsgLanguageCode>2002</cbs:MsgLanguageCode>
+            <cbs:ResultDesc>Operation successfully.</cbs:ResultDesc>
+         </ResultHeader>
+         <QueryInvoiceResult>
+            <ars:InvoiceInfo>
+               <ars:AcctKey>1010001969862</ars:AcctKey>
+               <ars:CustKey>1010001973495</ars:CustKey>
+               <ars:TransType>SLI</ars:TransType>
+               <ars:InvoiceID>222025168</ars:InvoiceID>
+               <ars:InvoiceNo>20151008000000213169</ars:InvoiceNo>
+               <ars:BillCycleID>20151001</ars:BillCycleID>
+               <ars:BillCycleBeginTime>20151001000000</ars:BillCycleBeginTime>
+               <ars:BillCycleEndTime>20151101000000</ars:BillCycleEndTime>
+               <ars:InvoiceAmount>0</ars:InvoiceAmount>
+               <ars:OpenAmount>0</ars:OpenAmount>
+               <ars:DisputeAmount>0</ars:DisputeAmount>
+               <ars:CurrencyID>1153</ars:CurrencyID>
+               <ars:InvoiceDate>20151008115123</ars:InvoiceDate>
+               <ars:DueDate>20151128000000</ars:DueDate>
+               <ars:SettleDate>20151008115128</ars:SettleDate>
+               <ars:Status>C</ars:Status>
+               <ars:InvoiceDetail>
+                  <ars:InvoiceID>322025168</ars:InvoiceID>
+                  <ars:ServiceCategory/>
+                  <ars:ChargeCode>C_STANDARD_MSISDN</ars:ChargeCode>
+                  <ars:ChargeAmount>0</ars:ChargeAmount>
+                  <ars:OpenAmount>0</ars:OpenAmount>
+                  <ars:DisputeAmount>0</ars:DisputeAmount>
+                  <ars:CurrencyID>1153</ars:CurrencyID>
+                  <ars:Status>C</ars:Status>
+               </ars:InvoiceDetail>
+            </ars:InvoiceInfo>
+            <ars:InvoiceInfo>
+               <ars:AcctKey>1010001969862</ars:AcctKey>
+               <ars:CustKey>1010001973495</ars:CustKey>
+               <ars:TransType>SLI</ars:TransType>
+               <ars:InvoiceID>222025169</ars:InvoiceID>
+               <ars:InvoiceNo>20151008000000213170</ars:InvoiceNo>
+               <ars:BillCycleID>20151001</ars:BillCycleID>
+               <ars:BillCycleBeginTime>20151001000000</ars:BillCycleBeginTime>
+               <ars:BillCycleEndTime>20151101000000</ars:BillCycleEndTime>
+               <ars:InvoiceAmount>0</ars:InvoiceAmount>
+               <ars:OpenAmount>0</ars:OpenAmount>
+               <ars:DisputeAmount>0</ars:DisputeAmount>
+               <ars:CurrencyID>1153</ars:CurrencyID>
+               <ars:InvoiceDate>20151008115123</ars:InvoiceDate>
+               <ars:DueDate>20151128000000</ars:DueDate>
+               <ars:SettleDate>20151008115128</ars:SettleDate>
+               <ars:Status>C</ars:Status>
+               <ars:InvoiceDetail>
+                  <ars:InvoiceID>322025169</ars:InvoiceID>
+                  <ars:ServiceCategory/>
+                  <ars:ChargeCode>C_SUBSCRIPTION_SERVICE</ars:ChargeCode>
+                  <ars:ChargeAmount>0</ars:ChargeAmount>
+                  <ars:OpenAmount>0</ars:OpenAmount>
+                  <ars:DisputeAmount>0</ars:DisputeAmount>
+                  <ars:CurrencyID>1153</ars:CurrencyID>
+                  <ars:Status>C</ars:Status>
+               </ars:InvoiceDetail>
+            </ars:InvoiceInfo>
+         </QueryInvoiceResult>
+      </ars:QueryInvoiceResultMsg>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,14 @@
+RewriteEngine on
+
+# Check for the environme here
+SetEnvIfNoCase SERVER_ADDR ^10\.90\.16\.137$ ENV_PROD
+SetEnvIfNoCase SERVER_ADDR ^10\.90\.17\.34$ ENV_TEST
+SetEnvIfNoCase SERVER_ADDR ^10\.90\.1\.10$ ENV_TEST
+SetEnvIfNoCase SERVER_ADDR ^127\.0\.0\.1$ ENV_DEV
+SetEnvIfNoCase SERVER_ADDR ^192\.168\.6\.2$ ENV_DEV
+SetEnvIfNoCase SERVER_ADDR ^111\.92\.240\.78$ ENV_DEV
+
+RewriteCond $1 !^(index\.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [QSA,L,NC]

@@ -1,0 +1,17 @@
+.ot-dialog {    
+    border:2px solid #c5c6c6;
+    z-index: 9;
+}
+.ot-dialog-wrapper {z-index: 9; position: relative;}
+.ot-dialog .ot-tabs-nav {margin-left: 0; margin-right: 0;}
+.ot-dialog .ot-tabs-nav li:first-child {margin-left: 10px;}
+
+
+
+.ot-dd-nav {position: relative; z-index: 1; margin: 0}
+.ot-dd-nav .ot-btn {}
+
+.ot-items.ot-items-tariff-list .ot-item {margin-right: 25px; }
+.ot-items-tariff-sale .ot-item {margin-right: 11px;}
+.ot-col-right.ot-col-personal-info a {z-index: 11}
+

@@ -1,0 +1,8 @@
+public/captcha/*.*
+application/config/config.php
+application/config/my_config.php
+application/config/database.php
+/data
+application/*/.gitignore
+application/*/*/.gitignore
+

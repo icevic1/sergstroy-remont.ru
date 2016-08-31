@@ -1,0 +1,75 @@
+/*********************************************************************/
+.ot-icon {background: url('../../images/icon.png') no-repeat top left; display: inline-block;}
+
+.ot-icon-help-big,
+.ot-icon-1{ background-position: 0 0; width: 72px; height: 72px; } 
+.ot-icon-10{ background-position: 0 -82px; width: 36px; height: 36px; } 
+.ot-icon-11{ background-position: 0 -128px; width: 44px; height: 47px; } 
+.ot-icon-12{ background-position: 0 -185px; width: 44px; height: 47px; } 
+.ot-icon-13{ background-position: 0 -242px; width: 30px; height: 33px; } 
+.ot-icon-14{ background-position: 0 -285px; width: 30px; height: 33px; } 
+.ot-icon-map-pt-in,
+.ot-icon-15{ background-position: 0 -328px; width: 14px; height: 14px; } 
+.ot-icon-map-pt-out,
+.ot-icon-16{ background-position: 0 -352px; width: 14px; height: 14px; } 
+.ot-icon-pdf,
+.ot-icon-17{ background-position: 0 -376px; width: 27px; height: 32px; } 
+.ot-icon-xls,
+.ot-icon-18{ background-position: 0 -418px; width: 27px; height: 32px; } 
+.ot-icon-doc,
+.ot-icon-19{ background-position: 0 -460px; width: 27px; height: 32px; } 
+.ot-icon-point-big,
+.ot-icon-2{ background-position: 0 -502px; width: 72px; height: 72px; } 
+.ot-icon-map-search,
+.ot-icon-20{ background-position: 0 -584px; width: 26px; height: 27px; } 
+.ot-search .ot-input .ot-btn,
+.ot-icon-21{ background-position: 0 -621px; width: 16px; height: 16px; } 
+.ot-icon-22{ background-position: 0 -647px; width: 17px; height: 15px; } 
+.ot-icon-account,
+.ot-icon-23{ background-position: 0 -672px; width: 15px; height: 16px; } 
+.ot-icon-profile,
+.ot-icon-24{ background-position: 0 -698px; width: 16px; height: 15px; } 
+.ot-icon-25{ background-position: 0 -723px; width: 10px; height: 12px; } 
+.ot-icon-26{ background-position: 0 -745px; width: 10px; height: 10px; } 
+.ot-icon-27{ background-position: 0 -765px; width: 13px; height: 12px; } 
+.ot-icon-new-window,
+.ot-icon-28{ background-position: 0 -787px; width: 15px; height: 12px; } 
+.ot-icon-29{ background-position: 0 -809px; width: 21px; height: 21px; } 
+.ot-icon-shop,
+.ot-icon-3{ background-position: 0 -840px; width: 72px; height: 72px; } 
+.ot-icon-30{ background-position: 0 -922px; width: 9px; height: 9px; } 
+.ot-header .ot-nav > ul > li > a .ot-icon,
+.ot-icon-31{ background-position: 0 -941px; width: 6px; height: 3px; } 
+.ot-icon-32{ background-position: 0 -954px; width: 3px; height: 2px; } 
+.ot-icon-33{ background-position: 0 -966px; width: 5px; height: 3px; } 
+.ot-icon-pt,
+.ot-icon-34 { background-position: 0 -979px; width: 3px; height: 3px; } 
+.ot-icon-35{ background-position: 0 -992px; width: 15px; height: 3px; } 
+.ot-icon-36{ background-position: 0 -1005px; width: 86px; height: 86px; } 
+.ot-icon-connection,
+.ot-icon-4{ background-position: 0 -1101px; width: 72px; height: 72px; } 
+.ot-icon-info,
+.ot-icon-5{ background-position: 0 -1183px; width: 72px; height: 72px; } 
+.ot-icon-email,
+.ot-icon-6{ background-position: 0 -1265px; width: 72px; height: 72px; } 
+.ot-icon-show,
+.ot-icon-7{ background-position: 0 -1347px; width: 34px; height: 34px; } 
+.ot-icon-chat,
+.ot-icon-8{ background-position: 0 -1391px; width: 34px; height: 34px; margin-right: 15px; } 
+.ot-icon-phone,
+.ot-icon-9{ background-position: 0 -1435px; width: 34px; height: 34px; margin-right: 15px;} 
+.ot-icon-point-address, .ot-icon-25{ background-position: 0 -723px; width: 10px; height: 12px; } 
+.ot-icon-point-name, .ot-icon-27{ background-position: 0 -765px; width: 13px; height: 12px; } 
+.ot-icon-search{background-position: 0 -621px !important; height: 16px; width: 16px; margin-bottom: -3px !important;margin-top:5px !important;}
+.ot-icon-check{ width: 17px; height: 13px; background-position: -68px -478px;}
+/**** payment page ****/
+.ot-card-icon {	background-position: 0 -1479px;}
+.cards-icon {background-position: 0 -1680px;display:block;float:left;height:20px;margin-right:30px;margin-left:13px;width:71px;}
+.ot-online-icon {background-position: 0 -1519px;}
+.ot-phone-icon {background-position: 0 -1639px;}
+.ot-list-icon {background-position: 0 -1599px;}
+.online-hold {width: 707px; height: 96px;background: url('../../images/online-system-pay.png') no-repeat top left;}
+.operators-hold div {background: url('../../images/payment-operators.png') no-repeat top left;}
+.operators-hold div.op-megafon {background-position: 0 -105px;}
+.operators-hold div.op-mtc {background-position: 0 -215px;}
+.operators-hold div.op-tele2 {background-position: 0 -323px;margin: 0;}

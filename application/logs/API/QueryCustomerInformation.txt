@@ -1,0 +1,81 @@
+------>http://10.12.5.205:7080/custom/SELFCARE/HWBSS_Customer
+----API: QueryCustomerInformation
+
+-------------------Request----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://www.huawei.com/bss/soaif/interface/CustomerService/" xmlns:com="http://www.huawei.com/bss/soaif/interface/common/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:QueryCustInfoReqMsg>
+         <com:ReqHeader>
+            <!--Optional:-->
+            <com:Version>1</com:Version>
+            <!--Optional:-->
+            <com:BusinessCode>T</com:BusinessCode>
+            <com:TransactionId>2003001111111135</com:TransactionId>
+                <com:Channel>28</com:Channel>
+                <com:PartnerId>101</com:PartnerId>
+            <com:AccessUser>5060</com:AccessUser>
+            <com:AccessPassword>d+7pCWDu8Dt7vxVMvEudvQ==</com:AccessPassword>
+         </com:ReqHeader>
+         <!--You have a CHOICE of the next 2 items at this level-->
+         <cus:CustId>1000021898882</cus:CustId>
+         <!--Optional:-->
+         <cus:Nationality>?</cus:Nationality>
+         <cus:Certificate>
+            <!--Optional:-->
+            <com:IdType>1</com:IdType>
+            <!--Optional:-->
+            <com:IdNum>?</com:IdNum>
+         </cus:Certificate>
+      </cus:QueryCustInfoReqMsg>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:QueryCustInfoRspMsg xmlns:cus="http://www.huawei.com/bss/soaif/interface/CustomerService/" xmlns:com="http://www.huawei.com/bss/soaif/interface/common/">
+         <com:RspHeader>
+            <com:Version>1</com:Version>
+            <com:ReturnCode>0000</com:ReturnCode>
+            <com:ReturnMsg>Success</com:ReturnMsg>
+            <com:RspTime>20151029034657</com:RspTime>
+         </com:RspHeader>
+         <cus:Customer>
+            <com:CustId>1000021898882</com:CustId>
+            <com:CustLevel>1</com:CustLevel>
+            <com:Name>
+               <com:FirstName>1</com:FirstName>
+               <com:LastName>1</com:LastName>
+            </com:Name>
+            <com:Nationality>1116</com:Nationality>
+            <com:Certificate>
+               <com:IdType>1</com:IdType>
+               <com:IdNum>87264069</com:IdNum>
+            </com:Certificate>
+            <com:Birthday>19960701</com:Birthday>
+            <com:Contact>
+               <com:ContactId>1000000006015</com:ContactId>
+               <com:Priority>1</com:Priority>
+               <com:Name>
+                  <com:FirstName>Testing</com:FirstName>
+                  <com:MiddleName>Soeung</com:MiddleName>
+                  <com:LastName>Sovath</com:LastName>
+               </com:Name>
+            </com:Contact>
+            <com:Address>
+               <com:AddressId>1954463</com:AddressId>
+               <com:AddressType>0</com:AddressType>
+               <com:Address1>1116</com:Address1>
+               <com:Address2>1</com:Address2>
+               <com:Address3>100</com:Address3>
+            </com:Address>
+            <com:Status>2</com:Status>
+         </cus:Customer>
+      </cus:QueryCustInfoRspMsg>
+   </soapenv:Body>
+</soapenv:Envelope>

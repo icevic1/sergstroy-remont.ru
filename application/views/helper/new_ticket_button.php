@@ -1,0 +1,1 @@
+<a class="btn btn-primary fixedsize btn-mini" href="<?php echo site_url('/servicetickets/newST/')?>"><i class="cus-add"></i> Add Ticket</a>

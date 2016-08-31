@@ -1,0 +1,80 @@
+------>http://10.12.5.205:7080/CRM/CBSInterface_AR_Services
+----API: QueryBalance
+
+-------------------Request----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ars="http://www.huawei.com/bme/cbsinterface/arservices" xmlns:cbs="http://www.huawei.com/bme/cbsinterface/cbscommon" xmlns:arc="http://cbs.huawei.com/ar/wsservice/arcommon">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ars:QueryBalanceRequestMsg>
+         <RequestHeader>
+   	<cbs:Version>1</cbs:Version>
+	<cbs:BusinessCode>1</cbs:BusinessCode><cbs:MessageSeq>1</cbs:MessageSeq>
+	<cbs:OwnershipInfo>
+	<cbs:BEID>101</cbs:BEID>
+	</cbs:OwnershipInfo>
+	<cbs:AccessSecurity>
+	<cbs:LoginSystemCode>5060</cbs:LoginSystemCode>
+	<cbs:Password>r8q0a5WwGNboj9I35XzNcQ==</cbs:Password>
+	</cbs:AccessSecurity>
+       </RequestHeader>
+         <QueryBalanceRequest>
+            <ars:QueryObj>
+               <!--You have a CHOICE of the next 2 items at this level-->
+               <ars:SubAccessCode>
+               <arc:PrimaryIdentity>10212648</arc:PrimaryIdentity>
+                 </ars:SubAccessCode>
+             </ars:QueryObj>
+         </QueryBalanceRequest>
+      </ars:QueryBalanceRequestMsg>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ars:QueryBalanceResultMsg xmlns:ars="http://www.huawei.com/bme/cbsinterface/arservices" xmlns:arc="http://cbs.huawei.com/ar/wsservice/arcommon" xmlns:cbs="http://www.huawei.com/bme/cbsinterface/cbscommon">
+         <ResultHeader>
+            <cbs:Version>1</cbs:Version>
+            <cbs:ResultCode>0</cbs:ResultCode>
+            <cbs:MsgLanguageCode>2002</cbs:MsgLanguageCode>
+            <cbs:ResultDesc>Operation successfully.</cbs:ResultDesc>
+         </ResultHeader>
+         <QueryBalanceResult>
+            <ars:AcctList>
+               <ars:AcctKey>1010001969862</ars:AcctKey>
+               <ars:BalanceResult>
+                  <arc:BalanceType>C_MAIN_BILLING_ACCOUNT</arc:BalanceType>
+                  <arc:BalanceTypeName>POS_MainAccount</arc:BalanceTypeName>
+                  <arc:TotalAmount>0</arc:TotalAmount>
+                  <arc:DepositFlag>N</arc:DepositFlag>
+                  <arc:RefundFlag>1</arc:RefundFlag>
+                  <arc:CurrencyID>1153</arc:CurrencyID>
+                  <arc:BalanceDetail>
+                     <arc:BalanceInstanceID>702003000405182786</arc:BalanceInstanceID>
+                     <arc:Amount>0</arc:Amount>
+                     <arc:InitialAmount>0</arc:InitialAmount>
+                     <arc:EffectiveTime>20151008115126</arc:EffectiveTime>
+                     <arc:ExpireTime>20370101070000</arc:ExpireTime>
+                  </arc:BalanceDetail>
+               </ars:BalanceResult>
+               <ars:AccountCredit>
+                  <ars:CreditLimitType>C_CREDITLIMITTYPE_BILL_CYCLE</ars:CreditLimitType>
+                  <ars:CreditLimitTypeName>Postpaid Credit Limit</ars:CreditLimitTypeName>
+                  <ars:TotalCreditAmount>1800000000</ars:TotalCreditAmount>
+                  <ars:TotalUsageAmount>31000000</ars:TotalUsageAmount>
+                  <ars:TotalRemainAmount>1769000000</ars:TotalRemainAmount>
+                  <ars:CurrencyID>1153</ars:CurrencyID>
+                  <ars:CreditAmountInfo>
+                     <ars:CreditInstID>300001616290</ars:CreditInstID>
+                     <ars:LimitClass>I</ars:LimitClass>
+                     <ars:Amount>1800000000</ars:Amount>
+                     <ars:EffectiveTime>20151008121458</ars:EffectiveTime>
+                     <ars:ExpireTime>20370101070000</ars:ExpireTime>
+                  </ars:CreditAmountInfo>
+               </ars:AccountCredit>
+            </ars:AcctList>
+         </QueryBalanceResult>
+      </ars:QueryBalanceResultMsg>
+   </soapenv:Body>
+</soapenv:Envelope>

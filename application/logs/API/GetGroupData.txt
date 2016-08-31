@@ -1,0 +1,116 @@
+------>http://10.12.5.207:8060/crm/services/OrderQuery
+----API: GetGroupData
+
+-------------------Request----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:quer="http://crm.huawei.com/query/" xmlns:bas="http://crm.huawei.com/basetype/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <quer:GetGroupRequest>
+         <quer:RequestHeader>
+             <bas:Version>1</bas:Version>
+            <bas:TransactionId>2015100723595212454855054293229</bas:TransactionId>
+            <bas:ProcessTime>20151007235952</bas:ProcessTime>
+            <bas:ChannelId>28</bas:ChannelId>
+            <bas:TechnicalChannelId>53</bas:TechnicalChannelId>
+            <bas:TenantId>101</bas:TenantId>
+            <bas:AccessUser>5060</bas:AccessUser>
+            <bas:AccessPwd>d+7pCWDu8Dt7vxVMvEudvQ==</bas:AccessPwd>
+         </quer:RequestHeader>
+         <quer:GetGroupBody>
+      
+            
+            <quer:ServiceNumber>70508666</quer:ServiceNumber>
+    
+
+
+                   </quer:GetGroupBody>
+      </quer:GetGroupRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <quer:GetGroupResponse xmlns:quer="http://crm.huawei.com/query/" xmlns:bas="http://crm.huawei.com/basetype/">
+         <quer:ResponseHeader>
+            <bas:RetCode>0</bas:RetCode>
+            <bas:RetMsg>success</bas:RetMsg>
+            <bas:RequestHeader>
+               <bas:Version>1</bas:Version>
+               <bas:TransactionId>2015100723595212454855054293229</bas:TransactionId>
+               <bas:ProcessTime>20151007235952</bas:ProcessTime>
+               <bas:ChannelId>28</bas:ChannelId>
+               <bas:TechnicalChannelId>53</bas:TechnicalChannelId>
+               <bas:TenantId>101</bas:TenantId>
+               <bas:AccessUser>5060</bas:AccessUser>
+            </bas:RequestHeader>
+         </quer:ResponseHeader>
+         <quer:GetGroupBody>
+            <quer:GetGroupDataList>
+               <quer:AccountId>410020942917</quer:AccountId>
+               <quer:BeID>101</quer:BeID>
+               <quer:CustomerId>110020900705</quer:CustomerId>
+               <quer:EffectiveDate>20140108100812</quer:EffectiveDate>
+               <quer:ExpireDate>20991231165959</quer:ExpireDate>
+               <quer:GroupId>210020942917</quer:GroupId>
+               <quer:GroupName>Kang Vuthea (KM Hotel)</quer:GroupName>
+               <quer:GroupNo>210020942917</quer:GroupNo>
+               <quer:GroupStatus>1</quer:GroupStatus>
+               <quer:PrimaryOffering>
+                  <bas:Amount>1</bas:Amount>
+                  <bas:BundleFlag>0</bas:BundleFlag>
+                  <bas:CreateDate>20140108100812</bas:CreateDate>
+                  <bas:EffectiveTime>20140108100812</bas:EffectiveTime>
+                  <bas:ExpiredTime>20991231165959</bas:ExpiredTime>
+                  <bas:LatestActiveDate>20991231165959</bas:LatestActiveDate>
+                  <bas:OfferingId>
+                     <bas:OfferingId>584773514</bas:OfferingId>
+                  </bas:OfferingId>
+                  <bas:OfferingName>VPN Primary</bas:OfferingName>
+                  <bas:ProductList>
+                     <bas:GetSubProductInfo>
+                        <bas:ProductId>1424896957</bas:ProductId>
+                     </bas:GetSubProductInfo>
+                  </bas:ProductList>
+                  <bas:Status>C01</bas:Status>
+                  <bas:TrialEndDate>20140108100812</bas:TrialEndDate>
+                  <bas:TrialStartDate>20140108100812</bas:TrialStartDate>
+               </quer:PrimaryOffering>
+            </quer:GetGroupDataList>
+            <quer:GetGroupDataList>
+               <quer:AccountId>413000002590</quer:AccountId>
+               <quer:BeID>101</quer:BeID>
+               <quer:CustomerId>113000002590</quer:CustomerId>
+               <quer:EffectiveDate>20140108100502</quer:EffectiveDate>
+               <quer:ExpireDate>20991231165959</quer:ExpireDate>
+               <quer:GroupId>213000002590</quer:GroupId>
+               <quer:GroupName>CUG_KMHotel_CP:001137</quer:GroupName>
+               <quer:GroupNo>213000002590</quer:GroupNo>
+               <quer:GroupStatus>1</quer:GroupStatus>
+               <quer:PrimaryOffering>
+                  <bas:Amount>1</bas:Amount>
+                  <bas:BundleFlag>0</bas:BundleFlag>
+                  <bas:CreateDate>20140108100502</bas:CreateDate>
+                  <bas:EffectiveTime>20140108100502</bas:EffectiveTime>
+                  <bas:ExpiredTime>20991231165959</bas:ExpiredTime>
+                  <bas:LatestActiveDate>20991231165959</bas:LatestActiveDate>
+                  <bas:OfferingId>
+                     <bas:OfferingId>1784675015</bas:OfferingId>
+                  </bas:OfferingId>
+                  <bas:OfferingName>CUG Primary Offer</bas:OfferingName>
+                  <bas:ProductList>
+                     <bas:GetSubProductInfo>
+                        <bas:ProductId>1522905425</bas:ProductId>
+                     </bas:GetSubProductInfo>
+                  </bas:ProductList>
+                  <bas:Status>C01</bas:Status>
+                  <bas:TrialEndDate>20140108100502</bas:TrialEndDate>
+                  <bas:TrialStartDate>20140108100502</bas:TrialStartDate>
+               </quer:PrimaryOffering>
+            </quer:GetGroupDataList>
+         </quer:GetGroupBody>
+      </quer:GetGroupResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,72 @@
+------>http://10.12.5.205:7080/custom/SELFCARE/HWBSS_Offering
+----API: QueryPurchasedSupplementaryOffering
+
+-------------------Request----->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:off="http://www.huawei.com/bss/soaif/interface/OfferingService/" xmlns:com="http://www.huawei.com/bss/soaif/interface/common/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <off:QueryPurchasedSupplementaryOfferingReqMsg>
+         <com:ReqHeader>
+             <com:TransactionId>2003001111111135</com:TransactionId>
+            <com:Channel>28</com:Channel>
+            <com:PartnerId>101</com:PartnerId>
+            <com:ReqTime>20150803193005</com:ReqTime>
+            <com:AccessUser>5060</com:AccessUser>
+            <com:AccessPassword>d+7pCWDu8Dt7vxVMvEudvQ==</com:AccessPassword>
+         </com:ReqHeader>
+         <off:AccessInfo>
+             <com:ObjectIdType>4</com:ObjectIdType>
+            <com:ObjectId>10212671</com:ObjectId>
+         </off:AccessInfo>
+      </off:QueryPurchasedSupplementaryOfferingReqMsg>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <off:QueryPurchasedSupplementaryOfferingRspMsg xmlns:off="http://www.huawei.com/bss/soaif/interface/OfferingService/" xmlns:com="http://www.huawei.com/bss/soaif/interface/common/">
+         <com:RspHeader>
+            <com:ReturnCode>0000</com:ReturnCode>
+            <com:ReturnMsg>Success.</com:ReturnMsg>
+            <com:RspTime>20151029061156</com:RspTime>
+         </com:RspHeader>
+         <off:SupplementaryOffering>
+            <off:OfferingId>
+               <com:OfferingId>1487022941</com:OfferingId>
+               <com:PurchaseSeq>520039550094</com:PurchaseSeq>
+            </off:OfferingId>
+            <off:OfferingName>Monthly International Line POS</off:OfferingName>
+            <off:EffectiveDate>20151008051114</off:EffectiveDate>
+            <off:ExpireDate>20991231165959</off:ExpireDate>
+            <off:Status>C01</off:Status>
+            <off:StatusDate>20151008051208</off:StatusDate>
+         </off:SupplementaryOffering>
+         <off:SupplementaryOffering>
+            <off:OfferingId>
+               <com:OfferingId>190853430</com:OfferingId>
+               <com:PurchaseSeq>520039550095</com:PurchaseSeq>
+            </off:OfferingId>
+            <off:OfferingName>Dollar 0 unlimited CUG</off:OfferingName>
+            <off:EffectiveDate>20151008051114</off:EffectiveDate>
+            <off:ExpireDate>20991231165959</off:ExpireDate>
+            <off:Status>C01</off:Status>
+            <off:StatusDate>20151008051208</off:StatusDate>
+         </off:SupplementaryOffering>
+         <off:SupplementaryOffering>
+            <off:OfferingId>
+               <com:OfferingId>1290134625</com:OfferingId>
+               <com:PurchaseSeq>520039550096</com:PurchaseSeq>
+            </off:OfferingId>
+            <off:OfferingName>4G_LTE_Service</off:OfferingName>
+            <off:EffectiveDate>20151008051114</off:EffectiveDate>
+            <off:ExpireDate>20991231165959</off:ExpireDate>
+            <off:Status>C01</off:Status>
+            <off:StatusDate>20151008051208</off:StatusDate>
+         </off:SupplementaryOffering>
+      </off:QueryPurchasedSupplementaryOfferingRspMsg>
+   </soapenv:Body>
+</soapenv:Envelope>

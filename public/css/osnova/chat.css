@@ -1,0 +1,186 @@
+.ot-panel-chat {
+    position: fixed;
+    right: 0;
+    top: 20%;
+   /* width: 415px;*/
+    width: 400px;
+   /* background: #fff url('../../images/panel.png') left center repeat-x;
+    min-height: 234px;
+    z-index: 2;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-left-radius: 20px;
+    border: 1px solid #939598;
+    border-bottom: 1px solid #cdcfd0;
+    border-right: 0;*/
+    font-family: 'Calibri';
+    font-size: 16px;
+}
+.ot-panel-chat-tab,
+.ot-panel-shadow a,
+.ot-panel-chat-btn-send,
+.ot-panel-chat-header-logo,
+.ot-panel-chat-header-nav a,
+.ot-panel-chat-form-message,
+.ot-panel-chat-form-messages,
+.ot-panel-chat-form-userinfo label {
+    background: url('../../images/panel-icon.png') -84px -343px no-repeat;
+    
+}
+.ot-panel-chat-tab.ot-panel-chat-tab-deactivate {background-position: 0 -344px;}
+.ot-panel-chat-tab.ot-panel-chat-tab-activate {background-position: -42px -344px;}
+
+.ot-panel-chat-wrapper {
+    position: relative;
+   /* margin: 20px;*/
+}
+.ot-panel-chat-header {margin-bottom: 8px;}
+.ot-panel-chat-tab {
+    position: absolute;
+    left: -38px;
+    top: 0px;
+    width: 39px;
+    height: 239px;
+    cursor: pointer;
+    
+}
+.ot-panel-chat-header-nav {height: 19px;text-align: right;}
+.ot-panel-chat-header-nav a {width: 23px; height: 23px; display: block;float: right; margin-left: 4px;}
+.ot-panel-chat-header-nav a.ot-panel-hide {background-position: -131px -372px;}
+.ot-panel-chat-header-nav a.ot-panel-close {background-position: -158px -372px;}
+.ot-panel-chat-header-logo {
+    width: 52px;
+    height: 51px;
+    background-position: -131px -411px;
+    float: left;
+    margin-right: 15px;
+}
+.ot-panel-chat-header-text {margin-left: 67px;}
+.ot-panel-chat-header-text h1 {font-size: 16px; margin-bottom: 0;}
+.ot-panel-chat-header-text p {margin: 0; color: #808285;}
+.ot-panel-chat-header-text p input {background: none; border: none; border-bottom: 1px solid #808285;}
+.ot-panel-chat-header-text a {color: #f58220;}
+
+.ot-panel-chat-form-messages {
+    width: 341px;
+    height: 182px;
+    background-position: 0 0;
+    margin-bottom: 8px;
+    padding: 15px 0px 10px 10px;
+}
+.ot-panel-chat-form-messages-wrapper {
+    padding-right: 10px;
+    height: 175px;
+    overflow: auto;
+}
+.ot-panel-chat-form-messages-item {margin: 0px; line-height: 16px;}
+.ot-panel-chat-form-messages p {
+    display: block;
+    background: url('../../images/pt-min.png') left top repeat-x;
+    padding-top: 12px;
+    margin-bottom: 8px;
+    color: #58595b;
+}
+.ot-panel-chat-form-messages .ot-panel-chat-form-messages-item:first-child {}
+.ot-panel-chat-form-messages .ot-panel-chat-form-messages-item:first-child p {background: none;padding-top: 0;}
+.ot-panel-chat-form-messages p span {color: #f58220; font-weight: bold;}
+.ot-panel-chat-form-messages p .ot-panel-user {color: #58595b;}
+.ot-panel-chat-form-message {
+    width: 351px;
+    height: 80px;
+    background-position: 0 -254px;
+    margin-bottom: 8px;
+    text-align: right;
+}
+.ot-panel-chat-form-message textarea {
+    background: none;
+    border: none;
+    width: 336px;
+    height: 49px;
+    margin: 15px 0px 15px 10px;
+}
+.ot-panel-chat-form-nav {width: 350px;}
+.ot-panel-chat-btn-send {
+    width: 86px;
+    height: 22px;
+    display: block;
+    background-position: -128px -343px;
+    float: right;
+    margin-right: 10px;
+}
+.ot-panel-chat-btn-send:hover {background-position: -227px -343px;}
+.ot-panel-chat-content-nav {clear: both;padding-top: 20px;padding-bottom: 4px;}
+.ot-panel-chat-content-nav a,
+.ot-panel-chat-content-nav a:hover {
+    color: #58595b;
+    background: url('../../images/pt.png') left bottom repeat-x;
+    text-decoration: none;
+    padding-bottom: 2px;
+}
+.ot-panel-chat-content-nav a:hover {color: #F58220;}
+
+.ot-panel-chat-form-userinfo {padding-top: 11px;}
+.ot-panel-chat-form-userinfo label {display: block;background-position: -84px -212px;height: 36px;margin-bottom: 8px;}
+.ot-panel-chat-form-userinfo label input {border: none; background: none;margin: 10px;width: 220px;}
+
+.ot-panel-chat-form-userinfo-send {
+    margin-left: 170px;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    font-family: 'Calibri';
+    font-size: 16px;
+}
+.ot-panel-chat-form-userinfo-send:hover {color: #F58220;}
+
+.ot-panel-shadow {
+    background: url('../../images/shadow.png') 0 0 ;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -10px;
+    right: 0;
+    z-index: 3;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-left-radius: 20px;
+    height: 100%;
+}
+.ot-panel-shadow a,
+.ot-panel-shadow a:hover {
+    color: #58595b;
+    display: inline-block;
+    text-decoration: none;
+    width: 157px;
+    height: 37px;
+    line-height: 37px;
+    background-position:-193px -369px;
+    margin: 0 5px;
+}
+.ot-panel-shadow td,
+.ot-panel-shadow table {width: 100%; height: 100%;vertical-align: middle;}
+.ot-panel-shadow .ot-panel-btn-no,
+.ot-panel-shadow .ot-panel-btn-no:hover {color: #f58220;}
+
+.ot-panel-shadow .ot-panel-btn-no:hover,
+.ot-panel-shadow .ot-panel-btn-yes:hover {
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
+    zoom: 1;
+}
+
+/* status */
+.ot-status-not-available .ot-panel-chat-tab {background-position: 0px -343px;}
+.ot-status-not-available .ot-panel-chat-header-logo {background-position: -190px -411px;}
+
+.ot-status-hidden {width: 0px; border: 0}
+.ot-status-active .ot-panel-chat-tab {background-position: -42px -344px}
+.ot-status-active.ot-status-hidden {width: 20px;border: 1px solid #939598;border-bottom: 1px solid #CDCFD0;border-right: 0;}
+.ot-status-active.ot-status-hidden .ot-panel-content,
+.ot-status-active.ot-status-hidden .ot-panel-chat-header {visibility: hidden;}

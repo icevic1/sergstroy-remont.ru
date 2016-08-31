@@ -1,0 +1,278 @@
+
+/************************ Home **********************/
+.ot-line-bond {
+    background: url('../images/line-bond.png') 50% 0 no-repeat;
+    height: 15px;
+}
+.ot-page-home .ot-main .ot-row {position: relative;}
+.ot-page-home .ot-main .ot-row.ot-row-actions {padding-bottom: 150px;}
+
+.ot-row-offer {text-align: center;padding-top: 5px;}
+
+.ot-page-home .ot-main .ot-row-connect {padding-top: 20px;text-align: center;}
+.ot-page-home .ot-main .ot-row-connect p {text-transform: uppercase; margin-bottom: 10px;}
+.ot-page-home .ot-main .ot-row .ot-nav-link {position: absolute;font-size: 14px;top: 95px;}
+.ot-page-home .ot-main .ot-row .ot-nav-link * {vertical-align: middle;}
+.ot-page-home .ot-main .ot-row .ot-nav-link span {display: inline-block; margin-left: 10px;text-decoration: underline;}
+.ot-page-home .ot-main .ot-row .ot-nav-link:hover span {text-decoration: none;}
+.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-shop {left: 57px;}
+.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-help {right: 73px;top: 134px;}
+.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-map {left: 40%;bottom: 47px;top: auto;}
+
+/* ot-panel-latest-news */
+.ot-panel-latest-news .ot-panel-content {padding-left: 30px;}
+.ot-panel-latest-news .ot-items {float: left;}
+.ot-panel-latest-news .ot-items-title {font-size: 9px; color: #999; margin-bottom: 5px;}
+.ot-panel-latest-news .ot-items-item {width: 275px; float: left;margin-right: 25px;}
+.ot-panel-latest-news .ot-items-item > p {margin-bottom: 5px;}
+.ot-panel-latest-news .ot-items-item > span {
+    display: inline-block;
+    font-size: 9px;
+    background-color: #fff;
+    padding: 2px;
+    color: #999;
+}
+
+/************************ Coverage Search **********************/
+.ot-panel-map-coverage .ot-panel-header {padding-top: 20px;}
+.ot-clearfix-after:after,
+.ot-panel-map-coverage .ot-panel-header:after {
+    clear: both;
+    content: '';
+    height: 1px;
+    width: 100%;
+    display: block;
+}
+.ot-panel-map-coverage .ot-panel-header h1.title {font-size: 18px; text-transform: uppercase; margin-bottom: 5px;}
+.ot-panel-map-coverage .ot-panel-header .ot-col {float: left}
+.ot-panel-map-coverage .ot-panel-header .ot-col:first-child {margin-left: 30px;}
+.ot-panel-map-coverage .ot-panel-header p * {vertical-align: middle}
+.ot-panel-map-coverage .ot-panel-header p > span {margin-right: 5px;}
+.ot-panel-map-coverage .ot-panel-header .ot-append .ot-icon {margin-left: 10px;}
+.ot-panel-map-coverage .ot-panel-header .ot-col.ot-last {float: right; padding-right: 43px;}
+
+
+.ot-panel-map-coverage {width: 950px; margin: auto;}
+.ot-map-coverage-search {
+    background-color: #fff;
+    height: 37px;
+    padding: 13px 0 12px;
+}
+.ot-map-coverage-search-wrapper {
+    background:url('../images/map-search.png') 0 0 no-repeat;
+    height: 37px;
+    width: 892px;
+    margin: auto;
+    position: relative;
+}
+.ot-map-coverage-search input[type=text] {height: 30px;width: 828px;background: none;font-size: 14px;}
+.ot-map-coverage-search input[type=submit] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 54px;
+    cursor: pointer;
+    background-position: 14px -579px;
+    height: 37px;
+}
+/* ot-panel-map-coverage-search-note */
+.ot-panel-map-coverage-search-note {margin-bottom: 20px;}
+.ot-panel-map-coverage-search-note .ot-panel-wrapper {}
+.ot-panel-map-coverage-search-note .ot-item {float: left; width: 387px; padding-left: 30px; position: relative;}
+.ot-panel-map-coverage-search-note .ot-item > .ot-icon {position: absolute; left: 10px; top: 0px;}
+.ot-panel-map-coverage-search-note .ot-item.ot-last {float: right; width: 235px}
+.ot-panel-map-coverage-search-note .ot-item h5 {font-size: 11px;margin-bottom: 5px;}
+.ot-panel-map-coverage-search-note .ot-item p {font-size: 9px; color: #999;}
+
+/* ot-panel-map-coverage-search-result */
+.ot-panel-map-coverage-search-result .ot-note {padding-top: 90px;}
+.ot-panel-map-coverage-search-result .ot-title {font-size: 24px; padding-bottom: 23px;}
+.ot-message {font-weight: bold;}
+.ot-message span {color: #ef7f1a;}
+.ot-note {color: #cc9999; font-size: 9px;}
+
+/* ot-page-home-all */
+.ot-page-home-all.ot-page-home .ot-main .ot-row.ot-row-actions {height: 116px;padding-bottom: 40px;}
+.ot-page-home-all.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-map {top: 71px;}
+.ot-page-home-all .ot-row-offer img {float: left;}
+.ot-page-home-all .ot-row-offer p {margin-left: 277px; display: block; width: 310px; text-align: left; padding-top: 84px;}
+.ot-page-home-all .ot-row-offer-4g {margin-left: 250px; padding-top: 50px;}
+.ot-page-home-all .ot-city-map {
+    background:url('../images/city-for-map.png') 0 0 no-repeat;
+    width: 224px;
+    height: 136px;
+    position: absolute;
+    top: 137px;
+    left: -80px;
+}
+.ot-page-home-all .ot-main .ot-row .ot-nav-link {top: 40px;}
+.ot-page-home-all .ot-main .ot-row .ot-nav-link.ot-nav-link-help {right: 67px;}
+.ot-page-home-all .ot-main .ot-row .ot-nav-link.ot-nav-link-shop {top: -6px;}
+
+.ot-page-home-all.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-info {left: 57px;top: -6px;}
+.ot-page-home-all.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-connect {top: 77px;left: 384px;}
+.ot-page-home-all.ot-page-home .ot-main .ot-row .ot-nav-link.ot-nav-link-email {right: 67px; top: 40px;}
+
+
+/************************ Devices **********************/
+
+.ot-panel-devices .ot-panel-content {padding: 15px 30px 0;}
+.ot-devices {padding-bottom: 40px;}
+.ot-devices h2 {font-size: 12px; margin-bottom: 20px;}
+.ot-devices-img {
+    position: relative;
+    width: 270px;
+    height: 292px;
+    background: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    float: left;
+}
+.ot-devices-img .ot-devices-img-panel {
+    position: absolute;
+    bottom: 6px;
+    left: 10px;
+    right: 10px;
+    text-align: center;
+}
+.ot-devices-img .ot-devices-img-panel img {border: 1px solid #edeeef;width: 53px; height: 53px;}
+.ot-devices-img .ot-devices-img-panel a:hover img,
+.ot-devices-img .ot-devices-img-panel .ot-active img {border: 1px solid #ef7f1a;}
+
+.ot-devices-description {float: left; padding-left: 19px; width: 365px;}
+.ot-devices-description .ot-note {font-size: 11px; color: #999;}
+.ot-btn.ot-btn-gray,
+.ot-btn.ot-btn-orange {
+    display: block;
+    color: #fff;
+    background: #ef7f1a;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0 10px;
+    height: 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.ot-btn.ot-btn-gray {background: #c5c6c6;}
+.ot-devices-description .ot-btn {margin-bottom: 10px;height: 40px;line-height: 40px; width: 186px;}
+.ot-devices-price strong {font-size: 30px;}
+.ot-devices-price span {color: #d7701e; font-size: 14px; font-weight: bold;}
+.ot-devices-characteristics {clear: both; padding-top: 30px;}
+.ot-devices-characteristics dt {float: left; clear: both; width: 290px;background: url('../images/field-pt.png') 0 100% repeat-x;}
+.ot-devices-characteristics dd {margin-left: 290px; }
+.ot-devices-characteristics dt span {background: url('../images/bg.png') 0 0 repeat;padding-right: 2px;}
+.ot-devices-characteristics dt,
+.ot-devices-characteristics dd {margin-bottom: 25px;}
+
+/* ot-dialog-order-form */
+.ot-dialog-order-form {width: 725px;}
+.ot-dialog-order-form .ot-row.ot-row-form > h2 {margin-left: 30px;margin-bottom: 50px;}
+.ot-dialog textarea,
+.ot-dialog-order-form input[type=text] {width: 207px; border: 1px solid #e2e1e7; border-top: 1px solid #aaacb1;margin: 0;}
+.ot-dialog-order-form textarea {width: 430px; height: 110px;}
+.ot-dialog-order-form select {width: 65px;height: 29px;}
+.ot-dialog-order-form .ot-field-note {color: #999; font-size: 9px;}
+.ot-dialog-order-form .ot-form-field-total {font-weight: bold;}
+.ot-dialog-order-form .ot-form-field-total p {margin: 0;}
+.ot-dialog-order-form .ot-form-field-total .ot-total-title {text-transform: uppercase; margin-bottom: 5px; display: block;}
+.ot-dialog-order-form .ot-form-field-total .ot-total-price {font-size:24px;}
+.ot-dialog .ot-row-form dd.ot-action {text-align: left;}
+.ot-dialog-order-form .ot-field-note {color: #999; font-size: 9px; padding-top: 15px;}
+.ot-dialog-order-form .ot-action .ot-btn {margin: 0}
+.ot-dialog-order-form a.ot-btn {margin-left: 10px;}
+
+.ot-dialog-order-form .ot-row-form dt,
+.ot-dialog-order-form .ot-row-form dd {margin-bottom: 15px;}
+.ot-dialog {z-index: 99}
+.ot-dialog-order-form.ot-dialog .ot-row-form dd.ot-action {margin-left: 190px;}
+
+/************************ Help ************************/
+.ot-main-help h2 {font-size: 12px; margin-bottom: 15px;}
+.ot-main-help h2 span.ot-note {font-size:9px; color: #999; font-weight: normal;padding-top: 5px; display: block;}
+.ot-main-help .ot-row-contact {font-size: 24px; margin-bottom: 25px; border-bottom: 1px solid #fff}
+.ot-main-help .ot-row-contact .ot-prepend .ot-icon {margin-right: 15px;}
+.ot-main-help .ot-row-form {padding-bottom: 15px; margin-bottom: 25px; border-bottom: 1px solid #fff;}
+.ot-main-help input[type=text] {width: 255px;}
+.ot-main-help select {width: 171px; line-height: 31px; height: 31px;}
+.ot-main-help .ot-message {margin-bottom: 0;clear: both;margin: 0;}
+.ot-row-form dl {margin-left: 32px; padding-top: 12px;}
+.ot-row-form dt {
+    width: 190px;
+    float: left;
+    clear: both;
+    margin-bottom: 10px;
+    font-weight: normal;
+    line-height: 31px;
+}
+.ot-row-form dd {margin: 0 0 10px 190px;}
+.ot-row-form dt.ot-action {display: none;}
+.ot-row-form dd.ot-action {text-align: center; padding-top: 10px;margin-left: 0;}
+.ot-row-form form textarea {padding: 10px;}
+.ot-row-form form select {border: 1px solid #d1d1d1}
+.ot-row-form form select,
+.ot-row-form form textarea,
+.ot-row-form form input[type=text] {
+    background: #fff;
+    line-height: 21px;
+}
+.ot-section .ot-row-form form select,
+.ot-section .ot-row-form form textarea,
+.ot-section .ot-row-form form input[type=text] {
+    -webkit-box-shadow: inset 1px 1px 0px 0px rgba(201, 201, 201, 0.5);
+    box-shadow: inset 1px 1px 0px 0px rgba(201, 201, 201, 0.5);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.ot-main-help .ot-row-form form textarea {width: 611px;}
+
+/* About Us */
+.ot-aside .ot-panel-latest-news {}
+
+.ot-aside .ot-panel-latest-news .ot-panel-content {padding-left: 0;}
+.ot-aside .ot-panel-latest-news .ot-items-item {float: none; width: auto;margin: 0;border-bottom: 1px solid #fff;}
+
+.ot-aside .ot-panel-latest-news .ot-items-item,
+.ot-aside .ot-panel-latest-news .ot-panel-header,
+.ot-aside .ot-panel-latest-news .ot-panel-content .ot-more {padding: 15px 20px;}
+
+.ot-aside .ot-panel-latest-news .ot-panel-header {font-size: 18px;padding-bottom: 0; padding-top: 30px;}
+.ot-aside .ot-panel-latest-news .ot-panel-content .ot-more a {font-size: 9px;color: #999;}
+
+.ot-img-left {float: left; margin: 0 29px 57px 0;}
+.ot-panel-aboutus p {line-height: 18px;}
+.ot-panel-aboutus.ot-panel-transparent .ot-panel-content {padding: 15px 27px 20px 30px;}
+
+/* ot-panel-news */
+.ot-panel-news .ot-panel-content {padding: 25px 25px 0;}
+.ot-panel-news .ot-items-title {font-weight: bold; margin-bottom: 20px;}
+.ot-panel-news .ot-items {padding-bottom: 30px;}
+.ot-panel-news .ot-items-item {margin-bottom: 10px;}
+.ot-panel-news .ot-items-item > p {margin: 0 0 5px 0;}
+.ot-panel-news .ot-items-item > span {
+    display: inline-block;
+    font-size: 9px;
+    background-color: #fff;
+    padding: 2px;
+    color: #999;
+}
+.ot-panel-news .ot-img-left {float: left;margin: 0 15px 15px 0;}
+.ot-panel-news .ot-news-description {padding: 10px 0 10px;}
+.ot-panel-news .ot-items-nav {text-align: center;}
+
+/* ot-panel-faq */
+.ot-panel-faq.ot-panel-transparent .ot-panel-content {padding: 15px 35px 0;}
+.ot-panel-faq .ot-map-coverage-search {background: none;padding-bottom: 30px;}
+.ot-panel-faq .ot-map-coverage-search-wrapper {width: 100%;background-position: 100% 0;}
+.ot-panel-faq .ot-map-coverage-search input[type=text] {width: 90%;}

@@ -1,0 +1,24 @@
+.ot-dialog {
+    
+    border:2px solid #c5c6c6;
+    outline:  5px solid #c5c6c6;
+    z-index: 9;
+}
+.ot-dialog-wrapper {z-index: 9; position: relative;}
+.ot-dialog .ot-tabs-nav {margin-left: 0; margin-right: 0;}
+.ot-dialog .ot-tabs-nav li:first-child {margin-left: 10px;}
+
+
+
+.ot-dd-nav {position: relative; z-index:1; margin: 0}
+.ot-dd-nav .ot-btn {}
+.ot-col-right.ot-col-personal-info a {z-index: 11}
+
+.ot-dialog-personal-info .ot-item-action.ot-disable a {
+    filter: alpha(opacity=20);
+}
+.ot-dialog-history dd {float: none;margin-left: 130px;}
+
+.ot-panel-user-info .ot-col-left div {padding-left: 50px;}
+
+.ot-dialog-history dl { float: none}
