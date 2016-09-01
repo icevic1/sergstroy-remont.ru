@@ -5,7 +5,7 @@
 <div class="clearfix"></div>
 <span id="top-link-block" class="hidden">
     <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
-        <i class="glyphicon glyphicon-chevron-up"></i> <span class="hidden-xs">Back to Top</span>
+        <i class="glyphicon glyphicon-chevron-up"></i> <span class="hidden-xs">Верх</span>
     </a>
 </span><!-- /top-link-block -->
 

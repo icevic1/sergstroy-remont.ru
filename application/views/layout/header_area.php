@@ -49,7 +49,7 @@
             <?php if(isset($titlePage) && $titlePage) { ?>
             <div class="page-title">
                 <div class="container">
-                    <div class="title-text">{{$titlePage}}</div>
+                    <div class="title-text"><?php echo $titlePage ?></div>
                 </div>
             </div>
             <?php }?>

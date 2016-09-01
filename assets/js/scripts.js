@@ -1,5 +1,46 @@
 $(document).ready(function(e) {
 
+	$('.q-form input[type="text"], .q-form textarea')
+		.focus(function() {
+			if ($(".q-text").is(":visible") == false) {
+				$(".q-text").slideDown();
+			}
+		}).focusout(function(e) {
+
+			setTimeout(function() {
+				var count = $('.q-form input[type="text"], .q-form textarea').filter(function () {
+					return !!this.value;
+				}).length;
+
+				var newTarget = $(':focus')[0];
+
+				if ($(newTarget).is('textarea, input[type="text"]') == false && count == 0)
+					$(".q-text").slideUp();
+				// console.log('focusout', $(':focus')[0]);
+			}, 1);
+		});
+
+	/*ymaps.ready(init);
+	 var myMap,
+	 myPlacemark;
+
+	 function init(){
+	 myMap = new ymaps.Map ("map", {
+	 center: [55.76, 37.64],
+	 zoom: 14
+	 });
+
+	 myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+	 hintContent: 'Москва!',
+	 balloonContent: 'Столица России'
+	 });
+
+	 myMap.geoObjects.add(myPlacemark);
+	 }*/
+	/*---- end map block -------*/
+
+	//------------------------------------
+
 	$(document).on('click', '[data-show="panel"]', function(e) {
 		e.preventDefault();
 		console.log($(this).data('target'));

@@ -1,5 +1,5 @@
 <?php
-class Home_origin extends Site_Controller 
+class Review extends Site_Controller
 {
 	function __construct() 
 	{
@@ -17,194 +17,44 @@ class Home_origin extends Site_Controller
 		$this->load->model('Subscriber_mod', 'subscriber');
 		$this->load->model('Servicetickets_model', 'st');
 		$this->load->helper('text');
-
-		/*
-		 * If have access only to sts redirect to sts
-		*/
-		if (false == $this->acl->can_view(null, 1 /*1 Main page*/) && $this->acl->can_view(null, 3 /*3 STS*/)) {
-			redirect('servicetickets/index');
-				
-		/*
-		 * Not have permision to any content, show error
-		*/
-		} elseif (false == $this->acl->can_view(null, 1 /*1 Main page*/) && false == $this->acl->can_view(null, 3 /*3 STS*/)) {
-			show_error("You haven't permission to see this page", $status_code= 503, 'Permission denied');
-		}
 	}
-	
-	function index()
-	{
-		$this->load->model('Customer_model');	
-		$this->load->helper('number');
-		$this->load->library('Aes');
-		
-// 		var_dump(strpos(strtolower('Free_On_net_SMS'), 'sms') !== false);die;
-// 		$Balance_Info = Service_Info('15400926');
-// 		var_dump($Balance_Info);die;
-		
-		
-// 		$this->aes->setKey($this->config->item('aes_key'));
-// 		$this->aes->setBlockSize($this->config->item('aes_size'));
-// 		$this->aes->setData('123456');
-// 		$encryptedPassword = $this->aes->encrypt();
-//98630372 10206198  hasan: 968576334 my: 963602313
-// 		
-//'20151201000000'
-// 		echo date('Ymd000000', strtotime('+1 month', strtotime('20151101000000')));
-// 		10206205
 
-// 		var_dump(ChangeSubscriberPassword('963602313', '395855-'));die;
-// 		var_dump(GetCorpCustomerData('98630372', true));die;
-// 		var_dump(Subscriber_Info('10212648'));
-// 		var_dump( Balance_Info('10212660'));die;
-// 		var_dump( Group_Member('211016129393', 1, 48));die;
+    function index()
+    {
+        $filter = array();
 
-		//var_dump(send_sms('963602313', 'test'));die;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $filter	= $this->empty2null($this->input->post());
+// 	    	var_dump($this->input->post(), $filter);
+        }
 
-// 		var_dump(send_sms('963602313', 'test'));die;
-		
-		$staff_company_subscribers = array();
-		$staff_company_id = null;
-		$current_subscriber = null;
-		
-		$current_memberpage = $this->session->userdata('current_memberpage')? $this->session->userdata('current_memberpage'): 1;
+       /* $data['filter'] = $filter;
+        $data['items'] = $this->applicant->search($filter);*/
 
-		if ($this->session->userdata('staff') && false == $this->session->userdata('visitor')) {
-			
-			if (isset($this->session->userdata('staff')['companies'])) {
-				$changeSubFlag = false;
-				if (($this->input->get('CustId') && !isset($this->session->userdata('current_customer')['WebCustId'])) || ($this->input->get('CustId') && isset($this->session->userdata('current_customer')['WebCustId']) && $this->input->get('CustId') != $this->session->userdata('current_customer')['WebCustId'])) 
-				{
-					$active_WebCustId = $this->input->get('CustId');
-					$current_customer = $this->Customer_model->getWebCustById($active_WebCustId);
-					if ($current_customer && !array_key_exists($active_WebCustId, $this->session->userdata('staff')['companies'])) {
-						show_404();
-					}
-					$staff_Group_Member = Group_Member($current_customer['GroupId']) or array();
-					$current_customer['Groups_Info'] = $staff_Group_Member;
-					$changeSubFlag = true;
-					$this->session->set_userdata('current_customer', $current_customer);
-					$this->session->set_userdata('current_memberpage', 1);
-				} 
-				elseif (isset($this->session->userdata('current_customer')['WebCustId'])) 
-				{
-					$active_WebCustId = $this->session->userdata('current_customer')['WebCustId'];
-					$current_customer = $this->session->userdata('current_customer');
-					$staff_Group_Member = $this->session->userdata('current_customer')['Groups_Info'];
-				} 
-				else 
-				{
-					$staff_companies = $this->session->userdata('staff')['companies'];
-					$current_customer = $this->get_cust_with_members($staff_companies);
-					
-					if ($current_customer) {
-						$changeSubFlag = true;
-						$staff_Group_Member = $current_customer['Groups_Info'];
-						$this->session->set_userdata('current_customer', $current_customer);
-						$this->session->set_userdata('current_memberpage', 1);
-					} else {
-						show_error('You have none customers for administration<br />Please contact administrator or goto <a href="'.site_url('servicetickets').'">Service Ticket System</a>', $status_code = 404);
-					}
-				}
+       /* $data['districts'] = $this->location->getDistricts(true);
+        $data['regions'] = $this->location->getRegions(true);
+        $data['communes'] = $this->location->getCommunes(true);
+        $data['cities'] = $this->location->getCities(true);
+        $data['zones'] = $this->location->getZone(true);
 
-				if (!$this->session->userdata('current_subscriber') 
-						|| ($this->input->get('subs_id') && (isset($this->session->userdata('current_subscriber')['Subscriber_Info']['PhoneNo']) && $this->input->get('subs_id') != $this->session->userdata('current_subscriber')['Subscriber_Info']['PhoneNo'])) 
-						|| ($changeSubFlag == true) 
-						){
+        $data['dealers'] = $this->dealer->search(null, true);
+        $data['dealer_types'] = $this->dealer->getDealerTypes(true);
+        $data['dealer_types'] = $this->dealer->getDealerTypes(true);
+        $data['sallers_list'] = $this->dealer->getDealerSallers(null, true);
 
-					if ($this->input->get('subs_id')) {
-						$currentServiceNumber = $this->input->get('subs_id');
-						
-						$current_customer['Groups_Info'] = Group_Member($current_customer['GroupId'], $current_memberpage) or array();
-						$this->session->set_userdata('current_customer', $current_customer);
-						
-					} else {
-// 						$currentsubsmember = current($staff_Group_Member);
+        $data['applicant_statuses'] = $this->applicant->getStatuses(true);*/
 
-						$firstServiceNumber = null;
-						if (isset($staff_Group_Member['MemberSubscriberList']) && is_array($staff_Group_Member['MemberSubscriberList'])) {
-							$firstServiceNumber = key($staff_Group_Member['MemberSubscriberList']); //$currentsubsmember['MemberServiceNumber'];
-						}
-						
-						$currentServiceNumber = $firstServiceNumber;
-					}
-					
-					$current_subscriber = $this->subscriber->loadSubscriber($currentServiceNumber);
-					
-					if ($current_subscriber) {
-						$this->session->set_userdata('current_subscriber', $current_subscriber);
-					} else {
-						$this->session->set_userdata('msg', "Sorry, the subscriber information are not loaded!");
-					}
-					
-				} else {
-					$current_subscriber = $this->session->userdata('current_subscriber');
-				}
-			}
-			
-			if( $this->acl->can_read(null, 12 /*Alert system*/)) {
-				$data['countActiveAlerts'] = $countActiveAlerts = $this->st->countActiveAlerts($this->session->userdata('staff')['user_id']);
-			}
-			
-			$data['customer_pics'] = $this->staff->getCustUsers($current_customer['WebCustId'], '1');
-			$data['customer_kams'] = $this->staff->getCustUsers($current_customer['WebCustId'], '2');
-// 			var_dump($this->session->userdata['staff']['roles'], $this->acl->can_read(null, 14 /*Corporate Sales Contacts*/));die;
-		
-		} else {
-			$ServiceNumber = $this->session->userdata('visitor');
-			$current_subscriber = $this->session->userdata('current_subscriber');
-			$current_customer = $this->session->userdata('current_customer');
-			
-			if (false == $current_customer) {
-				/* get CustId from ngbss related to the input phone number */
-				$CustId = GetCorpCustomerData($ServiceNumber, $onlyCustId = true);
-				$current_customer = $this->Customer_model->getCustById($CustId, 'array');
-				if ($current_customer) $this->session->set_userdata('current_customer', $current_customer);
-			}
-			
-			if (false == $current_subscriber) {
-				$current_subscriber = $this->subscriber->loadSubscriber($ServiceNumber);
-				if ($current_subscriber) $this->session->set_userdata('current_subscriber', $current_subscriber);
-			}
-			
-			$data['customer_pics'] = $this->staff->getCustUsers($current_customer['WebCustId'], '1');
-// 			var_dump($data['customer_pics']);die;
-		}
+        // add breadcrumbs
+//		$this->breadcrumbs->push('Application Forms Management', 'home/');
 
-		if (isset($current_customer['Groups_Info']['MemberSubscriberList']) && count($current_customer['Groups_Info']['MemberSubscriberList']) > 10) {
-			$current_customer['Groups_Info']['MemberSubscriberList'] = array_combine(array_slice(array_keys($current_customer['Groups_Info']['MemberSubscriberList']), 0, 10), array_slice($current_customer['Groups_Info']['MemberSubscriberList'], 0, 10));
-			$this->session->set_userdata('current_customer', $current_customer);
-			$current_memberpage = 1;
-			$this->session->set_userdata('current_memberpage', $current_memberpage);
-		}
-		
-		$data['current_customer'] = $current_customer;
-		$data['current_subscriber'] = $current_subscriber;
-		$data['current_memberpage'] = $current_memberpage;
-		
-		if ($this->input->get('debug') == 'subs') var_dump($current_subscriber);
-		if ($this->input->get('debug') == 'cust') var_dump($current_customer);
-		if ($this->input->get('debug') == 'staff') var_dump($this->session->userdata('staff'));
-		
-		$current_offering_id = isset($current_subscriber['Tariff_Info']['OfferingId'])? $current_subscriber['Tariff_Info']['OfferingId']: null;
-		$data['offer_plans'] = $this->Offer_model->getGroups($offer_type = 1, $current_offering_id);
-		$data['offer_services'] = $this->Offer_model->getGroups($offer_type = 2);
-// 		var_dump($data['offer_services'] );die;
-// 		$GroupsOffers = $this->Offer_model->getGroupsOffers(15);
+        $data['navAdd'] = array('link'=>'home/save', 'title'=>'Add New');
+        $data['titlePage'] = 'Отзывы :: Все отзывы';
+        $data['PAGE_TITLE'] = 'Отзывы :: Все отзывы';
+        $data['BODY_CLASS'] = "home";
+        $data['CONTENT']='review/index';
+        $this->load->view('layout/layout', $data);
 
-		//var_dump($this->acl->can_read(null, 9 /*Search subscribers*/));die;
-		
-		$data['PAGE_TITLE'] = "Home";
-		$data['BODY_CLASS'] = "site";
-		$data['block'] = $this->selfcare_mod->get_block(4);
-		
-		//$data['CONTENT']='home/index-smart';
-		
-		if ($this->input->get('debug') == 'def')
-			$this->load->view('template/tmpl_site', $data);
-		else 
-			$this->load->view('layout/layout_site', $data);
-	}
+    }
 	
 	protected function get_cust_with_members($staff_companies)
 	{

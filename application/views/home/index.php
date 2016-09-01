@@ -225,7 +225,7 @@
 			</a>
 		</div><!-- end of carusel-->
 		<div class="container text-right">
-			<a href="/reviews/" class="app-btn btn-orange">Отзывы клиентов</a>
+			<a href="/review/" class="app-btn btn-orange">Отзывы клиентов</a>
 		</div>
 	</div>
 </div><!-- end Projects slider block -->
@@ -277,7 +277,7 @@
 			</a>
 		</div><!-- end of carusel-->
 		<div class="container text-right">
-			<a href="{!! URL::to('reviews/#video') !!}" class="app-btn btn-orange">Отзывы клиентов</a>
+			<a href="/review/#video" class="app-btn btn-orange">Отзывы клиентов</a>
 		</div>
 	</div>
 </div><!-- end Projects slider block -->
