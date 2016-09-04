@@ -183,6 +183,34 @@ http://www.minimit.com/demos/bootstrap-3-responsive-columns-of-same-height
 		vertical-align: bottom;
 	}
 }
+.relative {
+	position: relative;
+}
+/*-- ajax loader indicator --*/
+.bg_opacity {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:1000;
+	background-color: #FFF;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);
+	opacity: 0.75;
+	cursor: wait;
+	background-size: cover;
+	display: none;
+}
+img.ajax-loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -50px; /* -1 * image width / 2 */
+	margin-top: -50px;  /* -1 * image height / 2 */
+	display: block;
+}
+/*----------*/
 .responsive-calendar {
 	margin-top: 30px;
 }

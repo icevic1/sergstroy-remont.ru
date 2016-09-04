@@ -1,6 +1,6 @@
 <?php
 
-class Review_mod extends CI_Model
+class Question_mod extends CI_Model
 {
     function __construct()
 	{
@@ -10,7 +10,7 @@ class Review_mod extends CI_Model
 	public function all()
 	{
 		$query = $this->db->select('*')
-			->from('client_reviews')
+			->from('client_questions')
 			->get();
 		
 		if ($query && $query->num_rows() > 0) {
@@ -28,7 +28,7 @@ class Review_mod extends CI_Model
 	{
 		if (!$inputData) return false;
 	
-		$this->db->insert('client_reviews', $inputData);
+		$this->db->insert('client_questions', $inputData);
 		$insert_id = $this->db->insert_id();
 		//print $lastQuery = $this->db->last_query();
 		return $insert_id;

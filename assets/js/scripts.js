@@ -1,11 +1,26 @@
 $(document).ready(function(e) {
 
-	$('.q-form input[type="text"], .q-form textarea')
-		.focus(function() {
+	$(document).on('submit', "#form_guest_question", function(e) {
+		e.preventDefault();
+		$('#ajax_preloader').show();
+		$.ajax({
+			url: $('#form_guest_question').prop('action'),
+			type: 'POST', //or POST
+			data: $('#form_guest_question').serialize(),
+			success: function(data){
+				$("#clientQuestion form").replaceWith($(data).find('form'));
+				$('#ajax_preloader').hide();
+			}
+		});
+	});
+
+	$("#clientQuestion")
+		.on('focus', '.q-form input[type="text"], .q-form textarea', function() {
+			console.log('focus');
 			if ($(".q-text").is(":visible") == false) {
 				$(".q-text").slideDown();
 			}
-		}).focusout(function(e) {
+		}).on('focusout', '.q-form input[type="text"], .q-form textarea', function(e) {
 
 			setTimeout(function() {
 				var count = $('.q-form input[type="text"], .q-form textarea').filter(function () {

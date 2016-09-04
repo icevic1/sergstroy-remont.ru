@@ -1,17 +1,5 @@
 $(document).ready(function() {
-	$(document).on('submit', "#frm_searh_parent", function(e) {
-		e.preventDefault();
-		$('#ajax-preloader').show();
-		$.ajax({
-			url: $('#frm_searh_parent').prop('action'),
-			type: 'POST', //or POST
- 	        data: $('#frm_searh_parent').serialize(),
- 	        success: function(data){
- 	       		$('#frm_searh_parent #search_result').html(data);
-				$('#ajax-preloader').hide();
- 	        }
- 	    });
- 	});
+
     	
 	$('#add_parent').modal({
             backdrop: true,

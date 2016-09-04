@@ -81,7 +81,7 @@
 	</div>
 </div><!-- end reviews slider block -->
 <!-- Client question block -->
-<?php $this->view('partial/client_questions');?>
+<?php $this->view('partial/client_question');?>
 
 <!-- Find us on map block-->
 <?php $this->view('partial/map');?>
