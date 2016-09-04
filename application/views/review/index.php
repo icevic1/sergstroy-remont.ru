@@ -4,31 +4,6 @@
 		<!-- Wrapper for Slides -->
 		<div class="container" id="clientReviews">
 			<div class="review-form-holder well">
-				<?php if(true){ /*Session::has('message_success')*/?>
-				<div class="alert alert-success">
-					<a href="#" class="close" data-hide="alert">&times;</a>
-					<strong>Спосибо!</strong>
-					<?php
-//					$errors = $this->form_validation->error_array();
-					if( !empty($errors)) {
-						foreach ($errors as $errorItem) {
-							echo '<br /><font color="red"> - '.$errorItem. '</font>';
-						}
-					}
-					if (isset($error)) echo '<br /><font color="red"> - '.$error. '</font>';
-					?>
-				</div>
-				<?php } elseif(false) {?>
-				<div class="alert alert-danger">
-					<a href="#" class="close" data-hide="alert">&times;</a>
-					<strong>Ошибка!</strong>
-					<ul>
-						@foreach ($errors->all() as $error)
-						<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-				<?php }?>
 				<?php echo form_open_multipart('review/store', array('id' => 'form-guest-review', 'name'=>'form-guest-review', 'class' => 'form-horizontal form-review', 'role'=>'form'));?>
 				<div class="col-sm-12 error-holder">
 					<div class="alert alert-danger none">
@@ -51,7 +26,7 @@
 							<div class="form-group relative">
 								<a class="btn btn-primary" href='javascript:;'>
 									Выберите картинку...
-									<input type="file" name="image" size="40" onchange='$("#upload-file-info").html($(this).val());'>
+									<input type="file" name="userfile" size="40" onchange='$("#upload-file-info").html($(this).val());'>
 								</a>
 								<span class='label label-info' id="upload-file-info"><?php echo form_error('image')?></span>
 								<div class="error"><?php echo form_error('image');?></div>
@@ -86,13 +61,13 @@
 						<div class="col-sm-3 col-sm-offset-1 review-img-block">
 							<div class="circle-block">
 								<div class="circle-inner img-review">
-									<?php if($item->image) echo '<img src="'.$item->image.'" />';?>
+									<?php if($item['image']) echo '<img src="'.$item['image'].'" />';?>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-7 review-content-block">
-							<h1><?php echo $item->name ?></h1>
-							<div class="quoted"><p><?php echo $item->review ?></p></div>
+							<h1><?php echo $item['name']; ?></h1>
+							<div class="quoted"><p><?php echo $item['review'] ?></p></div>
 						</div>
 					</div>
 				</div>
@@ -100,7 +75,7 @@
 				<?php } //endif ?>
 			</div>
 			<div class="text-center">
-				{{$itemsList->render()}}
+<!--				TODO: Pagination-->
 			</div>
 		</div><!-- .container -->
 	</div>

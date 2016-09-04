@@ -6,85 +6,213 @@ class Review extends Site_Controller
 		parent::__construct();
 		$this->load->helper('cookie');
 		$this->load->config('my_config');
-		$this->load->helper('webservice');
-		$this->load->helper('ngbssquery');
 		$this->load->helper('pagination');
 		$this->load->library('cryptastic');
-		$this->load->model('Selfcare_mod');
 		$this->load->library('Acl');
 		$this->load->library('Auth');
-		$this->load->model('Staff_mod', 'staff');
-		$this->load->model('Subscriber_mod', 'subscriber');
-		$this->load->model('Servicetickets_model', 'st');
-		$this->load->helper('text');
-	}
+        $this->load->helper('text');
 
-    function index()
+        $this->load->model('Review_mod');
+    }
+
+    public function index()
     {
-        $filter = array();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $filter	= $this->empty2null($this->input->post());
-// 	    	var_dump($this->input->post(), $filter);
-        }
-
-       /* $data['filter'] = $filter;
-        $data['items'] = $this->applicant->search($filter);*/
-
-       /* $data['districts'] = $this->location->getDistricts(true);
-        $data['regions'] = $this->location->getRegions(true);
-        $data['communes'] = $this->location->getCommunes(true);
-        $data['cities'] = $this->location->getCities(true);
-        $data['zones'] = $this->location->getZone(true);
-
-        $data['dealers'] = $this->dealer->search(null, true);
-        $data['dealer_types'] = $this->dealer->getDealerTypes(true);
-        $data['dealer_types'] = $this->dealer->getDealerTypes(true);
-        $data['sallers_list'] = $this->dealer->getDealerSallers(null, true);
-
-        $data['applicant_statuses'] = $this->applicant->getStatuses(true);*/
-
-        // add breadcrumbs
-//		$this->breadcrumbs->push('Application Forms Management', 'home/');
-
-        $data['navAdd'] = array('link'=>'home/save', 'title'=>'Add New');
-        $data['titlePage'] = 'Отзывы :: Все отзывы';
+        $data['itemsList'] = $this->Review_mod->all();
+        $data['titlePage'] = 'Отзывы - Все отзывы';
         $data['PAGE_TITLE'] = 'Отзывы :: Все отзывы';
         $data['BODY_CLASS'] = "home";
         $data['CONTENT']='review/index';
         $this->load->view('layout/layout', $data);
+    }
+
+    public function store()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $this->form_validation->set_rules('name', 'Имя', "trim|required");
+            $this->form_validation->set_rules('image', 'Картинка', "trim");
+            $this->form_validation->set_rules('review', 'Отзыв', "trim|required");
+
+            $this->form_validation->set_error_delimiters('<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Warning!</strong> ', '</div>');
+//            $this->form_validation->set_error_delimiters('<span class="error">', '</span>');
+
+            if ($this->form_validation->run() != FALSE)	{
+                $name = $this->form_validation->set_value('name');
+                $review = $this->form_validation->set_value('review');
+
+
+
+                $data_update = array(
+                    'name' => $this->form_validation->set_value('name'),
+                    'review' => $this->form_validation->set_value('review'),
+                    'ip_address' => $this->input->ip_address(),
+                    'is_video' => '0',
+                    'published' => '1',
+                );
+
+                if ( ($image_path = $this->upload_images($inputName = 'userfile')) ) {
+                    $data_update['image'] = $image_path;
+                }
+
+                $this->Review_mod->store($data_update);
+                redirect('/review');
+
+            } else {
+                $this->index();
+            }
+            //var_dump($this->input->post());
+        } else {
+            redirect('/review');
+        }
 
     }
-	
-	protected function get_cust_with_members($staff_companies)
-	{
-		$this->load->model('Customer_model');
-		$active_WebCustId = key($staff_companies);
-		$current_customer = $this->Customer_model->getWebCustById($active_WebCustId);
-	
-		if ($current_customer) {
-			/**
-			 * commented when run without internet
-			 */
-			$staff_Group_Member = Group_Member($current_customer['GroupId']);
-			$current_customer['Groups_Info'] = $staff_Group_Member;
-		
-			if (!$staff_Group_Member) {
-				next($staff_companies);
-				$current_customer = $this->get_cust_with_members($staff_companies);
-			}
-	
-			return $current_customer;
-		}
-	}
-	//===============REFRESH PAGE==================//
-	function refresh()
-	{
-		$this->session->unset_userdata('current_subscriber');
-		$this->session->unset_userdata('current_customer');
-		$this->session->unset_userdata('current_memberpage');
-		redirect('home');
-	}
+
+    protected function upload_images($inputName = 'userfile')
+    {
+        $uploadFolder = "/public/images/review";
+        $config['upload_path'] = FCPATH . "$uploadFolder/original";
+        $config['allowed_types'] = 'gif|jpg|png|bmp|jpeg';
+        $config['encrypt_name'] = TRUE;
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = time() . '.' . strtolower(pathinfo($_FILES[$inputName]['name'], PATHINFO_EXTENSION));;
+
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        if ( ! is_dir($this->upload->upload_path)) {
+            if ( ! mkdir ($this->upload->upload_path, 0777, TRUE)) {
+                $this->set_error('upload_no_filepath', 'error');
+                return FALSE;
+            }
+            if ( ! is_really_writable($this->upload->upload_path)) {
+                if ( ! chmod($this->upload->upload_path, 0777)) {
+                    $this->set_error('upload_not_writable', 'error');
+                    return FALSE;
+                }
+            }
+        }
+
+        if(!$this->upload->do_upload('userfile'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            echo $error;
+            return false; //$this->load->view('submit', $error);
+        }
+        else
+        {
+            $data['upload_data'] = array('upload_data' => $this->upload->data());
+            $file_name = $this->upload->file_name;
+
+//            $resize_url = $this->image_resize(800, 600, $uploadFolder, $file_name);
+            return $thumb_url = $this->image_crop(250, $uploadFolder, $file_name);
+        }
+    }
+
+    protected function image_resize($new_w, $new_h, $uploadFolder, $file_name)
+    {
+        $img_src = FCPATH ."$uploadFolder/original/$file_name";
+        $img_resize = FCPATH ."$uploadFolder/$file_name";
+
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $img_src;
+        $config['new_image'] = $img_resize;
+        $config['create_thumb'] = false;
+        $config['maintain_ratio'] = FALSE;
+
+        list($image_width, $image_height) = getimagesize($img_src);
+
+        if ($image_width > $image_height) {
+            $resize_w = intval($image_width * $new_h / $image_height);
+            $resize_h = $new_h;
+        }
+        else
+        {
+            $resize_w = $new_w;
+            $resize_h = intval($image_height * $new_w / $image_width);
+        }
+
+        $config['width'] = $resize_w;
+        $config['height'] = $resize_h;
+
+        $this->load->library('image_lib');
+        $this->image_lib->clear();
+        $this->image_lib->initialize($config);
+
+        if (!$this->image_lib->resize()) {
+            echo $this->image_lib->display_errors();
+            return false;
+        }
+
+        return "$uploadFolder/$file_name";
+    }
+
+    protected function image_crop($thumb_size = 250, $uploadFolder, $file_name)
+    {
+        $img_src = FCPATH ."$uploadFolder/original/$file_name";
+        $img_thumb = FCPATH ."$uploadFolder/thumbs/thumb_$file_name";
+
+        if ( ! is_dir(FCPATH ."$uploadFolder/thumbs/")) {
+            if ( ! mkdir (FCPATH ."$uploadFolder/thumbs/", 0777, TRUE)) {
+                $this->set_error('upload_no_filepath', 'error');
+                return FALSE;
+            }
+        }
+
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $img_src;
+        $config['new_image'] = $img_thumb;
+        $config['create_thumb'] = false;
+        $config['maintain_ratio'] = FALSE;
+
+        list($image_width, $image_height) = getimagesize($img_src);
+
+        if ($image_width > $image_height) {
+            $resize_w = intval($image_width * $thumb_size / $image_height);
+            $resize_h = $thumb_size;
+        }
+        else
+        {
+            $resize_w = $thumb_size;
+            $resize_h = intval($image_height * $thumb_size / $image_width);
+        }
+
+        $config['width'] = $resize_w;
+        $config['height'] = $resize_h;
+
+        $this->load->library('image_lib');
+        $this->image_lib->clear();
+        $this->image_lib->initialize($config);
+        if (!$this->image_lib->resize()) {
+            echo $this->image_lib->display_errors();
+            return false;
+        }
+
+        // reconfigure the image lib for cropping
+        $conf_new = array(
+            'image_library' => 'gd2',
+            'source_image' => $img_thumb,
+//            'new_image' => $img_thumb,
+            'create_thumb' => false,
+            'maintain_ratio' => FALSE,
+            'width' => $thumb_size,
+            'height' => $thumb_size,
+            'x_axis' => intval(round(($resize_w - $thumb_size) / 2)),
+            'y_axis' => intval(round(($resize_h - $thumb_size) / 2)),
+
+        );
+
+        $this->image_lib->clear();
+        $this->image_lib->initialize($conf_new);
+
+        if ( !$this->image_lib->crop() ){
+            echo $this->image_lib->display_errors();
+        }
+
+        return "$uploadFolder/thumbs/thumb_$file_name";
+    }
 	
 	//==============FUNCTION RANDOM==============//
 	function random_string($length = 6) {  
@@ -105,12 +233,6 @@ class Review extends Site_Controller
 		}else{
 			return $value;
 		}
-	}
-	function print_test($res){
-		echo '<pre>';
-		print_r($res);
-		echo '</pre>';
-		exit;
 	}
 
 	function edit_password(){
@@ -140,18 +262,7 @@ class Review extends Site_Controller
 		$reportspath = realpath(APPPATH.'../public/tmp_report/');
 		$objWriter->save($reportspath.'/Carddetails.xlsx');
 	}
-	
-	/**
-	 * get customer infomation
-	 * @imput: int $staff_id
-	 */
-	public function ajax_customer_info()
-	{
-		$data['current_customer'] = $this->session->userdata('current_customer');
-// 		var_dump($data['details']);die;
-		$this->load->view('home/ajax_customer_info', $data);
-	}
-	
+
 	/**
 	 * all my new funcions
 	 * @imput: int $staff_id
@@ -163,279 +274,4 @@ class Review extends Site_Controller
 // 		var_dump($data['details']);die;
 		$this->load->view('home/ajax_pic_details', $data);
 	}
-	
-	/**
-	 * get kam information
-	 * @imput: int $user_id
-	 */
-	public function ajax_kam_details()
-	{
-		$data['details'] = $data['detail_list'] = array();
-		$user_id = $this->input->post('user_id');
-		
-		if ($user_id) {
-			$data['details'] = $this->staff->getKAMByID($user_id);
-		} else {
-			$data['detail_list'] = $this->staff->getCustUsers($this->session->userdata['current_customer']['WebCustId'], '2');
-		}
-// 			var_dump($data['details']);die;
-		$this->load->view('home/ajax_kam_details', $data);
-	}
-	
-	/**
-	 * get offer details table
-	 * @imput: int $web_offer_id
-	 */
-	public function ajax_offer_details()
-	{
-		$this->load->model('Offer_model');
-		$web_offer_id = $this->input->get_post('webofferid');
-		$offerDetails = $this->Offer_model->getOffer($web_offer_id);
-		if ($offerDetails && !empty($offerDetails['remark'])) echo $offerDetails['remark'];
-		else echo '<em>No data</em>';
-	}
-	
-	/**
-	 * get group additon information
-	 * @imput: int $groupid
-	 */
-	public function ajax_offer_groupdetails()
-	{
-		$this->load->model('Offer_model');
-		$groupid = $this->input->get_post('groupid');
-		$offerDetails = $this->Offer_model->getGroup($groupid);
-		if ($offerDetails && !empty($offerDetails['addition'])) echo $offerDetails['addition'];
-		else echo '<em>No data</em>';
-	}
-	
-	/**
-	 * get group additon information
-	 * @imput: int $groupid
-	 */
-	public function ajax_bills_details()
-	{
-		$WebCustId = $this->input->get_post('webcustid');
-		$billtype = $this->input->get_post('billtype');
-		//$data['QueryBalanceResult'] = $this->Balance_Info();
-		//$data['BillInfo']= $this->Bill_Info();
-		$data['WebCustId'] = $WebCustId;
-		$data['billtype'] = $billtype;
-		
-		$current_subscriber = $this->session->userdata('current_subscriber');
-		$data['current_subscriber'] = $current_subscriber;
-
-		$this->load->view('home/ajax_bill_details', $data);
-	}
-	
-
-	public function ajax_cdr_details()
-	{
-		$WebCustId = $this->input->get_post('webcustid');
-
-		$data['WebCustId'] = $WebCustId;
-
-		if ($this->input->post('date_from')) {
-			$Startdate = date('YmdHis', strtotime($this->input->post('date_from')));
-			$data['date_from'] = $this->input->post('date_from');
-		} else {
-			$Startdate =  date('YmdHis', strtotime('-30 days'));
-			$data['date_from'] = date('Y-m-d', strtotime('-30 days'));
-		}
-		
-		if ($this->input->post('date_to')) {
-			$Enddate = date('YmdHis', strtotime($this->input->post('date_to')));
-			$data['date_to'] = $this->input->post('date_to');
-		} else {
-			$Enddate =  date('YmdHis');
-			$data['date_to'] = date('Y-m-d');
-		}
-		
-		//var_dump($Startdate,$Enddate);
-		$page = $this->uri->segment(3);
-		$current_cdrpage = $page? $page: 1;
-	    $perpage = 20;
-	    
-		$current_subscriber = $this->session->userdata('current_subscriber');
-		$current_cdr = $this->cdr->loadCDR($current_subscriber['Subscriber_Info']['PhoneNo'],$current_cdrpage,$perpage,$Startdate,$Enddate); //$this->input->get('subs_id'));
-		
-		$data['current_cdrpage'] = $current_cdrpage;
-		$data['current_subscriber'] = $current_subscriber;
-		$data['current_cdr'] = $current_cdr;
- 		//var_dump($current_cdr);die;
-		$data['page'] = $page;
-		$data['Startdate']=$Startdate;
-		$data['Enddate']=$Enddate;
-		$data['CDRAmount'] = $current_cdr['CDR_Info']['TotalCDRNum'];
-	   
-		$this->load->view('home/ajax_cdr_details', $data);
-		
-		
-	}
-	/*
-	public function ajax_cdr_search()
-	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			//$sdate = $this->input->post('date_from');
-			//	$edate = $this->input->post('date_to');
-			$sdate= ($this->input->post('date_from'))? $this->input->post('date_from'): null;
-			$edate = ($this->input->post('date_to'))? $this->input->post('date_to'): null;
-		}
-	
-		if($sdate && $sdate==null){
-			$Startdate =date('YmdHis', $sdate);
-		}
-		else
-		{
-			$Startdate = date('YmdHis', strtotime('-30 days'));
-	
-		}
-	
-		if($edate && $edate==null){
-			$Enddate =date('YmdHis', $edate);
-		}
-		else
-		{
-			$Enddate = date('YmdHis');
-	
-		}
-		//var_dump($Startdate,$Enddate);
-		$page = $this->uri->segment(3);
-		$current_cdrpage = $page? $page: 1;
-		$perpage=20;
-			
-		//var_dump($Startdate,$Enddate);die;
-		$current_subscriber = $this->session->userdata('current_subscriber');
-		$current_cdr = $this->cdr->loadCDR($current_subscriber['Subscriber_Info']['PhoneNo'],$current_cdrpage,$perpage,$Startdate,$Enddate); //$this->input->get('subs_id'));
-	
-	
-		$data['current_cdrpage'] = $current_cdrpage;
-		$data['current_subscriber'] = $current_subscriber;
-		$data['current_cdr'] = $current_cdr;
-		//var_dump($current_cdr);die;
-		$data['page'] = $page;
-		$data['Startdate']=$Startdate;
-		$data['Enddate']=$Enddate;
-		$data['CDRAmount'] = $current_cdr['CDR_Info']['TotalCDRNum'];
-	
-	
-		$this->load->view('home/ajax_cdr_details', $data);
-	
-	
-	
-	}
-	*/
-	
-	/**
-	 * get group members count
-	 * @imput: int $groupid
-	 */
-	public function ajax_gmem_counter()
-	{
-		$this->load->model('Customer_model');
-		
-		$staff = $this->session->userdata('staff');
-		
-		if (false == isset($staff['mgroup_counter']) && false == $this->session->userdata('visitor')) {
-		
-			if (isset($staff['companies'])) {
-				$staff_companies = $this->session->userdata('staff')['companies'];
-			}
-			
-			if (isset($this->session->userdata('current_customer')['WebCustId']) ) {
-				$WebCustId = $this->session->userdata('current_customer')['WebCustId'];
-				$currGroupAmount = $this->session->userdata('current_customer')['Groups_Info']['GroupDetails']['MemberAmount'];
-			}
-			
-			unset($staff_companies[$WebCustId]);
-			
-			$customers = $this->Customer_model->getCustomers(array_keys($staff_companies));
-			
-			$staff['mgroup_counter'] = array();
-			$staff['mgroup_counter'][$WebCustId] = $currGroupAmount;
-			if ($customers) {
-				foreach ($customers as $item) {
-					if (!$item['GroupId']) continue;
-					$gmem_data = Group_Member($item['GroupId'], 1, 2); if (!$gmem_data) continue;
-					$staff['mgroup_counter'][$item['WebCustId']] = $gmem_data['GroupDetails']['MemberAmount'];
-				}
-			}
-			
-			$this->session->set_userdata('staff', $staff);
-		}
-		
-		echo json_encode($staff['mgroup_counter']);
-	}
-	
-	function request11()
-	{
-// 		echo md5(time());die;
-		/*
-		$url=$this->config->item('server_ip').$this->config->item('get_drs');
-		$params=array('CustomerNumber'=>$cust_number,'SubscriberNumber'=>$sub_number,'DRType'=>'PDR','StartDate'=>$start_date,'EndDate'=>$end_date,'PageNumber'=>$page_num);
-		$res=request('SelfCare_GetDRs',$url,$params);
-		 * */
-		$ci=& get_instance();
-		$ci->load->library("Nusoap_Lib");
-		$ci->load->config('my_config');
-		$ci->load->model('selfcare_mod');
-		$soap_action = 'GetCorpCustomerData';// $ci->config->item('server_ip').'/acc/'.$method;
-// 		$soap_action = 'QueryPurchasedSupplementaryOffering';// $ci->config->item('server_ip').'/acc/'.$method;
-		$url = 'http://10.12.5.207:8060/crm/services/OrderQuery';
-// 		$url = 'http://10.12.8.14:7080/custom/SELFCARE/HWBSS_Offering';
-
-		$xml ='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:quer="http://crm.huawei.com/query/" xmlns:bas="http://crm.huawei.com/basetype/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <quer:GetCorpCustomerDataRequest>
-         <quer:RequestHeader>
-            <bas:Version>1</bas:Version>
-            <bas:TransactionId>2015100723595212454855054293229</bas:TransactionId>
-            <bas:ProcessTime>20151007235952</bas:ProcessTime>
-            <bas:ChannelId>28</bas:ChannelId>
-            <bas:TechnicalChannelId>53</bas:TechnicalChannelId>
-            <bas:TenantId>101</bas:TenantId>
-            <bas:AccessUser>5060</bas:AccessUser>
-            <bas:AccessPwd>d+7pCWDu8Dt7vxVMvEudvQ==</bas:AccessPwd>
-         </quer:RequestHeader>
-         <quer:GetCorpCustomerBody>
-            <quer:CustomerId>1010001973495</quer:CustomerId>
-         </quer:GetCorpCustomerBody>
-      </quer:GetCorpCustomerDataRequest>
-   </soapenv:Body>
-</soapenv:Envelope>';
-		
-		var_dump($xml);
-		$xml = preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',$xml);
-		$ci->nusoap_client = new nusoap_client($url);
-		$ci->nusoap_client->defencoding = 'UTF-8';
-		$ci->nusoap_client->soap_defencoding = 'UTF-8';
-		$ci->nusoap_client->decode_utf8 = false;
-		$ci->nusoap_client->serializeEnvelope($xml,'',array(),'document', 'literal');
-		
-		$result = $ci->nusoap_client->send($xml, $soap_action, $ci->config->item('conn_timeout'), $ci->config->item('resp_timeout'));
-		
-		var_dump($result, $ci->nusoap_client->fault, $ci->nusoap_client->faultstring, $ci->nusoap_client->getError());
-// var_dump($method,htmlspecialchars($ci->nusoap_client->request, ENT_QUOTES),htmlspecialchars($ci->nusoap_client->response, ENT_QUOTES), $ci->nusoap_client->getError());
-// 		echo $ci->nusoap_client->request;
-		
-// 		echo $xml;
-		die;
-		
-		if($ci->nusoap_client->fault)
-		{
-			//$ci->selfcare_mod->save_log(htmlspecialchars($ci->nusoap_client->faultstring, ENT_QUOTES));
-			$ci->selfcare_mod->save_api_log('fault Error '.$method,htmlspecialchars($ci->nusoap_client->faultstring, ENT_QUOTES),htmlspecialchars($ci->nusoap_client->faultstring, ENT_QUOTES));
-			return array();
-		}else{
-			if($ci->nusoap_client->getError()){
-				//$ci->selfcare_mod->save_log(htmlspecialchars($ci->nusoap_client->getError(), ENT_QUOTES));
-				$ci->selfcare_mod->save_api_log('getError Error '.$method,htmlspecialchars($ci->nusoap_client->getError(), ENT_QUOTES),htmlspecialchars($ci->nusoap_client->faultstring, ENT_QUOTES));
-				return array();
-			}else{
-				$ci->selfcare_mod->save_api_log($method,htmlspecialchars($ci->nusoap_client->request, ENT_QUOTES),htmlspecialchars($ci->nusoap_client->response, ENT_QUOTES));
-			}
-		}
-		return $result;
-	}
-	
 }
