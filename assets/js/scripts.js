@@ -54,6 +54,25 @@ $(document).ready(function(e) {
 	 }*/
 	/*---- end map block -------*/
 
+	$("#form_guest_question").validate({
+		rules: {
+			name: {
+				required: true,
+				maxlength: 13
+			},
+			phone: {
+				required: true,
+				digits: true,
+				maxlength: 13
+			},
+			question: {
+				required: true
+			}
+		}
+	});
+
+
+
 	//------------------------------------
 
 	$(document).on('click', '[data-show="panel"]', function(e) {

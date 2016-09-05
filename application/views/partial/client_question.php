@@ -36,19 +36,25 @@
                         <?php } ?>
                     <div class="col-sm-8">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <?php echo form_input(array('name'=>'name','value'=>set_value('name'), 'class'=>'form-control','id'=>'q_name','placeholder'=>'Ваше имя'));?>
+                            <div class="col-sm-6 padding-bottom-10">
+                                <div class="form-group- required">
+                                    <?php echo form_input(array('name'=>'name','value'=>set_value('name'), 'class'=>'form-control','id'=>'q_name','placeholder'=>'Ваше имя'));?>
+                                </div>
                                 <?php //echo form_error('name');?>
                             </div>
                             <div class="col-sm-6">
-                                <?php echo form_input(array('name'=>'phone','value'=>set_value('phone'), 'class'=>'form-control','id'=>'q_phone','placeholder'=>'Номер телефона'));?>
+                                <div class="form-group- required">
+                                <?php echo form_input(array('name'=>'phone','value'=>set_value('phone'), 'class'=>'form-control','id'=>'q_phone','placeholder'=>'Номер телефона', 'required'=>'required'));?>
                                 <?php //echo form_error('phone');?>
+                                </div>
                             </div>
                         </div>
                         <div class="row q-text">
                             <div class="col-sm-12">
+                                <div class="form-group- required">
                                 <?php echo form_textarea(array('name'=>'question','value'=>set_value('question'), 'class'=>'form-control','rows'=>'3','id'=>'review','placeholder'=>'Ваш вопрос...'));?>
                                 <?php //echo form_error('question');?>
+                                </div>
                             </div>
                         </div>
                     </div>

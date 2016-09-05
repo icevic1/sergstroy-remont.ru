@@ -8945,6 +8945,10 @@ img.ajax-loader {
   display: block;
 }
 /*----------*/
+.padding-bottom-10 {
+  padding-bottom: 10px;
+}
+/*----------*/
 .responsive-calendar {
   margin-top: 30px;
 }
@@ -9545,6 +9549,13 @@ ul.nav.nav-login > li.collapse-btn button {
   margin-top: 20px;
   margin-bottom: 45px;
 }
+.question-holder .question-holder-content .q-form label.error {
+  color: #a94442;
+}
+a.question-holder .question-holder-content .q-form label.error:hover,
+a.question-holder .question-holder-content .q-form label.error:focus {
+  color: #843534;
+}
 .question-holder .question-holder-content .q-form .q-text {
   display: none;
 }
@@ -9552,7 +9563,6 @@ ul.nav.nav-login > li.collapse-btn button {
 .question-holder .question-holder-content .q-form textarea {
   border-radius: 0;
   border: 1px solid #7d7d7d;
-  margin-bottom: 20px;
 }
 .question-holder .question-holder-content .q-form input[type="text"] {
   height: 53px;
