@@ -8918,6 +8918,13 @@ http://www.minimit.com/demos/bootstrap-3-responsive-columns-of-same-height
 .relative {
   position: relative;
 }
+.error {
+  color: #a94442;
+}
+a.error:hover,
+a.error:focus {
+  color: #843534;
+}
 /*-- ajax loader indicator --*/
 .bg_opacity {
   position: absolute;
@@ -9592,7 +9599,6 @@ a.question-holder .question-holder-content .q-form label.error:focus {
 .stages-holder .u-form .form-group:not(.has-error) textarea {
   border-radius: 0;
   border: 1px solid #7d7d7d;
-  margin-bottom: 20px;
 }
 .stages-holder .u-form .form-group:not(.has-error) input {
   height: 50px;

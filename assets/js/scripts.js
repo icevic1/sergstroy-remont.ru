@@ -54,6 +54,20 @@ $(document).ready(function(e) {
 	 }*/
 	/*---- end map block -------*/
 
+	$("#form_client_login").validate({
+		rules: {
+			user_name: {
+				required: true,
+				maxlength: 64
+			},
+			user_phone: {
+				required: true,
+				digits: true,
+				maxlength: 13
+			}
+		}
+	});
+
 	$("#form_guest_question").validate({
 		rules: {
 			name: {
@@ -70,7 +84,6 @@ $(document).ready(function(e) {
 			}
 		}
 	});
-
 
 
 	//------------------------------------

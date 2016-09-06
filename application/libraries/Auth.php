@@ -4,7 +4,6 @@ if (! defined ( 'BASEPATH' ))
 
 class Auth
 {
-
 	function __construct()
 	{
 	     $CI =& get_instance();
@@ -36,31 +35,25 @@ class Auth
 		else return false;
 	}
 	
-	function login($email, $password = null) 
+	function checkClient($user_name, $user_phone)
 	{
 		$CI = & get_instance ();
-		if (!$password) return false;
-		$data = array (
-				"email" => $email/* 'orletchi.victor@gmail.com', // */ ,
-// 				"password" => md5 ( $password ) 
-				"password" => $password
-		);
+		if (!$user_phone) return false;
+		$where = array (
+				"name" => $user_name,
+				"mobile_no" => $user_phone
+        );
 		
-		$query = $CI->db->get_where ("scsm_users", $data );
+		$query = $CI->db->get_where("scsm_users", $where);
 // 		var_dump ($data, $query->row());
 // 		die ();
-		if ($query->num_rows () !== 1) {
+		if ($query->num_rows() !== 1) {
 			return false;
 		} else {
-			$data = array ("logined_at" => date ( "Y-m-d H:i:s" ));
-			
-			$CI->db->update("scsm_users", $data );
-			
-			// store user id in the session
-// 			$CI->session->set_userdata ( "staff_id", $query->row ()->staff_id );
-			
-			return $query->row ();
+			$CI->db->update("scsm_users", array ("logined_at" => date ( "Y-m-d H:i:s" )) );
+            return $query->row_array();
 		}
+		return false;
 	}
 	
 	function loginSub($subID, $password) 

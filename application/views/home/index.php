@@ -282,65 +282,10 @@
 	</div>
 </div><!-- end Projects slider block -->
 <!-- Client question block -->
-<div class="container-fluid question-holder">
-	<div class="row">
-		<div class="col-sm-12 title text-center">
-			<h1>Вопросы</h1>
-		</div>
-	</div>
-	<div class="row question-holder-content">
-		<div class="col-md-12">
-			<div class="container price-pack-holder">
-				<div class="row">
-					<div class="col-sm-12">
-						<h2 class="q-title">Остались вопросы?</h2>
-						<span class="sub-qtitle">Задать их нашему специалисту</span>
-					</div>
-				</div>
-				<div class="row q-form">
-					<form class="form-horizontal">
-						<div class="col-sm-8">
-							<div class="row">
-								<div class="col-sm-6">
-									<input type="text" name="q_name" class="form-control" id="q_name" placeholder="Ваше имя" />
-								</div>
-								<div class="col-sm-6">
-									<input type="text" name="q_phone" class="form-control" id="q_phone" placeholder="Номер телефона">
-								</div>
-							</div>
-							<div class="row q-text">
-								<div class="col-sm-12">
-									<textarea class="form-control" rows="3" placeholder="Ваш вопрос"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4 q-action">
-							<div class="row">
-								<div class="col-sm-12">
-									<button type="submit" class="btn app-btn btn-orange btn-block">Задать вопрос</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div><!-- end Projects slider block -->
-<!-- Question block -->
-<div class="container-fluid map-holder">
-	<div class="row">
-		<div class="col-sm-12 title text-center">
-			<h1>Где мы находимся</h1>
-		</div>
-	</div>
-	<div class="row map-content">
-		<div class="col-md-12">
-			<div id="map" style="width: 100%; height: 400px"></div>
-		</div>
-	</div>
-</div><!-- end Projects slider block -->
-<!-- Question block -->
+<?php $this->view('partial/client_question');?>
+
+<!-- Find us on map block-->
+<?php $this->view('partial/map');?>
 
 <!-- Login block -->
 <div id="client_login" class="container-fluid stages-holder">
@@ -353,29 +298,7 @@
 		<div class="col-md-12">
 			<div class="container">
 				<div class="row">
-					<form class="form-horizontal">
-						<div class="col-sm-8">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<input type="text" name="u_name" class="form-control" id="u_name" placeholder="Имя клиента" />
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<input type="text" name="u_phone" class="form-control" id="u_phone" placeholder="Номер телефона">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4 q-action">
-							<div class="row">
-								<div class="col-sm-12">
-									<button type="submit" class="btn app-btn btn-orange btn-block">Войти</button>
-								</div>
-							</div>
-						</div>
-					</form>
+					<?php $this->view('account/login_client_form');?>
 				</div>
 			</div>
 		</div>

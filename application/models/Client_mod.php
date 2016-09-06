@@ -1,19 +1,31 @@
 <?php
 
-class Staff_mod extends CI_Model {
-
-	public static $search_fields = array('0'=>'--all--', '1' => 'ID', '2'=>'Name/email');
-	public static $activity_status = array('0'=>'Active', '1'=>'Suspended', '2'=>'Deleted'); //0-active; 1-suspended; 2-deleted
-	public $n_parents = 6;
-	public static $PICTypes = array('1'=>'Administrator','2'=>'Authorized Signatory');
-	public static $ACCOUNT_TYPE = '0'; //0-pic, kam, other; 1-subscriber
-	
+class Client_mod extends CI_Model
+{
     function __construct()
 	{
 		parent::__construct();
-// 		$this->load();
 	}
-	
+
+    public function checkClient($user_name, $user_phone)
+    {
+        if (!$user_name || !$user_phone) return false;
+
+        $query = $this->db->select('us.*')
+            ->from('scsm_users as us')
+            ->where('us.name', strtolower($user_name))
+            ->where('us.mobile_no', strtolower($user_phone));
+
+        $query = $query->get();
+        //print $lastQuery = $this->db->last_query();
+        if ($query && $query->num_rows() == 1) {
+            $response = $query->row_array();
+            unset($response['password']);
+            return $response;
+        } else
+            return false;
+    }
+
 	public function getByID($user_id = null, $full = false)
 	{
 		if (!$user_id) return false;
@@ -34,19 +46,7 @@ class Staff_mod extends CI_Model {
 		return $result;
 	}
 	
-	public function getByEmail($email = null)
-	{
-		if (!$email) return null;
-	
-		$query = $this->db->select('us.*')
-			->from('scsm_users as us')
-			->where('us.email', $email);
-	
-		$query = $query->get();
-		// 		print $lastQuery = $this->db->last_query();
-		$result = $query->row_array();
-		return $result;
-	}
+
 	
 	public function searchUsers($filter = array(), $retur_type = 'object')
 	{

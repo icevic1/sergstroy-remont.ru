@@ -22,10 +22,10 @@ class Home extends Site_Controller
 		$this->load->helper('pagination');
 		$this->load->helper('url');
 		$this->load->library('breadcrumbs'); // load Breadcrumbs
-		$this->load->model('Dealer_model', 'dealer');     
-		$this->load->model('Location_model', 'location');     
-		$this->load->model('Inventory_model', 'inventory');
-		$this->load->model('Applicant_model', 'applicant');
+//		$this->load->model('Dealer_model', 'dealer');
+//		$this->load->model('Location_model', 'location');
+//		$this->load->model('Inventory_model', 'inventory');
+//		$this->load->model('Applicant_model', 'applicant');
 
 		$this->staff = $this->session->userdata('staff');
 	}	
@@ -39,8 +39,8 @@ class Home extends Site_Controller
 // 	    	var_dump($this->input->post(), $filter);
 	    }
 	    
-	    $data['filter'] = $filter;
-	    $data['items'] = $this->applicant->search($filter);
+//	    $data['filter'] = $filter;
+//	    $data['items'] = $this->applicant->search($filter);
 
 	   /* $data['districts'] = $this->location->getDistricts(true);
 	    $data['regions'] = $this->location->getRegions(true);
@@ -53,7 +53,7 @@ class Home extends Site_Controller
 	    $data['dealer_types'] = $this->dealer->getDealerTypes(true);
 	    $data['sallers_list'] = $this->dealer->getDealerSallers(null, true);*/
 	    
-	    $data['applicant_statuses'] = $this->applicant->getStatuses(true);
+//	    $data['applicant_statuses'] = $this->applicant->getStatuses(true);
 
 		// add breadcrumbs
 //		$this->breadcrumbs->push('Application Forms Management', 'home/');
