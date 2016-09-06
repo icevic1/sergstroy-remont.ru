@@ -303,6 +303,7 @@
 			</div>
 		</div>
 	</div>
+	<?php if (isset($client) && $client) { ?>
 	<div class="row stages-content">
 		<div class="col-md-12">
 			<div class="container">
@@ -335,8 +336,8 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 u-details">
-								<h2 class="color-orange">Валерий</h2>
-								<div class="text-muted">Графский переулок, дом 14, корпус 2, 4 этаж</div>
+								<h2 class="color-orange"><?php echo $client['name'];?></h2>
+								<div class="text-muted"><?php echo $client['address'];?></div>
 							</div>
 						</div>
 					</div>
@@ -347,4 +348,5 @@
 			</div>
 		</div>
 	</div>
+	<?php } ?>
 </div><!-- end Projects slider block -->

@@ -54,6 +54,20 @@ $(document).ready(function(e) {
 	 }*/
 	/*---- end map block -------*/
 
+	if ($(".responsive-calendar").length > 0) {
+		$(".responsive-calendar").responsiveCalendar({
+			//time: '2013-05',
+			allRows: false,
+			translateMonths: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+
+			events: {
+				"2016-09-03": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
+				"2016-09-01": {"number": 1, "url": "http://w3widgets.com"},
+				"2016-08-03": {"number": 1},
+				"2016-06-12": {}}
+		});
+	}
+
 	$("#form_client_login").validate({
 		rules: {
 			user_name: {

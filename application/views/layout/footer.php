@@ -10,6 +10,7 @@
     <script src="<?php echo base_url('public/js/jquery.cookie.js'); ?>"></script>
     <script src="<?php echo base_url('public/js/jquery.inputmask.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootbox.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/responsive-calendar.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/scripts.js'); ?>"></script>
   </body>
 </html>

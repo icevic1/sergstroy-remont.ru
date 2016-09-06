@@ -21,48 +21,17 @@ class Home extends Site_Controller
 		$this->load->helper('form');
 		$this->load->helper('pagination');
 		$this->load->helper('url');
-		$this->load->library('breadcrumbs'); // load Breadcrumbs
-//		$this->load->model('Dealer_model', 'dealer');
-//		$this->load->model('Location_model', 'location');
-//		$this->load->model('Inventory_model', 'inventory');
-//		$this->load->model('Applicant_model', 'applicant');
 
-		$this->staff = $this->session->userdata('staff');
+		$this->Client = $this->session->userdata('Client');
 	}	
 	
 	function index()
-	{			
-	    $filter = array();
-	    
-	    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	    	$filter	= $this->empty2null($this->input->post());
-// 	    	var_dump($this->input->post(), $filter);
-	    }
-	    
-//	    $data['filter'] = $filter;
-//	    $data['items'] = $this->applicant->search($filter);
-
-	   /* $data['districts'] = $this->location->getDistricts(true);
-	    $data['regions'] = $this->location->getRegions(true);
-	    $data['communes'] = $this->location->getCommunes(true);
-	    $data['cities'] = $this->location->getCities(true);
-	    $data['zones'] = $this->location->getZone(true);
-	    
-	    $data['dealers'] = $this->dealer->search(null, true);
-	    $data['dealer_types'] = $this->dealer->getDealerTypes(true);
-	    $data['dealer_types'] = $this->dealer->getDealerTypes(true);
-	    $data['sallers_list'] = $this->dealer->getDealerSallers(null, true);*/
-	    
-//	    $data['applicant_statuses'] = $this->applicant->getStatuses(true);
-
-		// add breadcrumbs
-//		$this->breadcrumbs->push('Application Forms Management', 'home/');
-		
+	{
+        $data['client'] = $this->Client;
 		$data['PAGE_TITLE'] = 'Ремонт не может быть скучным';
 		$data['BODY_CLASS'] = "home";
 		$data['CONTENT']='home/index';
 		$this->load->view('layout/layout', $data);
-        
 	}
 	
 	function profile($ID = null)
