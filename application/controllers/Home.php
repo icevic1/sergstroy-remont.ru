@@ -22,11 +22,20 @@ class Home extends Site_Controller
 		$this->load->helper('pagination');
 		$this->load->helper('url');
 
+
 		$this->Client = $this->session->userdata('Client');
 	}	
 	
 	function index()
 	{
+        $this->load->model('Review_mod', 'Review');
+        $reviewItems = $this->Review->all(array('is_video'=>'0','on_home'=>'1','published'=>'1'));
+        $reviewVideoItems = $this->Review->all(array('is_video'=>'1','on_home'=>'1','published'=>'1'));
+//        var_dump($reviewVideoItems, $reviewItems);
+
+        $data['reviewItems'] = $reviewItems;
+        $data['reviewVideoItems'] = $reviewVideoItems;
+
         $data['client'] = $this->Client;
 		$data['PAGE_TITLE'] = 'Ремонт не может быть скучным';
 		$data['BODY_CLASS'] = "home";

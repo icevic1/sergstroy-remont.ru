@@ -7,12 +7,14 @@ class Review_mod extends CI_Model
 		parent::__construct();
 	}
 
-	public function all()
+	public function all($filter = array())
 	{
 		$query = $this->db->select('*')
-			->from('client_reviews')
-			->get();
-		
+			->from('client_reviews');
+
+        if (isset($filter['is_video'])) $query->where('is_video', (string)$filter['is_video']);
+
+        $query = $query->get();
 		if ($query && $query->num_rows() > 0) {
             return $query->result_array();
 		} else

@@ -186,34 +186,29 @@
 			<!-- Wrapper for Slides -->
 			<div class="container">
 				<div class="carousel-inner">
-					<div class="item active">
+					<?php
+						if(isset($reviewItems) && $reviewItems) {
+							foreach ($reviewItems as $key=>$item) {
+					?>
+					<div class="item <?php echo (($key==0)? 'active':'')?>">
 						<!-- Set the first background image using inline CSS below. -->
 						<div class="row circles-holder">
 							<div class="col-sm-3 col-sm-offset-1 review-img-block">
 								<div class="circle-block">
-									<div class="circle-inner img-review"></div>
+									<div class="circle-inner img-review">
+										<?php if($item['image']) {?>
+											<img src="<?php echo $item['image']?>" />
+										<?php } ?>
+									</div>
 								</div>
 							</div>
 							<div class="col-sm-7 review-content-block">
-								<h1>Юля Студеникина</h1>
-								<div class="quoted"><p>Для меня было истинным удовольствие работать с Екатериной Петровой. Она талантливый, креативный, яркий человек. Энергичная и жизнерадостная! Каждая ее работа не похожа на предыдущую, стили неповторимы. Она тонко чувствует Ваши потребности и предпочтения. Результат превосходит все ожидания!<br />Всем рекомендую!</p></div>
+								<h1><?php echo $item['name']?></h1>
+								<div class="quoted"><p><?php echo $item['review']?></p></div>
 							</div>
 						</div>
 					</div>
-					<div class="item">
-						<!-- Set the first background image using inline CSS below. -->
-						<div class="row circles-holder">
-							<div class="col-sm-3 col-sm-offset-1 review-img-block">
-								<div class="circle-block">
-									<div class="circle-inner img-review"></div>
-								</div>
-							</div>
-							<div class="col-sm-7 review-content-block">
-								<h1>Юля Студеникина</h1>
-								<div class="quoted"><p>Для меня было истинным удовольствие работать с Екатериной Петровой. Она талантливый, креативный, яркий человек. Энергичная и жизнерадостная! Каждая ее работа не похожа на предыдущую, стили неповторимы. Она тонко чувствует Ваши потребности и предпочтения. Результат превосходит все ожидания!<br />Всем рекомендую!</p></div>
-							</div>
-						</div>
-					</div>
+					<?php }}?>
 				</div>
 			</div>
 			<!-- Controls -->
@@ -241,31 +236,28 @@
 			<!-- Wrapper for Slides -->
 			<div class="container">
 				<div class="carousel-inner">
-					<div class="item active">
+					<?php
+					if(isset($reviewVideoItems) && $reviewVideoItems) {
+						foreach ($reviewVideoItems as $key=>$item) {
+					?>
+					<div class="item <?php echo (($key==0)? 'active':'')?>">
 						<div class="row circles-holder">
 							<div class="col-sm-3 col-sm-offset-1 review-img-block">
 								<div class="circle-block">
-									<div class="circle-inner img-vreview"></div>
+									<div class="circle-inner img-vreview <?php echo ((isset($item) && $item['video'])? 'is_video': '')?>">
+										<?php if($item['image']) {?>
+											<img src="<?php echo $item['image']?>" />
+										<?php } ?>
+									</div>
 								</div>
 							</div>
 							<div class="col-sm-7 review-content-block">
-								<h1>Уолтер Брюс Уиллис</h1>
+								<h1><?php echo $item['name']?></h1>
+							</h1>
 							</div>
 						</div>
 					</div>
-					<div class="item">
-						<!-- Set the first background image using inline CSS below. -->
-						<div class="row circles-holder">
-							<div class="col-sm-3 col-sm-offset-1 review-img-block">
-								<div class="circle-block">
-									<div class="circle-inner img-review"></div>
-								</div>
-							</div>
-							<div class="col-sm-7 review-content-block">
-								<h1>Юля Студеникина</h1>
-							</div>
-						</div>
-					</div>
+					<?php }}?>
 				</div><!-- end carousel-inner -->
 			</div><!-- end container -->
 			<!-- Controls -->
