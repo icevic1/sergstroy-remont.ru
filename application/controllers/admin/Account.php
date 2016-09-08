@@ -14,6 +14,7 @@ class Account extends My_Controller {
 		$username=$this->input->post('txt_username');
 		$pwd=$this->input->post('txt_pwd');
 		$res=$this->selfcare_mod->check_user($username,$pwd);
+//        var_dump($res);die;
 		if($res['err']==0){
 			$this->session->set_userdata('login_name', $username);
 			redirect(base_url('admin/home/'));

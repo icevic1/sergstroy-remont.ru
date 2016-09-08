@@ -10,7 +10,13 @@
             <?php }?>
         </div>
     </div>
-    <div class="box-content">
+    <ul id="group_tabs" class="nav nav-tabs small-tabs">
+        <li><a href="<?php echo base_url("admin/customeracl/");?>">Permissions</a></li>
+        <li><a href="<?php echo base_url("admin/customeracl/roles/");?>">Roles</a></li>
+        <li class="active"><a href="">Resources</a></li>
+    </ul>
+    <div class="tab-content box-content">
+        <div class="tab-pane active">
         <table class="table table-striped table-bordered bootstrap-datatable datatable">
           <thead>
               <tr>
@@ -58,4 +64,5 @@
             </tbody>
          </table>
       </div>
+    </div>
 </div>

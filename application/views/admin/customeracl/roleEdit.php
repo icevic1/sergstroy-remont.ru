@@ -35,12 +35,6 @@
                   <?php echo form_dropdown('parent_id', $roleOptions, $default = ((isset($customer_role->parent_id))? $customer_role->parent_id : '0'));?>
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label" for="txt_user_name">Staff Type</label>
-                <div class="controls">
-                	<?php echo form_dropdown('staff_type', array('0'=>'Choose staff type', '1'=>'Smart Staff', '2'=>'Subscriber'), $default = ((isset($customer_role->staff_type))? $customer_role->staff_type : '0'));?>
-                </div>
-              </div>
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary"><i class="cus-disk"></i> Save</button>
                 <a href="<?php echo site_url('admin/customeracl/roles')?>" class="btn"><i class="cus-cancel"></i> Cancel</a>

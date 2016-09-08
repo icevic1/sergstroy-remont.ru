@@ -9,13 +9,16 @@ class Customeracl extends Admin_Controller {
 	}
 	function index()
 	{
-		$data['menus']=$this->selfcare_mod->get_menu($this->login_name);
+		/*$data['menus']=$this->selfcare_mod->get_menu($this->login_name);
 		$data['menus_page']=$this->selfcare_mod->get_page_menu($this->login_name, $this->page_id);
 		$data['per_page']=$this->selfcare_mod->get_perm_per_page($this->login_name,$this->page_id);
 		$data['PAGE_TITLE']=$data['per_page']['page_name'];
 		$data['users']=$this->selfcare_mod->get_users();
 		$data['CONTENT']='admin/customeracl/index';
-		$this->load->view('template/tmpl_admin',$data);
+		$this->load->view('template/tmpl_admin',$data);*/
+
+
+        $this->roles();
 	}
 	
 	function roles()
@@ -28,8 +31,6 @@ class Customeracl extends Admin_Controller {
 		
 		$data['roles'] = $query->result();
 		$data['roleOptions'] =  Acl::simpleRoleArray();
-		$data['staff_type'] =  Acl::$staff_type;
-// var_dump($data['staff_type']);
 		$data['CONTENT']='admin/customeracl/roles';
 		$this->load->view('template/tmpl_admin',$data);
 	}
@@ -55,7 +56,6 @@ class Customeracl extends Admin_Controller {
 				$this->form_validation->set_rules('role_id', 'Role ID', 'trim|required|min_length[1]|max_length[4]');
 			}
 			$this->form_validation->set_rules('role_name', 'Role name', 'trim|required|min_length[2]|max_length[100]');
-			$this->form_validation->set_rules('staff_type', 'Staff type', 'trim|numeric');
 			$this->form_validation->set_rules('parent_id', 'Parent', 'trim|numeric');
 			$this->form_validation->set_rules('role_description', 'Role description', 'trim');
 			
@@ -64,7 +64,6 @@ class Customeracl extends Admin_Controller {
 				$data['customer_role']->role_name = $this->form_validation->set_value('role_name');
 				$data['customer_role']->role_description = $this->form_validation->set_value('role_description');
 				$data['customer_role']->parent_id = $this->form_validation->set_value('parent_id');
-				$data['customer_role']->staff_type = $this->form_validation->set_value('staff_type');
 			} else {
 				$data_update = array(
 						'role_name' => $this->form_validation->set_value('role_name'),
@@ -72,8 +71,7 @@ class Customeracl extends Admin_Controller {
 				);
 				
 				$data_update['parent_id'] = $this->form_validation->set_value('parent_id');
-				$data_update['staff_type'] = $this->form_validation->set_value('staff_type');
-				
+
 				$data_update = $this->empty2null($data_update);
 				
 				$role_id = $this->form_validation->set_value('role_id');

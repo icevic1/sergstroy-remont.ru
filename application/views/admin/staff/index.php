@@ -14,7 +14,7 @@
     </div>
     <div class="box-content">
     
-        <table class="table gradient-thead compact table-striped table-bordered bootstrap-datatable datatable">
+        <table class="table gray-head gradient-thead compact table-striped table-bordered bootstrap-datatable datatable">
           <thead>
               <tr>
                   <th>ID</th>
@@ -22,7 +22,6 @@
                   <th>Email</th>
                   <th>Role</th>
                   <th>Mobile No.</th>
-                  <th>Office No.</th>
                   <th>Created</th>
                   <th style="width: 100px;">Actions</th>
               </tr>
@@ -36,7 +35,6 @@
                 <td><?php echo $item->email;?></td>
                 <td><?php echo $item->role_name;?></td>
                 <td><?php echo $item->mobile_no;?></td>
-                <td><?php echo $item->office_no;?></td>
                 <td><?php echo $item->created_at;?></td>
                 <td>
                     <?php if($per_page['per_update']==1){?>
@@ -45,7 +43,7 @@
                     <a class="btn-link disabled" href=""><i class="cus-page-white-edit"></i>Edit</a>
                     <?php }?>
                     <?php if($per_page['per_delete']==1){?>
-                    <a class="btn-link" href="<?php echo site_url("admin/staff/delete_user/{$item->user_id}/$item->user_type")?>" onclick="return confirm('You are sure to delete this record')"><i class="cus-delete"></i>Delete</a>
+                    <a class="btn-link" href="<?php echo site_url("admin/staff/delete_user/{$item->user_id}")?>" onclick="return confirm('You are sure to delete this record')"><i class="cus-delete"></i>Delete</a>
                     <?php }else{?>
                     <a class="btn-link disabled" href="#"><i class="cus-delete"></i>Delete</a>
                     <?php }?>
