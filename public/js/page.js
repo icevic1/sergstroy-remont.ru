@@ -1,4 +1,11 @@
 $(document).ready(function() {
+	// [name^='pages_title']
+	$("input[name^='userfile']").change(function() {
+		$("#upload-files-info").empty();
+		for (var i = 0; i < $(this).get(0).files.length; ++i) {
+			$("#upload-files-info").append($("<span class='label label-info margin-right-5'>"+$(this).get(0).files[i].name+"</span>"));
+		}
+	});
 
 	$('[placeholder]').focus(function() {
 	  var input = $(this);

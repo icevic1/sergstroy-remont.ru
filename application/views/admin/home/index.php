@@ -14,7 +14,7 @@
                     $r=1;
                     $scol=0;
                     while($r<=($trow+$mrow)){
-                        echo '<div class="sortable row-fluid thumnail">';
+                        echo '<div class="sortable row-fluid thumbnails">';
                         for($j=$scol;$j<$scol+$num_col;$j++){
                             if($j<$tt){
                                 ?>

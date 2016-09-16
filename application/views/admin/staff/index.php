@@ -18,12 +18,13 @@
           <thead>
               <tr>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Mobile No.</th>
+                  <th>Имя</th>
+                  <th>Емэйл</th>
+                  <th>Роль</th>
+                  <th>Телефон</th>
+                  <th>Адрес</th>
                   <th>Created</th>
-                  <th style="width: 100px;">Actions</th>
+                  <th style="width: 100px;">Действия</th>
               </tr>
           </thead>   
           <tbody>
@@ -35,6 +36,7 @@
                 <td><?php echo $item->email;?></td>
                 <td><?php echo $item->role_name;?></td>
                 <td><?php echo $item->mobile_no;?></td>
+                <td><?php echo $item->address;?></td>
                 <td><?php echo $item->created_at;?></td>
                 <td>
                     <?php if($per_page['per_update']==1){?>

@@ -1,6 +1,6 @@
 <?php
 
-class Gallery_mod extends CI_Model
+class Photo_mod extends CI_Model
 {
     function __construct()
 	{
@@ -11,9 +11,9 @@ class Gallery_mod extends CI_Model
     {
         if (!$id) return false;
         $query = $this->db->select('g.*')
-            ->from('galleries g')
+            ->from('photos g')
             ->where('g.id', $id)
-            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name, us.mobile_no, us.address');
+            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
 
         $query = $query->get();
         if ($query && $query->num_rows() > 0) {
@@ -25,7 +25,7 @@ class Gallery_mod extends CI_Model
 	public function all($filter = array())
 	{
 		$query = $this->db->select('g.*')
-			->from('galleries g')
+			->from('photos g')
             ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
 
 //        if (isset($filter['is_video'])) $query->where('is_video', (string)$filter['is_video']);
@@ -46,7 +46,7 @@ class Gallery_mod extends CI_Model
 	{
 		if (!$inputData) return false;
 	
-		$this->db->insert('galleries', $inputData);
+		$this->db->insert('photos', $inputData);
 		$insert_id = $this->db->insert_id();
 		//print $lastQuery = $this->db->last_query();
 		return $insert_id;
@@ -78,19 +78,5 @@ class Gallery_mod extends CI_Model
 		if (!$ID) return false;
 		return $this->db->delete('galleries', array('id' => $ID), 1);
 	}
-
-    public function getPhotos($gallery_id = null)
-    {
-        if (!$gallery_id) return false;
-        $query = $this->db->select('p.*')
-            ->from('photos as p')
-            ->join("galleries as g", 'p.gallery_id = g.id', 'LEFT')->select('g.name')
-            ->where('p.gallery_id', $gallery_id);
-
-        $query = $query->get();
-        if ($query && $query->num_rows() > 0) {
-            return $query->result_array();
-        } else
-            return null;
-    }
-}
+	
+}// end Servicetickets_model class

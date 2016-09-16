@@ -32,7 +32,7 @@
           	<?php foreach($itemsList as $item) :?>
             <tr>
                 <td><?php echo $item['id'];?></td>
-                <td><?php echo $item['name'];?></td>
+                <td><a href="<?php echo site_url('admin/galleries/view/'.$item['id'])?>"><?php echo $item['name'];?></a></td>
                 <td><?php echo $item['user_name'];?></td>
                 <td><?php echo $item['description'];?></td>
                 <td><?php echo $item['views'];?></td>
@@ -41,7 +41,7 @@
                 <td>
                     <?php if($per_page['per_update']==1){?>
                     <a class="btn-link" href="<?php echo site_url('admin/galleries/edit/'.$item['id'])?>"><i class="cus-page-white-edit"></i> Edit</a>
-                    <?php }else{?>
+                    <?php } else {?>
                     <a class="btn-link disabled" href=""><i class="cus-page-white-edit"></i>Edit</a>
                     <?php }?>
                     <?php if($per_page['per_delete']==1){?>

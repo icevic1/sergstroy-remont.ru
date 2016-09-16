@@ -9,7 +9,7 @@ class Staff extends Admin_Controller
 		$this->load->library('cryptastic');
 		$this->load->library('Acl');
 		$this->load->model('Staff_mod');
-		$this->load->model('Customer_model');
+//		$this->load->model('Customer_model');
 // 		$this->load->model('Masteracc_model');
 		$this->load->library('Aes');
 	}
@@ -86,14 +86,15 @@ class Staff extends Admin_Controller
 			$this->form_validation->set_rules('user[user_id]', 'User ID', 'trim'.(($getUser_id)?'|required':''));
 			
 			$this->form_validation->set_rules('user[name]', 'Name', 'trim|required|max_length[64]');
-			$this->form_validation->set_rules('password', 'Password', 'trim|min_length[3]|max_length[32]');
+//			$this->form_validation->set_rules('password', 'Password', 'trim|min_length[3]|max_length[32]');
 			$this->form_validation->set_rules('user[email]', 'Email', 'trim|valid_email|max_length[128]'.$uniqEmail);
 			$this->form_validation->set_rules('user[mobile_no]', 'Mobile No.', 'trim|required|is_natural|max_length[64]');
-			$this->form_validation->set_rules('user[home_no]', 'Home No.', 'trim|is_natural|max_length[64]');
-			$this->form_validation->set_rules('user[office_no]', 'Office No.', 'trim|is_natural|max_length[64]');
-			$this->form_validation->set_rules('user[fax_no]', 'Fax No.', 'trim|is_natural|max_length[64]');
+//			$this->form_validation->set_rules('user[home_no]', 'Home No.', 'trim|is_natural|max_length[64]');
+//			$this->form_validation->set_rules('user[office_no]', 'Office No.', 'trim|is_natural|max_length[64]');
+//			$this->form_validation->set_rules('user[fax_no]', 'Fax No.', 'trim|is_natural|max_length[64]');
+			$this->form_validation->set_rules('user[address]', 'Адрес', 'trim');
 			$this->form_validation->set_rules('roles[]', 'Role', 'trim|is_natural_no_zero');
-	
+
 // 			var_dump($this->form_validation->run(), $this->form_validation->error_array());
 			
 			if ($this->form_validation->run() != FALSE)	{
@@ -129,7 +130,7 @@ class Staff extends Admin_Controller
 				}
 				
 // 				redirect('admin/staff/edit/');
-				redirect('admin/staff/edit/'.$user_id);
+				redirect('admin/staff');
 			} else {
 				$data['loadedItem'] = $this->input->post('user');
 				$data['loadedRoles'] = $this->input->post('roles');
