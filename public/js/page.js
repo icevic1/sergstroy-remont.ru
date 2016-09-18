@@ -1,6 +1,31 @@
 $(document).ready(function() {
+
+	$("a.delete-photo").on("click", function(e) {
+		e.preventDefault();
+		$this = $(this);
+		if (confirm("Вы действительно хотите удулить фотографию безвозвратно?") == true) {
+			$.ajax({
+				url: $this.attr('href'),
+				dataType: "json",
+				// data: {typeid: $(this).val(), csrf_sc_name : csrf_sc_name},
+				type: "GET",
+				success: function(response){
+					// console.log(response.msg, response.code, response);
+					if (response.code == 0) {
+						$('<div class="alert alert-success"><button data-dismiss="alert" class="close" type="button">×</button>' + response.msg + "</div>").insertBefore("ul.gallery-photos");
+						$this.closest('li').remove();
+					}
+					else
+						$('<div class="alert alert-error"><button data-dismiss="alert" class="close" type="button">×</button>' + response.msg + "</div>").insertBefore("ul.gallery-photos");
+
+				}
+			});
+		}
+		// alert(1112);
+		// console.log(e);
+	});
 	// [name^='pages_title']
-	$("input[name^='userfile']").change(function() {
+	$("input[name^='images']").change(function() {
 		$("#upload-files-info").empty();
 		for (var i = 0; i < $(this).get(0).files.length; ++i) {
 			$("#upload-files-info").append($("<span class='label label-info margin-right-5'>"+$(this).get(0).files[i].name+"</span>"));

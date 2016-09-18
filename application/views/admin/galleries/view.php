@@ -38,7 +38,7 @@
             <div class="form-group relative">
                 <a class="btn btn-primary-" href="javascript:void(0);"><!--$('#userfile').click()-->
                     Выберите картинки...
-                    <input type="file" id="userfiles" name="userfile" size="40"  /><!-- multiple="multiple" onchange='console.log($(this));return;$("#upload-file-info").html($(this).val());'-->
+                    <input type="file" id="userfiles" name="images[]" size="40" multiple="multiple" /><!--  onchange='console.log($(this));return;$("#upload-file-info").html($(this).val());'-->
                 </a>
                 <span id="upload-files-info"></span>
                 <span class='label label-info'><?php echo form_error('image')?></span>
@@ -52,6 +52,15 @@
 
 
           <div class="row-fluid">
+              <?php if($this->session->userdata('msg')){ ?>
+                  <div class="alert alert-success">
+                      <button data-dismiss="alert" class="close" type="button">×</button>
+                      <?php
+                      echo $this->session->userdata('msg');
+                      $this->session->unset_userdata('msg');
+                      ?>
+                  </div>
+              <?php } ?>
             <ul class="thumbnails gallery-photos">
 <!--                <li class="span3" style="display:none"></li>-->
                 <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
@@ -60,7 +69,7 @@
                         <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
                     </a>
                     <div class="thump-head">
-                        <a class="btn btn-danger btn-mini" href="#"><i class="icon-trash icon-white"></i></a>
+                        <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
                     </div>
                 </li>
                 <?php } ?>

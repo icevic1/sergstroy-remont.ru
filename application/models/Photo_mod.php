@@ -10,10 +10,11 @@ class Photo_mod extends CI_Model
     public function get($id = null)
     {
         if (!$id) return false;
-        $query = $this->db->select('g.*')
-            ->from('photos g')
-            ->where('g.id', $id)
-            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
+        $query = $this->db->select('p.*')
+            ->from('photos p')
+            ->where('p.photo_id', $id)
+            ->join("galleries as g", 'p.gallery_id = g.id', 'LEFT')->select('g.name as gallery_name, g.description as gallery_description, g.event_date')
+            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.user_id, us.name as user_name');
 
         $query = $query->get();
         if ($query && $query->num_rows() > 0) {
@@ -52,22 +53,7 @@ class Photo_mod extends CI_Model
 		return $insert_id;
 	}
 	
-	/**
-	 * Update galleries data by ID
-	 * @param string $id
-	 * @param array $inputData
-	 * @return multitype:|int affected rows
-	 */
-	public function save($ID = null, $inputData = array())
-	{
-		if (!$ID || !$inputData) return array();
-	
-		$this->db->update('galleries', $inputData, $where = array('id'=>$ID), $limit = 1);
-		$afftectedRows = $this->db->affected_rows();
-		//print $lastQuery = $this->db->last_query();
-		return $afftectedRows;
-	}
-	
+
 	/**
 	 * Delete dealer by ID
 	 * @param string $ID
@@ -76,7 +62,6 @@ class Photo_mod extends CI_Model
 	public function delete($ID = null)
 	{
 		if (!$ID) return false;
-		return $this->db->delete('galleries', array('id' => $ID), 1);
+		return $this->db->delete('photos', array('photo_id' => $ID), 1);
 	}
-	
-}// end Servicetickets_model class
+}
