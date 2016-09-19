@@ -9,7 +9,7 @@
             <?php }?>
         </div>
         <div class="box-icon">
-            <a href="<?php echo base_url('admin/')?>" class="btn-link"><i class="cus-arrow-undo"></i> Назад</a>
+            <a href="<?php echo base_url('admin/galleries/')?>" class="btn-link"><i class="cus-arrow-undo"></i> Назад</a>
         </div>
     </div>
     <div class="box-content">
@@ -23,10 +23,8 @@
             <?php echo $albumItem['description'];?>
         </blockquote>
 
-        <div class="upload-form-holder well">
+        <div class="upload-form-holder well relative">
             <?php echo form_open_multipart('admin/galleries/upload', array('id' => 'form_upload_photo', 'name'=>'form-gallery-photo', 'class' => 'form-horizontal form-review', 'role'=>'form'), array('gallery_id'=>$albumItem['id']));?>
-            <?php //echo form_hidden(array('name'=>'gallery_id','value'=>set_value('gallery_id')));?>
-
             <div class="row-fluid error-holder hidden">
                 <div class="alert alert-danger none">
                     <a href="#" class="close" data-hide="alert">&times;</a>
@@ -48,42 +46,33 @@
                 <button type="submit" class="btn btn-primary"><i class="icon-upload icon-white"></i> Загрузить</button>
             </div>
             <?php echo form_close(); ?>
+            <div id="ajax_preloader" class="bg_opacity">
+                <img class="ajax-loader" alt="waiting..." src="<?php echo base_url('public/img/ajax-loader.gif'); ?>" />
+            </div>
         </div><!--.review-form-holder-->
-
-
-          <div class="row-fluid">
-              <?php if($this->session->userdata('msg')){ ?>
-                  <div class="alert alert-success">
-                      <button data-dismiss="alert" class="close" type="button">×</button>
-                      <?php
-                      echo $this->session->userdata('msg');
-                      $this->session->unset_userdata('msg');
-                      ?>
-                  </div>
-              <?php } ?>
-            <ul class="thumbnails gallery-photos">
-<!--                <li class="span3" style="display:none"></li>-->
-                <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
-                <li class="span3">
-                    <a class="thumbnail" href="<?php echo $item['photo'];?>">
-                        <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
-                    </a>
-                    <div class="thump-head">
-                        <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
-                    </div>
-                </li>
-                <?php } ?>
-            </ul>
+        <div id="photo_container" class="row-fluid">
+            <?php if($this->session->userdata('msg')){ ?>
+                <div class="alert alert-success">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <?php
+                  echo $this->session->userdata('msg');
+                  $this->session->unset_userdata('msg');
+                  ?>
+                </div>
+            <?php } ?>
+        <ul class="thumbnails gallery-photos">
+            <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
+            <li class="span3">
+                <a href="<?php echo $item['photo'];?>" class="thumbnail" ><!--data-imagelightbox="f"-->
+                    <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
+                </a>
+                <div class="thump-head">
+                    <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
+                </div>
+            </li>
+            <?php } ?>
+        </ul>
         </div>
 
       </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-
-
-});
-</script>
-<style>
-
-</style>

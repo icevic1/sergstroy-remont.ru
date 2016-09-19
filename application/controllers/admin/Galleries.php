@@ -159,7 +159,7 @@ class Galleries extends Admin_Controller
                 }
 //                var_dump($data_update, $image_path);die;
 
-                redirect("/admin/galleries/view/{$gallery_id}");
+                redirect("/admin/galleries/view/{$gallery_id}/#photo_container");
 
             } else {
                 $this->view();

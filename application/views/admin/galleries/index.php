@@ -19,6 +19,7 @@
               <tr>
                   <th>ID</th>
                   <th>Название</th>
+                  <th>Количество</th>
                   <th>Клиент</th>
                   <th>Описание</th>
                   <th>Просмотры</th>
@@ -33,6 +34,7 @@
             <tr>
                 <td><?php echo $item['id'];?></td>
                 <td><a href="<?php echo site_url('admin/galleries/view/'.$item['id'])?>"><?php echo $item['name'];?></a></td>
+                <td class="text-center"><?php echo $item['uploaded'];?></td>
                 <td><?php echo $item['user_name'];?></td>
                 <td><?php echo $item['description'];?></td>
                 <td><?php echo $item['views'];?></td>

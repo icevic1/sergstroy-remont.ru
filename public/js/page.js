@@ -1,5 +1,46 @@
 $(document).ready(function() {
 
+	$('.gallery-photos').magnificPopup({
+		delegate: 'a.thumbnail',
+		type: 'image',
+		tLoading: 'Loading image #%curr%...',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+			/*titleSrc: function(item) {
+				return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+			}*/
+		}
+	});
+
+	$("#form_upload_photo").validate({
+// 		debug: true,
+		errorElement: 'span',
+		errorClass: 'error',
+		rules: {
+			"images[]": {required: true,},
+			"gallery_id":{required: true, digits: true},
+		},
+		messages: {
+			"images[]":{
+				required: 'Пожалуйста, выберите изображение!'
+			},
+		},
+		errorPlacement: function (error, element) {
+			element.parent().next().html(error); //error.insertAfter(element);
+		},
+		submitHandler: function(form) {
+			$("#ajax_preloader").show();
+			$(form).submit();
+		}
+
+	});
+
 	$("a.delete-photo").on("click", function(e) {
 		e.preventDefault();
 		$this = $(this);

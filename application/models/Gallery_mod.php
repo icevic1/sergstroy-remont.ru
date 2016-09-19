@@ -26,11 +26,14 @@ class Gallery_mod extends CI_Model
 	{
 		$query = $this->db->select('g.*')
 			->from('galleries g')
-            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
+            ->join("photos as p", 'g.id = p.gallery_id', 'LEFT')->select('COUNT(p.photo_id) as uploaded')
+            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name')
+            ->group_by('g.id');
 
 //        if (isset($filter['is_video'])) $query->where('is_video', (string)$filter['is_video']);
 
         $query = $query->get();
+//        print $lastQuery = $this->db->last_query();
 		if ($query && $query->num_rows() > 0) {
             return $query->result_array();
 		} else

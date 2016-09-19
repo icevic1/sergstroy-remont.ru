@@ -1,3 +1,4 @@
+<link href="<?php echo base_url('public/css/magnific-popup.css');?>" rel="stylesheet" type="text/css">
 <!-- jQuery UI -->
 <script src='<?php echo base_url('public/js/1.10.7.jquery.dataTables.min.js'); ?>'></script>
 <script src="<?php echo base_url('public/js/jquery.dataTables.bootstrap.js')?>"></script>
@@ -35,11 +36,12 @@
 <script src="<?php //echo base_url('public/js/bootstrap-datepicker.js')?>"></script-->
 <script src="<?php echo base_url('public/js/jquery.validate.js');?>"></script>
 <script src="<?php echo base_url('public/js/jquery.numeric.js');?>"></script>
+<script src="<?php echo base_url('public/js/jquery.magnific-popup.js');?>"></script>
 <script src="<?php echo base_url('public/js/page.js')?>" type="text/javascript"></script>
 <script src="<?php echo base_url('public/ckeditor/ckeditor.js'); ?>"></script>
 <script src="<?php echo base_url('public/js/bootbox.min.js'); ?>"></script>
 <script src="<?php echo base_url('public/js/bootstrap-switch.min.js'); ?>"></script>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
 <script type="text/javascript">
 	$(document).ready(function(e) {
 		<?php if($this->session->userdata('msg')){?>
