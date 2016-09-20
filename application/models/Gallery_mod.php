@@ -96,4 +96,23 @@ class Gallery_mod extends CI_Model
         } else
             return null;
     }
+
+    public function getEvents($filter = array())
+    {
+        $query = $this->db->from('galleries g')->select('g.id, g.event_date')
+            ->join("photos as p", 'g.id = p.gallery_id', 'LEFT')->select('COUNT(p.photo_id) as number')
+            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')
+            ->where("g.published", "1")
+            ->order_by('g.event_date desc')
+            ->group_by('g.id');
+
+        if (isset($filter['user_id'])) $query->where('us.user_id', $filter['user_id']);
+
+        $query = $query->get();
+//        print $lastQuery = $this->db->last_query();
+        if ($query && $query->num_rows() > 0) {
+            return $query->result_array();
+        } else
+            return null;
+    }
 }

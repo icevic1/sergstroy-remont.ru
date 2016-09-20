@@ -1,4 +1,21 @@
 $(document).ready(function(e) {
+	$('.carousel-inner').magnificPopup({
+		delegate: 'a.image-item',
+		type: 'image',
+		tLoading: 'Loading image #%curr%...',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+			/*titleSrc: function(item) {
+			 return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+			 }*/
+		}
+	});
 
 	$(document).on('submit', "#form_guest_question", function(e) {
 		e.preventDefault();
@@ -54,17 +71,73 @@ $(document).ready(function(e) {
 	 }*/
 	/*---- end map block -------*/
 
+
+
 	if ($(".responsive-calendar").length > 0) {
 		$(".responsive-calendar").responsiveCalendar({
 			//time: '2013-05',
 			allRows: false,
 			translateMonths: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+			events: {}, /*"2016-09-03": {"number": 5, "url": "http://w3widgets.com/responsive-slider"}*/
+			onDayClick: function(events) {
+				if ($(this).parent('div').hasClass('active')) {
+					getEventGallery($(this).attr('href'));
+					$(".responsive-calendar .days .day.active a.selected").removeClass('selected');
+					$(this).addClass('selected');
+				}
+				return false;
+			}
+		});
+	}
 
-			events: {
-				"2016-09-03": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
-				"2016-09-01": {"number": 1, "url": "http://w3widgets.com"},
-				"2016-08-03": {"number": 1},
-				"2016-06-12": {}}
+	function loadEvents()
+	{
+		if ($(".responsive-calendar").length > 0) {
+			$.ajax({
+				url: "/home/get_events",
+				dataType: "json",
+				// data: {typeid: $(this).val(), csrf_sc_name : csrf_sc_name},
+				type: "GET",
+				success: function (response) {
+					if (_.keys(response).length < 1) return;
+					$('.responsive-calendar').responsiveCalendar('edit', response);
+					var firsUrl = response[_.first(_.keys(response))].url;
+					getEventGallery(firsUrl)
+				}
+			});
+		}
+	}
+	loadEvents();
+
+	function getEventGallery(url)
+	{
+		if (!url) return false;
+		$("#ajax_preloader_gallery").show();
+		$.ajax({
+			url: url, /*/home/gallery_photos/2*/
+			// dataType: "json",
+			// data: {typeid: $(this).val(), csrf_sc_name : csrf_sc_name},
+			type: "GET",
+			success: function(html){
+				$("#ajax_preloader_gallery").hide();
+				$('#galleryCarousel').empty().append($(html));
+				$('a[href="'+url+'"]').addClass('selected');
+				$('#galleryCarousel .carousel-inner').magnificPopup({
+					delegate: 'a.image-item',
+					type: 'image',
+					tLoading: 'Loading image #%curr%...',
+					mainClass: 'mfp-img-mobile',
+					gallery: {
+						enabled: true,
+						navigateByImgClick: true,
+						preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+					},
+					image: {
+						tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+					}
+				});
+				// console.log(response );
+			}
 		});
 	}
 

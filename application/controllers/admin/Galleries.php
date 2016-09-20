@@ -71,6 +71,7 @@ class Galleries extends Admin_Controller
 
             $this->form_validation->set_rules('album[id]', 'ID', "trim|numeric");
             $this->form_validation->set_rules('album[name]', 'Название', "trim|required");
+            $this->form_validation->set_rules('album[event_date]', 'Дата События', "trim|date");
             $this->form_validation->set_rules('album[user_id]', 'Привязка', "trim|required|numeric");
             $this->form_validation->set_rules('album[description]', 'Описание', "trim");
             $this->form_validation->set_rules('album[published]', 'Опубликовать', "trim|numeric");
@@ -84,6 +85,7 @@ class Galleries extends Admin_Controller
                 $data_update = array(
                     'name' => $this->form_validation->set_value('album[name]'),
                     'user_id' => $this->form_validation->set_value('album[user_id]'),
+                    'event_date' => $this->form_validation->set_value('album[event_date]'),
                     'description' => $this->form_validation->set_value('album[description]'),
                     'published' => $this->form_validation->set_value('album[published]'),
                 );

@@ -9012,6 +9012,14 @@ img.ajax-loader {
 .responsive-calendar .day.active a {
   color: #ff7e00;
 }
+.responsive-calendar .day a.selected {
+  background: #FF3333;
+  color: #ffffff;
+}
+.responsive-calendar .day.today a {
+  background: #6c808c;
+  color: #ffffff;
+}
 .responsive-calendar .day.active a:hover {
   background-color: #09293c;
 }
@@ -9027,13 +9035,15 @@ img.ajax-loader {
 }
 .responsive-calendar .day .badge {
   position: absolute;
-  top: 2px;
+  top: 0px;
   right: 2px;
   z-index: 1;
   background: transparent none;
   font-size: 10px;
   border-radius: 0px;
-  color: red;
+  color: white;
+  text-decoration: underline;
+  padding: 0;
 }
 /*@media(max-width:767px){}
 @media(min-width:768px){}

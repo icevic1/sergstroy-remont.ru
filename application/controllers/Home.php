@@ -21,6 +21,8 @@ class Home extends Site_Controller
 		$this->load->helper('form');
 		$this->load->helper('pagination');
 		$this->load->helper('url');
+        $this->load->model('Photo_mod', 'Photo');
+        $this->load->model('Gallery_mod', 'Gallery');
 
 
 		$this->Client = $this->session->userdata('Client');
@@ -32,6 +34,7 @@ class Home extends Site_Controller
         $reviewItems = $this->Review->all(array('is_video'=>'0','on_home'=>'1','published'=>'1'));
         $reviewVideoItems = $this->Review->all(array('is_video'=>'1','on_home'=>'1','published'=>'1'));
 //        var_dump($reviewVideoItems, $reviewItems);
+        $data['albumPhotos'] = $albumPhotos = $this->Gallery->getPhotos($gallery_id = 2);
 
         $data['reviewItems'] = $reviewItems;
         $data['reviewVideoItems'] = $reviewVideoItems;
@@ -224,38 +227,34 @@ class Home extends Site_Controller
 	/**
 	 * Change status to approved
 	 */
-	public function approve_ajax() 
+	public function get_events()
 	{
-		$response = array('result'=>1);
-		
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			$applicant_id = $this->input->post('applicant_id');
+        $photosEvents = array();
+		if ($this->input->is_ajax_request()) {
+//			$applicant_id = $this->input->post('applicant_id');
+            $photosEvents = $this->Gallery->getEvents(array('user_id'=> $this->session->userdata('staff')['user_id']));
+            $photosEvents = array_column($photosEvents, null, 'event_date');
 
-			if($applicant_id && ($item = $this->applicant->getFullDetails($applicant_id))) {
-				$this->applicant->update($applicant_id, array('applicant_status_id'=>'2'));
-				$response['result'] = 0;
-			}
-		}
-		echo json_encode($response);
+            $photosEvents = array_map(function($item) {
+                return array('number'=>$item['number'], 'url'=>site_url("/home/gallery_event_photos/{$item['id']}"));
+            }, $photosEvents);
+
+//        $data['photosEvents'] =
+//var_dump( $photosEvents);die;
+		} else {
+            $this->output->set_status_header('404');
+            show_404();
+        }
+		echo json_encode($photosEvents);
 	}
 	
 	/**
 	 * Change status to rejected and keep reason
 	 */
-	public function reject_ajax() 
+	public function gallery_event_photos($gallery_id)
 	{
-		$response = array('result'=>1);
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			$applicant_id = $this->input->post('reject_applicant_id');
-			$reason = $this->input->post('reason');
-
-			if($reason && $applicant_id && ($item = $this->applicant->getFullDetails($applicant_id))) {
-				$this->applicant->update($applicant_id, array('applicant_status_id'=>'3'));
-				$this->applicant->appendRejectReason(array('applicant_id'=>$applicant_id, 'user_id'=> $this->session->userdata('staff')['user_id'], 'reason'=>$reason));
-				$response['result'] = 0;
-			}
-		}
-		echo json_encode($response);
+        $data['albumPhotos'] = $albumPhotos = $this->Gallery->getPhotos($gallery_id);
+        $this->load->view('home/gallery_event_photos', $data);
 	}
 	
-}// end Servicetickets class
+}

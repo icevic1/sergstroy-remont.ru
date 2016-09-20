@@ -334,7 +334,10 @@
 						</div>
 					</div>
 					<div class="col-md-8">
-						<a href="#" class="stage-img center-block"></a>
+						<!-- <a href="#" class="stage-img center-block"></a>-->
+						<div id="galleryCarousel" class="carousel slide relative" data-ride="carousel">
+							<?php //$this->view('home/gallery_event_photos', array('albumPhotos'=>$albumPhotos));?>
+						</div><!-- end of carusel-->
 					</div>
 				</div>
 			</div>
