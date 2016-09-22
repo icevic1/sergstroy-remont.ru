@@ -32,15 +32,15 @@
                     </div>
                     <div class="menu-wrapper">
                         <ul class="nav navbar-nav navbar-right nav-login hidden-xs">
-                            <li class="login-btn"><a href="/#client_login" onclick=""><img src="/public/img/key-icon.jpg" class="img-responsive" /></a></li>
-                            <li class="collapse-btn"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"><img src="/public/img/toggle-menu-icon.jpg" class="img-responsive" /></button></li>
+                            <li class="login-btn"><a href="<?php echo site_url("/#client_login")?>" onclick=""><img src="<?php echo base_url("/public/img/key-icon.jpg")?>" class="img-responsive" /></a></li>
+                            <li class="collapse-btn"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"><img src="<?php echo base_url("/public/img/toggle-menu-icon.jpg")?>" class="img-responsive" /></button></li>
                         </ul>
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="">О компании</a></li>
-                                <li><a href="/#priceBlock">Цены</a></li>
-                                <li><a href="">Фотогалерея</a></li>
-                                <li><a href="#clientReviews">Отзывы</a></li>
+                                <li><a href="<?php echo site_url("/#about")?>">О компании</a></li>
+                                <li><a href="<?php echo site_url("/#priceBlock")?>">Цены</a></li>
+                                <li><a href="<?php echo site_url("/galleries/")?>">Фотогалерея</a></li>
+                                <li><a href="<?php echo site_url("/#clientReviews")?>"">Отзывы</a></li>
                             </ul>
                         </div>
                     </div>
