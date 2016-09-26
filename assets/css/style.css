@@ -9900,9 +9900,9 @@ a.question-holder .question-holder-content .q-form label.error:focus {
     background-size: 100% auto;
   }
   body.home .overlay .main-overlay .page-title .title-text {
-    font-size: 60px;
-    line-height: 75px;
-    text-align: center;
+    font-size: 25px;
+    line-height: 25px;
+    text-align: left;
   }
   .price-list {
     text-align: center;

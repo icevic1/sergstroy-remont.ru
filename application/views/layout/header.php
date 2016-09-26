@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="<?php echo base_url('public/images/favicon.ico'); ?>">
-    <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'Smart Care';?></title>
+    <link rel="shortcut icon" href="<?php echo base_url('public/img/favicon.ico'); ?>">
+    <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'SergStroy';?></title>
 
     <meta name="description" content="Source code generated Orletchi Victor">
     <meta name="author" content="Orletchi Victor">

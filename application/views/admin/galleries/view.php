@@ -60,18 +60,18 @@
                   ?>
                 </div>
             <?php } ?>
-        <ul class="thumbnails gallery-photos">
-            <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
-            <li class="span3">
-                <a href="<?php echo $item['photo'];?>" class="thumbnail" ><!--data-imagelightbox="f"-->
-                    <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
-                </a>
-                <div class="thump-head">
-                    <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
-                </div>
-            </li>
-            <?php } ?>
-        </ul>
+            <ul class="thumbnails gallery-photos">
+                <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
+                <li class="span3">
+                    <a href="<?php echo $item['photo'];?>" class="thumbnail" ><!--data-imagelightbox="f"-->
+                        <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
+                    </a>
+                    <div class="thump-head">
+                        <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
+                    </div>
+                </li>
+                <?php } ?>
+            </ul>
         </div>
 
       </div>

@@ -25,8 +25,9 @@ class Photo_mod extends CI_Model
 
 	public function all($filter = array())
 	{
-		$query = $this->db->select('g.*')
-			->from('photos g')
+		$query = $this->db->select('p.*')
+			->from('photos as p')
+            ->join("galleries as g", 'p.gallery_id = g.id', 'LEFT')->select('g.name as gallery_name, g.description as gallery_description, g.event_date')
             ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
 
 //        if (isset($filter['is_video'])) $query->where('is_video', (string)$filter['is_video']);
