@@ -45,8 +45,8 @@ class Home extends Site_Controller
 		$data['CONTENT']='home/index';
 		$this->load->view('layout/layout', $data);
 	}
-	
-	function profile($ID = null)
+
+   	function profile($ID = null)
 	{
 		$item = $this->dealer->getFullDetails($ID);
 

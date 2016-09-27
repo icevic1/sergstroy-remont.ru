@@ -279,11 +279,14 @@
 <!-- Find us on map block-->
 <?php $this->view('partial/map');?>
 
+<!-- about block-->
+<?php $this->view('partial/about');?>
+
 <!-- Login block -->
 <div id="client_login" class="container-fluid stages-holder">
 	<div class="row">
 		<div class="col-sm-12 title text-center">
-			<h1>Этапы работ</h1>
+			<h1>Этапы работ - Для клиентов</h1>
 		</div>
 	</div>
 	<div class="row u-form">

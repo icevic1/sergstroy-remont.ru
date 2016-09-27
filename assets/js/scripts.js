@@ -25,6 +25,10 @@ $(document).ready(function(e) {
 		$('html, body').animate({ scrollTop: 0 }, "slow");
 	});
 
+    if($(window.location.hash).length > 0){
+        $('html, body').animate({ scrollTop: $(window.location.hash).offset().top},  "slow");
+    }
+
 	$('.carousel-inner, .thumbs-holder').magnificPopup({
 		delegate: 'a.image-item, .thumb:not(:hidden) .thumbnail',
 		type: 'image',
@@ -79,7 +83,7 @@ $(document).ready(function(e) {
     });
 
     /*---- start map block -------*/
-    ymaps.ready(init);
+    /*ymaps.ready(init);
     var myMap, myPlacemark;
 
     function init(){
@@ -94,7 +98,7 @@ $(document).ready(function(e) {
         });
 
         myMap.geoObjects.add(myPlacemark);
-    }
+    }*/
 	/*---- end map block -------*/
 
 	var checkMode = function () {
