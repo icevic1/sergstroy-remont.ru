@@ -76,25 +76,25 @@ $(document).ready(function(e) {
 					$(".q-text").slideUp();
 				// console.log('focusout', $(':focus')[0]);
 			}, 1);
-		});
+    });
 
-	/*ymaps.ready(init);
-	 var myMap,
-	 myPlacemark;
+    /*---- start map block -------*/
+    ymaps.ready(init);
+    var myMap, myPlacemark;
 
-	 function init(){
-	 myMap = new ymaps.Map ("map", {
-	 center: [55.76, 37.64],
-	 zoom: 14
-	 });
+    function init(){
+        myMap = new ymaps.Map ("map", {
+            center: [55.76, 37.64],
+            zoom: 14
+        });
 
-	 myPlacemark = new ymaps.Placemark([55.76, 37.64], {
-	 hintContent: 'Москва!',
-	 balloonContent: 'Столица России'
-	 });
+        myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+            hintContent: 'Москва!',
+            balloonContent: 'Столица России'
+        });
 
-	 myMap.geoObjects.add(myPlacemark);
-	 }*/
+        myMap.geoObjects.add(myPlacemark);
+    }
 	/*---- end map block -------*/
 
 	var checkMode = function () {

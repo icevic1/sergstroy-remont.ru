@@ -28,9 +28,10 @@ class Photo_mod extends CI_Model
 		$query = $this->db->select('p.*')
 			->from('photos as p')
             ->join("galleries as g", 'p.gallery_id = g.id', 'LEFT')->select('g.name as gallery_name, g.description as gallery_description, g.event_date')
+            ->join("photo_categories as c", 'p.category_id = c.category_id', 'LEFT')->select('c.category_name')
             ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')->select('us.name as user_name');
 
-//        if (isset($filter['is_video'])) $query->where('is_video', (string)$filter['is_video']);
+        if (isset($filter['selected'])) $query->where('p.selected', (string)$filter['selected']);
 
         $query = $query->get();
 		if ($query && $query->num_rows() > 0) {
@@ -53,7 +54,22 @@ class Photo_mod extends CI_Model
 		//print $lastQuery = $this->db->last_query();
 		return $insert_id;
 	}
-	
+
+    /**
+     * Update photo data by ID
+     * @param string $id
+     * @param array $inputData
+     * @return multitype:|int affected rows
+     */
+    public function save($ID = null, $inputData = array())
+    {
+        if (!$ID || !$inputData) return array();
+
+        $this->db->update('photos', $inputData, $where = array('photo_id'=>$ID), $limit = 1);
+        $afftectedRows = $this->db->affected_rows();
+        //print $lastQuery = $this->db->last_query();
+        return $afftectedRows;
+    }
 
 	/**
 	 * Delete dealer by ID
@@ -65,4 +81,15 @@ class Photo_mod extends CI_Model
 		if (!$ID) return false;
 		return $this->db->delete('photos', array('photo_id' => $ID), 1);
 	}
+
+    public function categories()
+    {
+        $query = $this->db->select('*')->from('photo_categories');
+
+        $query = $query->get();
+        if ($query && $query->num_rows() > 0) {
+            return $query->result_array();
+        } else
+            return null;
+    }
 }

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$('.gallery-photos').magnificPopup({
-		delegate: 'a.thumbnail',
+		delegate: 'a.selector',
 		type: 'image',
 		tLoading: 'Loading image #%curr%...',
 		mainClass: 'mfp-img-mobile',
@@ -38,8 +38,43 @@ $(document).ready(function() {
 			$("#ajax_preloader").show();
 			$(form).submit();
 		}
-
 	});
+	$(".category-changer").on("change", function(e) {
+		$this = $(this);
+		// console.log($this.data('photo_id'));return;
+        $this.closest("li.thumbnail").children(".ajax-preloader").show();
+		$.ajax({
+			url: "/admin/galleries/change_photo_category",
+			dataType: "json",
+			data: {"photo_id": $this.data('photo_id'), "category_id": $this.val()},
+			type: "GET",
+			success: function(response){
+                $this.closest("li.thumbnail").children(".ajax-preloader").hide();
+				// console.log(response);
+			}
+		});
+	});
+
+    $(".selected-changer").on("change", function(e) {
+        // if(this.checked)
+        $this = $(this);
+        $this.closest("li.thumbnail").children(".ajax-preloader").show();
+        // ajax-preloader
+
+        // var selected = Number(this.checked).toString();
+        // $this.data('photo_id')
+        // console.log(Number(this.checked).toString(), this.checked.toString());return;
+        $.ajax({
+            url: "/admin/galleries/change_photo_destination",
+            dataType: "json",
+            data: {"photo_id": $(this).data('photo_id'), "selected": Number(this.checked).toString()},
+            type: "GET",
+            success: function(response){
+                $this.closest("li.thumbnail").children(".ajax-preloader").hide();
+                // console.log(response);
+            }
+        });
+    });
 
 	$("a.delete-photo").on("click", function(e) {
 		e.preventDefault();

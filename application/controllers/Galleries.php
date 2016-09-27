@@ -18,7 +18,9 @@ class Galleries extends Site_Controller
 
     public function index()
     {
-        $data['itemsList'] = $this->Photo->all();
+        $data['itemsList'] = $this->Photo->all(array('selected'=>'1'));
+        $data['categoryOptions'] = $this->Photo->categories();
+
         $data['titlePage'] = 'Фотогалерея - Все альбомы';
         $data['PAGE_TITLE'] = 'Фотогалерея :: Все альбомы';
         $data['BODY_CLASS'] = "home";

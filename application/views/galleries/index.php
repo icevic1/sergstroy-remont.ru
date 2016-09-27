@@ -33,12 +33,11 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div id="filter">
-				<ul class="nav nav-pills" role="tablist">
-					<li role="presentation"><a class="" data-filter="*" href=""><i class="icon icon-reorder"></i> Все</a></li>
-					<li role="presentation"><a data-filter=".cat1" href="" class="selected"><i class="icon icon-th-large"></i> Дизайн</a></li>
-					<li role="presentation"><a data-filter=".cat2" href="" class=""><i class="icon icon-th-list"></i> Демонтаж</a></li>
-					<li role="presentation"><a data-filter=".cat3" href="" class=""><i class="icon icon-th-list"></i> Ход работы</a></li>
-					<li role="presentation"><a data-filter=".cat4" href="" class=""><i class="icon icon-th"></i> Результат</a></li>
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active" onclick="$('#filter ul li.active').removeClass('active'); $(this).addClass('active')"><a data-filter="*" href="" class="selected"><i class="icon icon-reorder"></i> Все</a></li>
+					<?php if ($categoryOptions) foreach ($categoryOptions as $option) { ?>
+					<li role="presentation" onclick="$('#filter ul li.active').removeClass('active'); $(this).addClass('active')"><a data-filter=".cat<?php echo $option['category_id']?>" href=""><?php echo $option['category_name']?></a></li>
+					<?php }?>
 				</ul>
 			</div>
 		</div>

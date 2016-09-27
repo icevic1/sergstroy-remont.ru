@@ -62,12 +62,31 @@
             <?php } ?>
             <ul class="thumbnails gallery-photos">
                 <?php if ($albumPhotos) foreach ($albumPhotos as $item) { ?>
-                <li class="span3">
-                    <a href="<?php echo $item['photo'];?>" class="thumbnail" ><!--data-imagelightbox="f"-->
+                <li class="span3 thumbnail">
+                    <div class="thumb-head">
+                        <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
+                    </div>
+                    <a href="<?php echo $item['photo'];?>" class="selector" ><!--data-imagelightbox="f"-->
                         <img alt="260x180" data-src="holder.js/260x180" style="width: 260px; height: 180px;" src="<?php echo $item['thumb'];?>" />
                     </a>
-                    <div class="thump-head">
-                        <a class="btn btn-danger btn-mini delete-photo" data-action="delete-photo<?php //echo $item['photo_id']?>" href="<?php echo site_url("/admin/galleries/delete_photo/{$item['photo_id']}")?>"><i class="icon-trash icon-white"></i></a>
+                    <form class="form-inline controls-row margin-top-5">
+                        <div class="row-fluid">
+                            <label class="control-label span4">Категория</label>
+                            <select class="inline-block span8 category-changer" data-photo_id="<?php echo $item['photo_id']?>">
+                                <?php if ($categoryOptions) foreach ($categoryOptions as $option) { ?>
+                                <option value="<?php echo $option['category_id']?>" <?php echo ($item['category_id'] == $option['category_id']?' selected="selected"':'')?>><?php echo $option['category_name']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="row-fluid">
+                            <label class="checkbox">
+                                <input type="checkbox" class="selected-changer" data-photo_id="<?php echo $item['photo_id']?>" value="1" <?php echo ($item['selected']?' checked="checked"':'')?> />
+                                Отобразить в галереи
+                            </label>
+                        </div>
+                    </form>
+                    <div class="bg_opacity ajax-preloader">
+                        <img class="ajax-loader" alt="waiting..." src="<?php echo base_url('public/img/ajax-loader.gif'); ?>" />
                     </div>
                 </li>
                 <?php } ?>

@@ -41,6 +41,8 @@ class Galleries extends Admin_Controller
                 show_error("Нету Альбома с номером <b>{$gallery_id}</b>, перепроверьте ваш запрос!", $status_code= 500 );
             }
         }
+
+        $data['categoryOptions'] = $this->Photo->categories();
 //var_dump($albumItem);die;
         $data['menus'] = $this->selfcare_mod->get_menu($this->login_name);
         $data['per_page'] = $this->selfcare_mod->get_perm_per_page($this->login_name, $this->page_id);
@@ -392,6 +394,60 @@ class Galleries extends Admin_Controller
                     unlink(FCPATH . $details['photo']);
 
                 $response['msg'] = "<stron>Поздровляю!<strong> Фотография была успешна удалена!";
+                $response['code'] = 0;
+            }
+        }
+        else
+        {
+            $this->output->set_status_header('404');
+            show_404();
+        }
+        echo json_encode($response);
+    }
+
+    /**
+     * Change status to rejected and keep reason
+     */
+    public function change_photo_category()
+    {
+        $photo_id = $this->input->get('photo_id');
+        $category_id = $this->input->get('category_id');
+
+//        var_dump($this->input->get('photo_id'));die;
+
+        $response = array('msg'=>"<stron>Внимание</stron> Произошла ошибка!", "code"=>1);
+        if ( $photo_id && $category_id && $this->input->is_ajax_request() && ($details = $this->Photo->get($photo_id)))
+        {
+            if($this->Photo->save($photo_id, array('category_id'=>$category_id)))
+            {
+                $response['msg'] = "<stron>Поздровляю!<strong> Фотография была успешна изменена!";
+                $response['code'] = 0;
+            }
+        }
+        else
+        {
+            $this->output->set_status_header('404');
+            show_404();
+        }
+        echo json_encode($response);
+    }
+
+    /**
+     * Change status to rejected and keep reason
+     */
+    public function change_photo_destination()
+    {
+        $photo_id = $this->input->get('photo_id');
+        $selected = $this->input->get('selected');
+
+//        var_dump($this->input->get('photo_id'));die;
+
+        $response = array('msg'=>"<stron>Внимание</stron> Произошла ошибка!", "code"=>1);
+        if ( $photo_id && $this->input->is_ajax_request() && ($details = $this->Photo->get($photo_id)))
+        {
+            if($this->Photo->save($photo_id, array('selected'=>$selected)))
+            {
+                $response['msg'] = "<stron>Поздровляю!<strong> Фотография была успешна изменена!";
                 $response['code'] = 0;
             }
         }
