@@ -9380,6 +9380,21 @@ ul.nav.nav-login > li.collapse-btn button {
 .row.circles-holder .title-circle h4 {
   font-size: 16px;
 }
+.popover-content {
+  width: 560px;
+  position: absolute;
+  text-align: left;
+  font-size: 14px;
+  color: #063551;
+  z-index: 111;
+  display: none;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0 15px 15px 30px;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 10px 6px -6px #777777;
+  -moz-box-shadow: 0 10px 6px -6px #777777;
+  box-shadow: 0 10px 6px -6px #777777;
+}
 .row.design-holder .title h1,
 .projects-holder .title h1,
 .preices-holder .title h1 {

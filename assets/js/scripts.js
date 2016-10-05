@@ -1,5 +1,35 @@
 $(document).ready(function(e) {
 
+    var t;
+    $('.ot-item-account .ot-ico-help, .ot-tooltip-help-phone-number').hover(function() {
+        clearTimeout(t);
+        $('.ot-tooltip-help-phone-number').show();
+    }, function() {
+        t = setTimeout(function() {$('.ot-tooltip-help-phone-number').hide();}, 20);
+    });
+
+    $('.circle-block').on('mousemove', function(e) {
+        var element = $(this).parent().children('.popover-content');
+        // console.log(element.data('position'));
+
+        if (element.data('position') == 'right') {
+           var left = e.pageX - $(this).offset().left - 400;
+        } else if (element.data('position') == 'center') {
+            var left = e.pageX - $(this).offset().left - 200;
+        } else
+            var left = e.pageX - $(this).offset().left;
+
+        element.css({top: e.pageY - $(this).offset().top + 20, left: left }).show();
+    });
+
+    $('.circle-block').on('mouseleave', function(e) {
+        $('.popover-content').hide()
+    });
+
+    $(document).on( 'scroll', function(){
+        $('.popover-content').hide()
+    });
+
 	// init Isotope
 	var $grid = $('.thumbs-holder').isotope({
 		itemSelector: '.thumb',
