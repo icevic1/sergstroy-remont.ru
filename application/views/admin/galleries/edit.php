@@ -15,12 +15,57 @@
 	    	<h3 class="box-hd">Информация о фотоальбоме</h3>
 	    	<div class="box-content-no">
 	    		<table class="cust-inputs">
-	    			<tr><td class="input-label required">Название</td><td class="input-field"><input id="name" name="album[name]" type="text" value="<?php echo set_value('album[name]', ((isset($loadedItem['name']))? $loadedItem['name']:'')); ?>" maxlength="64" /></td><td><?php echo form_error('album[name]'); ?></td></tr>
-	    			<tr><td class="input-label required">Клиент</td><td class="input-field"><?php echo form_dropdown('album[user_id]', $usersOptions, $default = ((isset($loadedItem['user_id']))? $loadedItem['user_id']:''), 'id="user_id"');?></td><td><?php echo form_error('album[user_id]'); ?></td></tr>
-					<tr><td class="input-label">Дата События</td><td class="input-field"><input id="event_date" name="album[event_date]" type="text" value="<?php echo set_value('album[event_date]', ((isset($loadedItem['event_date']))? date('Y-m-d', strtotime($loadedItem['event_date'])):'')); ?>" class="datepicker" /></td><td><?php echo form_error('album[event_date]'); ?></td></tr>
-					<tr><td class="input-label">Опубликован</td><td class="input-field"><input id="published" name="album[published]" type="checkbox" value="1" <?php echo ((isset($loadedItem['published']))? 'checked="checked"':''); ?> /></td><td><?php echo form_error('album[published]'); ?></td></tr>
-					<tr><td class="input-label">Описание</td><td class="input-field"><textarea id="description" name="album[description]"><?php echo set_value('album[description]', ((isset($loadedItem['description']))? $loadedItem['description']:'')); ?></textarea></td><td><?php echo form_error('album[description]'); ?></td></tr>
-	    			<tr><td></td><td align="right"><button type="submit" class="btn btn-primary"><i class="cus-disk"></i> Save</button></td><td></td></tr>
+	    			<tr><td class="input-label required">Название</td>
+						<td class="input-field">
+							<input id="name" name="album[name]" type="text" value="<?php echo set_value('album[name]', ((isset($loadedItem['name']))? $loadedItem['name']:'')); ?>" maxlength="64" />
+						</td>
+						<td><?php echo form_error('album[name]'); ?></td>
+					</tr>
+					<tr>
+						<td class="input-label">Преднозначение</td>
+						<td class="input-field">
+							<label><input id="gallery_type" name="album[gallery_type]" type="checkbox" value="1"
+									<?php echo ((isset($loadedItem['gallery_type']) && $loadedItem['gallery_type'])? 'checked="checked"':''); ?> />
+								в наши проекты
+							</label>
+						</td>
+						<td><?php echo form_error('album[gallery_type]'); ?></td>
+					</tr>
+					<tr>
+						<td class="input-label required">Клиент</td>
+						<td class="input-field">
+							<?php echo form_dropdown('album[user_id]',
+								$usersOptions,
+								$default = ((isset($loadedItem['user_id']))? $loadedItem['user_id']:''),
+								'id="user_id"' .
+								((isset($loadedItem['gallery_type']) && $loadedItem['gallery_type'])? ' disabled=""':'')
+							);?></td>
+						<td><?php echo form_error('album[user_id]'); ?></td>
+					</tr>
+					<tr>
+						<td class="input-label">Дата События</td>
+						<td class="input-field">
+							<input type="text" id="event_date" name="album[event_date]" class="datepicker"
+								   value="<?php echo set_value('album[event_date]', ((isset($loadedItem['event_date']))? date('Y-m-d', strtotime($loadedItem['event_date'])):'')); ?>"
+								<?php echo ((isset($loadedItem['gallery_type']) && $loadedItem['gallery_type'])? 'disabled=""':''); ?> />
+						</td>
+						<td><?php echo form_error('album[event_date]'); ?></td>
+					</tr>
+					<tr><td class="input-label">Опубликован</td>
+						<td class="input-field">
+							<input id="published" name="album[published]" type="checkbox" value="1" <?php echo ((isset($loadedItem['published']) && $loadedItem['published'])? 'checked="checked"':''); ?> />
+						</td>
+						<td><?php echo form_error('album[published]'); ?></td>
+					</tr>
+					<tr><td class="input-label">Описание</td>
+						<td class="input-field">
+							<textarea id="description" name="album[description]"><?php echo set_value('album[description]', ((isset($loadedItem['description']))? $loadedItem['description']:'')); ?></textarea>
+						</td>
+						<td><?php echo form_error('album[description]'); ?></td></tr>
+	    			<tr><td></td>
+						<td align="right"><button type="submit" class="btn btn-primary"><i class="cus-disk"></i> Save</button></td>
+						<td></td>
+					</tr>
 	    		</table>
 	    	</div>
 	    </div>
@@ -29,6 +74,11 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+
+	$("#gallery_type").on("change", function(e) {
+		$("#user_id").prop('disabled', this.checked);
+		$("#event_date").prop('disabled', this.checked);
+	});
 	
 	$("#frm_edit_album").validate({
 // 		debug: true,
@@ -36,7 +86,7 @@ $(document).ready(function() {
         errorClass: 'error',
         rules: {	
         	"album[name]": {required: true, maxlength:64},
-        	"album[user_id]":{required: true, digits: true},
+//        	"album[user_id]":{required: true, digits: true},
         },
         errorPlacement: function (error, element) {
         	element.parent().next().html(error); //error.insertAfter(element);

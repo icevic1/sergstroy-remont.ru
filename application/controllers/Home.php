@@ -33,8 +33,9 @@ class Home extends Site_Controller
         $this->load->model('Review_mod', 'Review');
         $reviewItems = $this->Review->all(array('is_video'=>'0','on_home'=>'1','published'=>'1'));
         $reviewVideoItems = $this->Review->all(array('is_video'=>'1','on_home'=>'1','published'=>'1'));
-//        var_dump($reviewVideoItems, $reviewItems);
-        $data['albumPhotos'] = $albumPhotos = $this->Gallery->getPhotos($gallery_id = 2);
+//        $data['albumPhotos'] = $albumPhotos = $this->Gallery->getPhotos($gallery_id = 2);
+        $data['projectsPhotos'] = $projectsPhotos = $this->Gallery->filterPhotos(array('gallery_type'=>'1', 'published'=>'1', 'selected'=>'1'));
+//        var_dump($projectsPhotos);
 
         $data['reviewItems'] = $reviewItems;
         $data['reviewVideoItems'] = $reviewVideoItems;

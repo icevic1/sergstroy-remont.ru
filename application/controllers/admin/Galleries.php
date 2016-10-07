@@ -74,9 +74,10 @@ class Galleries extends Admin_Controller
             $this->form_validation->set_rules('album[id]', 'ID', "trim|numeric");
             $this->form_validation->set_rules('album[name]', 'Название', "trim|required");
             $this->form_validation->set_rules('album[event_date]', 'Дата События', "trim|date");
-            $this->form_validation->set_rules('album[user_id]', 'Привязка', "trim|required|numeric");
+            $this->form_validation->set_rules('album[user_id]', 'Привязка', "trim|numeric");//|required
             $this->form_validation->set_rules('album[description]', 'Описание', "trim");
             $this->form_validation->set_rules('album[published]', 'Опубликовать', "trim|numeric");
+            $this->form_validation->set_rules('album[gallery_type]', 'Преднозначение', "trim|numeric");
 
 //            $this->form_validation->set_error_delimiters('<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Warning!</strong> ', '</div>');
             $this->form_validation->set_error_delimiters('<span class="error">', '</span>');
@@ -89,9 +90,10 @@ class Galleries extends Admin_Controller
                     'user_id' => $this->form_validation->set_value('album[user_id]'),
                     'event_date' => $this->form_validation->set_value('album[event_date]'),
                     'description' => $this->form_validation->set_value('album[description]'),
-                    'published' => $this->form_validation->set_value('album[published]'),
+                    'gallery_type' => (string)intval($this->form_validation->set_value('album[gallery_type]')),
+                    'published' => (string)intval($this->form_validation->set_value('album[published]')),
                 );
-
+//var_dump($data_update);die;
                 if ($get_id) {
                     $this->Gallery->save($get_id, $data_update);
                 } else {

@@ -97,6 +97,27 @@ class Gallery_mod extends CI_Model
             return null;
     }
 
+    public function filterPhotos($filter = array())
+    {
+        $query = $this->db->select('p.*')
+            ->from('photos as p')
+            ->join("galleries as g", 'p.gallery_id = g.id', 'INNER')->select('g.name')
+            ->join("scsm_users as us", 'g.user_id = us.user_id', 'LEFT')
+            ->order_by('g.event_date desc');
+
+        if (isset($filter['published'])) $query->where('g.published', (string)intval($filter['published']));
+        if (isset($filter['selected'])) $query->where('p.selected', (string)intval($filter['selected']));
+        if (isset($filter['gallery_id'])) $query->where('p.gallery_id', $filter['gallery_id']);
+        if (isset($filter['gallery_type'])) $query->where('g.gallery_type', (string)intval($filter['gallery_type']));
+        if (isset($filter['user_id'])) $query->where('us.user_id', $filter['user_id']);
+
+        $query = $query->get();
+//        print $lastQuery = $this->db->last_query();
+        if ($query && $query->num_rows() > 0) {
+            return $query->result_array();
+        } else
+            return null;
+    }
     public function getEvents($filter = array())
     {
         $query = $this->db->from('galleries g')->select('g.id, g.event_date')

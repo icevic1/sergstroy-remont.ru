@@ -97,25 +97,17 @@
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
+                <?php if ($projectsPhotos) foreach ($projectsPhotos as $index=>$item) { ?>
+				<li data-target="#myCarousel" data-slide-to="<?php echo $index;?>" <?php echo (($index==0)?'class="active"':'');?>></li>
+                <?php }?>
 			</ol>
-			<!-- Wrapper for Slides -->
 			<div class="carousel-inner">
-				<div class="item active">
-					<!-- Set the first background image using inline CSS below. -->
-					<div class="fill" style="background-image:url('/public/img/project_1.png');"><img src="/public/img/project_1.png" /></div>
+                <?php if ($projectsPhotos) foreach ($projectsPhotos as $index=>$item) { ?>
+				<div class="item<?php echo (($index==0)?' active':'');?>" >
+					<div class="fill" style="background-image:url('<?php echo $item['photo']; ?>');"><img src="<?php echo $item['photo']; ?>" /></div>
 					<!--<div class="carousel-caption"><h2>Caption 1</h2></div>-->
 				</div>
-				<div class="item">
-					<!-- Set the second background image using inline CSS below. -->
-					<div class="fill" style="background-image:url('/public/img/project_1.png')"><img src="/public/img/project_1.png" /></div>
-				</div>
-				<div class="item">
-					<!-- Set the third background image using inline CSS below. -->
-					<div class="fill" style="background-image:url('/public/img/project_1.png');"><img src="/public/img/project_1.png" /></div>
-				</div>
+                <?php }?>
 			</div>
 			<!-- Controls -->
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">

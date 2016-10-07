@@ -52,7 +52,8 @@ form span.error {color: red;font-style: italic;font-size: 11px;}
 .align-center {text-align: center;}
 table.gradient-thead {width: 100%;border:1px solid #CCCCCC;}
 /* table.gradient-thead tbody tr:nth-child(even) {background-color: #F0F0F0;} */
-table.gradient-thead tbody tr td {/* border: 1px solid #ccc; */font-size: 11px; padding: 0 4px;white-space: nowrap;}
+table.gradient-thead tbody tr td {/* border: 1px solid #ccc; */font-size: 11px; padding: 0 4px;}
+table.gradient-thead thead tr th {white-space: nowrap;}
 .gradient-thead thead {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
