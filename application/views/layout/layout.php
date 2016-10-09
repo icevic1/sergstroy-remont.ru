@@ -3,11 +3,14 @@
 <?php if(isset($CONTENT))$this->view($CONTENT);?>
 
 <div class="clearfix"></div>
-<span id="top-link-block" class="hidden">
-    <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
-        <i class="glyphicon glyphicon-chevron-up"></i> <span class="hidden-xs">Верх</span>
+<div id="top-link-block" class="hidden" title="Нажмите, чтобы вернуться к началу странице" data-toggle="tooltip" data-placement="left">
+    <a href="#top" class="btn btn-primary btn-lg" onclick="$('html,body').animate({scrollTop:0},'slow');" ><!--well well-sm-->
+        <span class="hidden-xs">Вверх</span> <i class="glyphicon glyphicon-chevron-up"></i>
     </a>
-</span><!-- /top-link-block -->
+</div><!-- /top-link-block -->
+<!--<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+	<span class="glyphicon glyphicon-chevron-up"></span> <span class="hidden-xs">Верх</span>
+</a>-->
 
 <script type="text/javascript">
 $(document).ready(function(e) {

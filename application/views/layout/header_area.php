@@ -32,8 +32,8 @@
                     </div>
                     <div class="menu-wrapper">
                         <ul class="nav navbar-nav navbar-right nav-login hidden-xs">
-                            <li class="login-btn"><a href="<?php echo site_url("/#client_login")?>" onclick=""><img src="<?php echo base_url("/public/img/key-icon.jpg")?>" class="img-responsive" /></a></li>
-                            <li class="collapse-btn"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"><img src="<?php echo base_url("/public/img/toggle-menu-icon.jpg")?>" class="img-responsive" /></button></li>
+                            <li class="login-btn" data-toggle="tooltip" data-placement="left" title="Доступ к разделу ежедневного фотоотчета с объектов"><a href="<?php echo site_url("/#client_login")?>"><img src="<?php echo base_url("/public/img/key-icon.jpg")?>" class="img-responsive" /></a></li>
+                            <li class="collapse-btn" data-toggle="tooltip" data-placement="left" title="Разварачивание меню при просмотре с мобильного или планшета"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"><img src="<?php echo base_url("/public/img/toggle-menu-icon.jpg")?>" class="img-responsive" /></button></li>
                         </ul>
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav">

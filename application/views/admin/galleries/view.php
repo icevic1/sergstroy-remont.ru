@@ -73,6 +73,7 @@
                         <div class="row-fluid">
                             <label class="control-label span4">Категория</label>
                             <select class="inline-block span8 category-changer" data-photo_id="<?php echo $item['photo_id']?>">
+                                <option value="">---</option>
                                 <?php if ($categoryOptions) foreach ($categoryOptions as $option) { ?>
                                 <option value="<?php echo $option['category_id']?>" <?php echo ($item['category_id'] == $option['category_id']?' selected="selected"':'')?>><?php echo $option['category_name']?></option>
                                 <?php }?>

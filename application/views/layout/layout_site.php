@@ -756,7 +756,7 @@ $(document).ready(function(e) {
 
 			/*----- smart functions -------*/
 
-			$('[data-toggle="tooltip"]').tooltip(); //{"placement":"top",delay: { show: 400, hide: 200 }}
+//			$('[data-toggle="tooltip"]').tooltip(); //{"placement":"top",delay: { show: 400, hide: 200 }}
 
 			<?php if($this->session->userdata('msg')){?>
 					bootbox.alert("<?php echo $this->session->userdata('msg');?>",'OK');

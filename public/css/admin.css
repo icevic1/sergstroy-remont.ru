@@ -149,7 +149,7 @@ form#form_upload_photo input[type="file"] {
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 2;
+    z-index: 102;
     padding: 10px 10px 0 0;
 }
 .row-fluid ul.thumbnails li.span12 + li { margin-left : 0px; }
