@@ -46,7 +46,7 @@ class Review_mod extends CI_Model
 	{
 		if (!$ID || !$inputData) return array();
 	
-		$this->db->update('dealers', $inputData, $where = array('dealer_id'=>$ID), $limit = 1);
+		$this->db->update('client_reviews', $inputData, $where = array('id'=>$ID), $limit = 1);
 		$afftectedRows = $this->db->affected_rows();
 		//print $lastQuery = $this->db->last_query();
 		return $afftectedRows;
@@ -60,7 +60,7 @@ class Review_mod extends CI_Model
 	public function delete($ID = null)
 	{
 		if (!$ID) return false;
-		return $this->db->delete('dealers', array('dealer_id' => $ID), 1);
+		return $this->db->delete('client_reviews', array('id' => $ID), 1);
 	}
 	
 }// end Servicetickets_model class

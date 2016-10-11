@@ -317,3 +317,6 @@ input[type="checkbox"] {
 .my-mfp-slide-bottom.mfp-removing.mfp-bg {
     opacity: 0;
 }
+.no-margin {
+    margin: 0;
+}

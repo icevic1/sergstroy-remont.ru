@@ -81,7 +81,7 @@
                         </div>
                         <div class="row-fluid">
                             <label class="checkbox">
-                                <input type="checkbox" class="selected-changer" data-photo_id="<?php echo $item['photo_id']?>" value="1" <?php echo ($item['selected']?' checked="checked"':'')?> />
+                                <input type="checkbox" class="status-selected" data-photo_id="<?php echo $item['photo_id']?>" value="1" <?php echo ($item['selected']?' checked="checked"':'')?> />
                                 Отобразить в галереи
                             </label>
                         </div>

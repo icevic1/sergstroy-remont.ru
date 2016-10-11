@@ -1,5 +1,24 @@
 $(document).ready(function() {
 
+	$('select[data-toggle="selected-changer"]').on("change", function(e) {
+		$this = $(this);
+		$(".ajax-preloader").show();
+        //$this.val()
+		// var selected = Number(this.checked).toString();
+		// $this.data('photo_id')
+		// console.log(Number(this.checked).toString(), this.checked.toString());return;
+		$.ajax({
+			url: $(this).data('action_url'),
+			dataType: "json",
+			data: {"id": $(this).data('item_id'), "field": $(this).data('field'), "value": $this.val()},
+			type: "GET",
+			success: function(response){
+				$(".ajax-preloader").hide();
+				// console.log(response);
+			}
+		});
+	});
+
 	$('.gallery-photos').magnificPopup({
 		delegate: 'a.selector',
 		type: 'image',
@@ -55,7 +74,7 @@ $(document).ready(function() {
 		});
 	});
 
-    $(".selected-changer").on("change", function(e) {
+    $(".status-selected").on("change", function(e) {
         // if(this.checked)
         $this = $(this);
         $this.closest("li.thumbnail").children(".ajax-preloader").show();
