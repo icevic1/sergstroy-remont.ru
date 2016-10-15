@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  facebook SEO -->
+    <meta property="og:title" content="Студия Ремонта"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo current_url();?>"/>
+    <meta property="og:image" content="<?php echo base_url('/public/img/logo/logo.png');?>"/>
+    <meta property="og:site_name" content="SERG-STROY"/>
+    <meta property="fb:app_id" content="961073814038310"/>
+    <meta property="og:description" content="SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!"/>
+
     <link rel="shortcut icon" href="<?php echo base_url('public/img/favicon.ico'); ?>">
     <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'SergStroy';?></title>
 

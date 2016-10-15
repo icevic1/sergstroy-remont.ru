@@ -6,12 +6,13 @@
                 <div class="container">
                     <ul class="nav navbar-nav navbar-right social-buttons">
                         <li class="evaluate"><a href=""></a><input type="search" name="evaluate-input" class="evaluate-input" placeholder="Оцени работу" value="" /></li>
-                        <li class="fb"><a href=""></a></li>
-                        <li class="ok"><a href=""></a></li>
-                        <li class="vk"><a href=""></a></li>
-                        <li class="btn-google"><a href=""></a></li>
-                        <li class="btn-twitter"><a href=""></a></li>
+                        <li class="fb"><a href="" onclick="fbShare();return false;"></a>
+                        <li class="ok"><a href="" onclick="Share.odnoklassniki('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
+                        <li class="vk"><a href="" onclick="Share.vkontakte('<?php echo site_url();?>','Студия Ремонта','<?php echo base_url('/public/img/logo/logo.png');?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
+                        <li class="btn-google"><a href="" onclick="Share.google('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
+                        <li class="btn-twitter"><a href="" onclick="Share.twitter('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
                     </ul>
+<!--                    <a class="twitter-timeline" href="https://twitter.com/TwitterDev/likes">Tweets Liked by @TwitterDev</a>-->
                 </div>
             </nav>
             <div class="clearfix"></div>
@@ -22,7 +23,7 @@
                 <div class="container">
                     <div class="navbar-header">
                         <div class="row no-gutter">
-                            <div class="col-xs-9 col-sm-12 brand-wrapper"><a class="navbar-brand block" href="/"><img src="/public/img/logo/logo.png" alt="Lavalite" class="img-responsive" /></a></div>
+                            <div class="col-xs-9 col-sm-12 brand-wrapper"><a class="navbar-brand block" href="/"><img src="<?php echo base_url('/public/img/logo/logo.png');?>" alt="Lavalite" class="img-responsive" /></a></div>
                             <div class="col-xs-3 visible-xs toggle-menu-wrapper">
                                 <a href="#client_login"><img src="/public/img/key-icon.jpg" class="img-responsive" /></a>
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"><img src="/public/img/toggle-menu-icon.jpg" class="img-responsive" /></button>

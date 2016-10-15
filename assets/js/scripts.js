@@ -354,6 +354,23 @@ $(document).ready(function(e) {
 		$(this).closest('form').find('input:checked, option:selected').removeAttr('checked').removeAttr('selected');
 		return true;
 	});
+
+    $('.twitter-share-button').click(function(event) {
+        var width  = 575,
+            height = 400,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            url    = this.href,
+            opts   = 'status=1' +
+                ',width='  + width  +
+                ',height=' + height +
+                ',top='    + top    +
+                ',left='   + left;
+
+        window.open(url, 'twitter', opts);
+
+        return false;
+    });
 	
 });//end ready
 
@@ -454,3 +471,48 @@ if ( ($(window).height() + 100) < $(document).height() ) {
      offset: {top:100}
  });
 }
+
+(function() {
+    if (window.__twitterIntentHandler) return;
+    var intentRegex = /twitter\.com\/intent\/(\w+)/,
+        windowOptions = 'scrollbars=yes,resizable=yes,toolbar=no,location=yes',
+        width = 550,
+        height = 420,
+        winHeight = screen.height,
+        winWidth = screen.width;
+
+    function handleIntent(e)
+    {
+        e = e || window.event;
+        var target = e.target || e.srcElement,
+            m, left, top;
+
+        while (target && target.nodeName.toLowerCase() !== 'a') {
+            target = target.parentNode;
+        }
+
+        if (target && target.nodeName.toLowerCase() === 'a' && target.href) {
+            m = target.href.match(intentRegex);
+            if (m) {
+                left = Math.round((winWidth / 2) - (width / 2));
+                top = 0;
+
+                if (winHeight > height) {
+                    top = Math.round((winHeight / 2) - (height / 2));
+                }
+
+                window.open(target.href, 'intent', windowOptions + ',width=' + width +
+                    ',height=' + height + ',left=' + left + ',top=' + top);
+                e.returnValue = false;
+                e.preventDefault && e.preventDefault();
+            }
+        }
+    }
+
+    if (document.addEventListener) {
+        document.addEventListener('click', handleIntent, false);
+    } else if (document.attachEvent) {
+        document.attachEvent('onclick', handleIntent);
+    }
+    window.__twitterIntentHandler = true;
+}());
