@@ -35,7 +35,7 @@
                 <td class="center"><?php echo $tmpl->is_public==1?'Public':'UnPublic'?></td>
                  <td class="center" style="width: 220px;">
                 	<div class="btn-group">
-                    <?php if($per_page['per_update']==1 && $tmpl->pg_id>4){?>
+                    <?php if($per_page['per_update']==1){?>
                     <a class="btn" href="<?php echo base_url('admin/page/edit/'.$tmpl->pg_id)?>">
                         <i class="cus-page-white-edit"></i>  
                         Edit                                            
@@ -46,7 +46,7 @@
                         Edit                                            
                     </a>
                     <?php }?>
-                     <?php if($per_page['per_update']==1 && $tmpl->pg_id>4){?>
+                     <?php if($per_page['per_update']==1){?>
                     <a class="btn" href="<?php echo base_url('admin/page/block/'.$tmpl->pg_id)?>">
                         <i class="cus-page-white-edit"></i>  
                         Block                                            

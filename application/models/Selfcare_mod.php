@@ -236,7 +236,7 @@ class Selfcare_mod extends CI_Model
 	
 	//=================DYNAMIC PAGE BLOCK================//
 	function get_dynamic_pages(){
-		$query="SELECT pg_id,pg_name,pg_type,is_public,pg_url FROM sc_dynamic_page ORDER BY pg_type";
+		$query="SELECT pg_id,pg_name,pg_type,is_public,pg_url, pg_content FROM sc_dynamic_page ORDER BY pg_type";
 		return $this->db->query($query)->result();
 	}
 	function get_dynamic_page($pg_id){
@@ -274,12 +274,12 @@ ON l.l_id=d.l_id WHERE l.is_deleted=0 ORDER BY l.l_id";
 		$this->db->query($query);
 	}
 	function create_dynamic_page($pg_name,$pg_url,$is_public,$pg_script,$login_name){
-		$query="INSERT INTO sc_dynamic_page(pg_name,pg_url,is_public,pg_script,created_by,created_date) VALUES ('".$pg_name."','".$pg_url."',".$is_public.",'".$pg_script."','".$login_name."',NOW())";
+		$query="INSERT INTO sc_dynamic_page(pg_name,pg_url,is_public,pg_script,created_by,created_date) VALUES ('".$pg_name."','".$pg_url."',".$is_public.",'".$pg_script."','".$login_name."',".$pg_script.",NOW())";
 		$this->db->query($query);
 		return $this->db->insert_id();
 	}
-	function update_dynamic_page($pg_id,$pg_name,$pg_url,$is_public,$pg_script,$login_name){
-		$query1="UPDATE sc_dynamic_page SET pg_name='".$pg_name."',pg_url='".$pg_url."',is_public=".$is_public.",pg_script='".$pg_script."',modified_by='".$login_name."',modified_date=NOW() WHERE pg_id=".$pg_id."";
+	function update_dynamic_page($pg_id,$pg_name,$pg_url,$is_public,$pg_script,$login_name, $pg_content){
+		$query1="UPDATE sc_dynamic_page SET pg_name='".$pg_name."',pg_url='".$pg_url."',is_public=".$is_public.",pg_script='".$pg_script."',modified_by='".$login_name."',pg_script='".$pg_script."',modified_date=NOW() WHERE pg_id=".$pg_id."";
 		$this->db->query($query1);
 		return $pg_id;
 	}
@@ -295,7 +295,34 @@ ON l.l_id=d.l_id WHERE l.is_deleted=0 ORDER BY l.l_id";
 		$query="INSERT INTO sc_dynamic_page_html(pg_id,l_id,pg_content) VALUES (".$pg_id.",".$l_id.",'".$pg_content."')";
 		$this->db->query($query);
 	}
-
+//=================DYNAMIC PAGE BLOCK================//
+    //==============BLOCK PAGE===============//
+    function get_blocks($pg_id){
+        $query="SELECT A.block_id,A.block_name,A.remark,CASE WHEN B.pg_id IS NOT NULL THEN 'checked=\"checked\"' ELSE '' END chk  FROM sc_block A LEFT JOIN (SELECT * FROM sc_page_block WHERE pg_id=".$pg_id.") B ON A.block_id=B.block_id";
+        return $this->db->query($query)->result();
+    }
+    function save_block_page($pg_id,$block_id_arr,$user_name){
+        $query1="DELETE FROM sc_page_block WHERE pg_id=".$pg_id."";
+        $this->db->query($query1);
+        $values='';
+        for($i=0;$i<sizeof($block_id_arr);$i++){
+            $values.="(".$pg_id.",".$block_id_arr[$i].",'".$user_name."',NOW()),";
+        }
+        $values=rtrim($values,',');
+        $query2="INSERT INTO sc_page_block(pg_id,block_id,modified_by,modified_date) VALUES ".$values;
+        $this->db->query($query2);
+    }
+    function get_block($pg_id){
+        $query="SELECT block_id FROM sc_page_block WHERE pg_id=".$pg_id."";
+        $res=$this->db->query($query)->result_array();
+        $block=array();
+        if($res){
+            foreach($res as $val){
+                $block[$val['block_id']]=true;
+            }
+        }
+        return $block;
+    }
 	//===============================PERMISSION BLOCK=============================//
 	function get_per_page($user_name){
 		$query="SELECT p.page_id,page_name,CASE per_show WHEN 1 THEN 'checked=\"checked\"' ELSE '' END per_show,

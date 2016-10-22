@@ -24,7 +24,7 @@ class Page extends Admin_Controller {
 		$data['PAGE_TITLE']=$data['per_page']['page_name'];
 		$pg_id= $this->uri->segment(4, 0);
 		$data['page']=$this->selfcare_mod->get_dynamic_page($pg_id);
-		$data['details']=$this->selfcare_mod->get_dynamic_detail_page($pg_id);
+//		$data['details']=$this->selfcare_mod->get_dynamic_detail_page($pg_id);
 		$data['CONTENT']='admin/page/edit';
 		$this->load->view('template/tmpl_admin',$data);
 	}
@@ -37,18 +37,13 @@ class Page extends Admin_Controller {
 		$pg_content=$this->input->post('txt_content');
 		$is_public=$this->input->post('chk_public')?1:0;
 		if($pg_id){
-			$pg_id=$this->selfcare_mod->update_dynamic_page($pg_id,$pg_name,$pg_url,$is_public,$pg_script,$this->login_name);
+			$pg_id=$this->selfcare_mod->update_dynamic_page($pg_id,$pg_name,$pg_url,$is_public,$pg_script,$this->login_name, $pg_content);
 		}else{
-			$pg_id=$this->selfcare_mod->create_dynamic_page($pg_name,$pg_url,$is_public,$pg_script,$this->login_name);
+			$pg_id=$this->selfcare_mod->create_dynamic_page($pg_name,$pg_url,$is_public,$pg_script,$this->login_name, $pg_content);
 		}
-		if($pg_id){
-			$this->selfcare_mod->delete_dynamic_page($pg_id);
-			for($i=0;$i<sizeof($l_id);$i++){
-				$this->selfcare_mod->save_dynamic_page_detail($pg_id,$l_id[$i],$pg_content[$i]);
-			}
-			$this->session->set_flashdata('msg', $this->config->item('msg_succeed'));
-			redirect(base_url('admin/page'));
-		}
+
+        $this->session->set_flashdata('msg', $this->config->item('msg_succeed'));
+        redirect(base_url('admin/page'));
 	}
 	function block(){
 		$data['menus']=$this->selfcare_mod->get_menu($this->login_name);
