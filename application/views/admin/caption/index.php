@@ -16,15 +16,13 @@
             <tbody>
             <?php foreach($captions as $capt){?>
                     <tr>
-                        <td>
-                            <?php echo $capt->capt_id?>
-                        </td>
-                        <td><?php echo wordwrap($capt->caption,50,'<br/>',true)?></td>
+                        <td><?php echo $capt->capt_id?></td>
+                        <td><?php echo word_limiter($capt->caption, 6)?></td>
                         <td><?php echo $capt->caption_type?></td>
                         <td><?php echo $capt->in_pages?></td>
                         <td>
                         	<?php if($per_page['per_update']==1){?>
-                                <a class="btn" href="<?php echo base_url('admin/caption/edit/'.$capt->capt_id)?>">
+                                <a class="btn" href="<?php echo base_url('admin/caption/edit/'.$capt->id)?>">
                                     <i class="cus-page-white-edit"></i>Edit                                            
                                 </a>
                               <?php }else{?>

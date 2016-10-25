@@ -16,7 +16,8 @@ class Home extends Site_Controller
  		parent::__construct();
 		$this->load->helper('cookie');
         $this->load->helper('text');
-        $this->load->library('form_validation');		
+//        $this->load->helper('translate_helper');
+        $this->load->library('form_validation');
         $this->load->library('Acl');
 		$this->load->helper('form');
 		$this->load->helper('pagination');

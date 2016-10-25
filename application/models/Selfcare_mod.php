@@ -32,10 +32,10 @@ class Selfcare_mod extends CI_Model
 		return $queryResult->row();
 	}
 	
-	public function updateCaption($capt_id = null, $l_id = null, $data_update) 
+	public function updateCaption($id = null, $l_id = null, $data_update)
 	{
-		if (!$capt_id || !$l_id || !$data_update) return 0;
-		$this->db->where('capt_id', $capt_id);
+		if (!$id || !$l_id || !$data_update) return 0;
+		$this->db->where('id', $id);
 		$this->db->where('l_id', $l_id);
 		$this->db->limit(1);
 		$this->db->update('sc_caption', $data_update);
@@ -123,12 +123,18 @@ class Selfcare_mod extends CI_Model
 		$this->db->query($query);
 	}
 	//============= CAPTION ================//
-	function get_caption_list($l_id = 2){
-		$query="SELECT capt_id,IFNULL(translate,caption) caption,caption_type,in_pages FROM sc_caption WHERE l_id={$l_id} ORDER BY capt_id";
+	function get_caption_list($l_id = 1){
+		$query="SELECT id, capt_id,IFNULL(translate,caption) caption,caption_type,in_pages FROM sc_caption WHERE l_id={$l_id} ORDER BY created_at desc";
 		return $this->db->query($query)->result();
 	}
 	function get_caption($capt_id){
 		$query="SELECT l.l_id,capt_id,caption,translate,l.l_name,caption_type,in_pages FROM sc_caption b INNER JOIN sc_language l ON b.l_id=l.l_id WHERE capt_id='".$capt_id."' ORDER BY l.l_id";
+		$result = $this->db->query($query)->result();
+// 		print $lastQuery = $this->db->last_query();
+		return $result;
+	}
+	function get_caption_id($id){
+		$query="SELECT id, l.l_id,capt_id,caption,translate,l.l_name,caption_type,in_pages FROM sc_caption b INNER JOIN sc_language l ON b.l_id=l.l_id WHERE id='".$id."' ORDER BY l.l_id";
 		$result = $this->db->query($query)->result();
 // 		print $lastQuery = $this->db->last_query();
 		return $result;

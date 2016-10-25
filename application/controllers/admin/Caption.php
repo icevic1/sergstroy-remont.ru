@@ -1,6 +1,14 @@
 <?php
-class Caption extends Admin_Controller {
+class Caption extends Admin_Controller
+{
 	var $page_id=3;
+
+    function __construct() {
+        parent::__construct();
+        $this->CI = &get_instance();
+        $this->load->helper('text');
+    }
+
 	function index(){
 		$data['menus']=$this->selfcare_mod->get_menu($this->login_name);
 		$data['per_page']=$this->selfcare_mod->get_perm_per_page($this->login_name,$this->page_id);
@@ -27,19 +35,21 @@ class Caption extends Admin_Controller {
 		$this->load->library('form_validation');
 		
 		$data['caption'] = null;
-		$data['capt_id'] = $this->uri->segment(4, '');
-		$dbCaption = $this->selfcare_mod->get_caption($data['capt_id']);
+		$data['id'] = $this->uri->segment(4, '');
+		$dbCaption = $this->selfcare_mod->get_caption_id($data['id']);
+
 		foreach ($dbCaption as $item) {
 			$data['caption'][$item->l_id] = $item;
+            $data['capt_id'] = $item->capt_id;
 		}
 		$data['languages'] = $this->selfcare_mod->get_language();
-		
+//        var_dump($data['caption'], $_POST);
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				
 			$this->form_validation->set_rules('capt_id', 'Caption ID', 'trim');
 			if (!$data['capt_id']) {$this->form_validation->set_rules('capt_id', 'Caption ID', 'trim|required');}
 			$this->form_validation->set_rules('hd_l_id[]', 'Language ID', 'trim|is_natural_no_zero');
-			$this->form_validation->set_rules('hd_capt_id[]', 'Each edited caption ID', 'trim|alpha_dash');
+//			$this->form_validation->set_rules('hd_capt_id[]', 'Each edited caption ID', 'trim|alpha_dash');
 			$this->form_validation->set_rules('txt_translate[]', 'Caption translation', 'trim');
 			
 			if ($this->form_validation->run() == true)	{
@@ -54,18 +64,21 @@ class Caption extends Admin_Controller {
 					$data_update = array (
 						'translate' => $txt_translate[$key],
 						'modified_by' => $this->login_name,	
+						'capt_id' => $capt_id
 						);
-					if ($data['capt_id']) {
-						$this->selfcare_mod->updateCaption($capt_id, $l_id, $data_update);
+					if ($data['id']) {
+//					    var_dump($data_update);die;
+						$this->selfcare_mod->updateCaption($data['id'], $l_id, $data_update);
 					} else {
-						$data_update['capt_id'] = $capt_id;
+//					    die('23');
+//						$data_update['capt_id'] = $capt_id;
 						$data_update['l_id'] = $l_id;
 						
 						$this->selfcare_mod->addCaption($data_update);
 					}
 				}
 
-				redirect('admin/caption/edit/'.$capt_id);
+				redirect('admin/caption');
 			} 
 			
 		}
@@ -83,4 +96,3 @@ class Caption extends Admin_Controller {
 		redirect('admin/caption/');
 	}
 }
-?>

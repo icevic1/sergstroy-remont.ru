@@ -14,7 +14,7 @@ class My_Controller extends CI_Controller
 		$this->load->library ( 'user_agent' );
 
 		$language = $this->selfcare_mod->get_language_by_short_name ( $this->lang->lang () );
-		$this->l_id = $language ? $language ['l_id'] : 2;
+		$this->l_id = $language ? $language ['l_id'] : 1;
 		$this->segm = $this->uri->segment ( 1, '' ) == 'en' ? 4 : 3;
 
 		$this->message = array(); //$this->selfcare_mod->get_messages ( $this->l_id );

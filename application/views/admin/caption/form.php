@@ -4,7 +4,7 @@
     </div>
     <?php echo validation_errors(); ?>
     <div class="box-content">
-    	<?php echo form_open(base_url('admin/caption/edit/'),array('id'=>'frm_label','name'=>'frm_label','class'=>'form-horizontal')); ?>
+    	<?php echo form_open(base_url('admin/caption/edit/'.(isset($id)?$id:'')),array('id'=>'frm_label','name'=>'frm_label','class'=>'form-horizontal'), array('id' => '123')); ?>
         <div class="control-group">
             <label class="control-label"><b>ID</b></label>
             <div class="controls">
