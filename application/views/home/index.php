@@ -6,12 +6,11 @@
 				<div class="circle-inner img-terms"></div>
 			</div>
 			<div class="title-circle" data-toggle="hover-popover">
-				<h2>Сроки</h2>
-				<h4>Сдача работы без задержек</h4>
+				<h2><?php echo label('Terms');?></h2>
+				<h4><?php echo label('Terms_short_description');?></h4>
 			</div>
 			<div class="popover-content fade in" data-position="left">
-				<h3>Права заказчика</h3>
-				<p>Если работа (услуга) выполнена не в срок, Вы имеете право предъявить исполнителю свои требования (например, Вы можете потребовать возместить Ваши расходы, убытки, уменьшить оплату за выполненную работу и др.). Исполнитель должен выполнить Ваши требования в определенный срок. Если исполнитель нарушает сроки, Вы вправе требовать выплаты неустойки (пени) в размере 3% от цены работы за каждый день просрочки.</p>
+				<?php echo label('Terms_description_popover');?>
 			</div>
 		</div>
 		<div class="col-md-4 text-center">
@@ -19,12 +18,11 @@
 				<div class="circle-inner img-quality"></div>
 			</div>
 			<div class="title-circle">
-				<h2>Качество</h2>
-				<h4>Соблюдение технологий</h4>
+				<h2><?php echo label('Quality');?></h2>
+				<h4><?php echo label('Quality_short_description');?></h4>
 			</div>
 			<div class="popover-content fade in" data-position="center">
-				<h3>Качество</h3>
-				<p>Под качеством строительства понимается соответствие качества построенных зданий проектным решениям и нормативам. Качество должно формироваться на всех стадиях строительства: предпроизводственной (проектирование), производственной (строительно-монтажные процессы) и после производственной (эксплуатация). Поэтому оно является комплексной проблемой, зависящей от всех участников: государственных органов, заказчиков, проектных и строительно-монтажных организаций, заводов-изготовителей, транспортных предприятий и организаций, участвующих в эксплуатации строительных объектов.</p>
+				<h2><?php echo label('Quality_description_popover');?></h2>
 			</div>
 		</div>
 		<div class="col-md-4 text-center">
@@ -32,13 +30,11 @@
 				<div class="circle-inner img-result"></div>
 			</div>
 			<div class="title-circle">
-				<h2>Результат</h2>
-				<h4>Удовлетворенность клиента</h4>
+				<h2><?php echo label('Result');?></h2>
+				<h4><?php echo label('Result_short_description');?></h4>
 			</div>
 			<div class="popover-content fade in" data-position="right">
-				<h3>Результат</h3>
-				<p>Мы бережно относимся к экологии и здоровью своих Заказчиков, а потому никогда не рекомендуем к использованию небезопасные материалы.
-					Если Вы действительно решили выбирать надежную строительную компанию, на которую можно положиться во всех отношениях – задумайтесь: возможно, Ваш выбор - «Serg-Stroy.ru».</p>
+				<?php echo label('Result_description_popover');?>
 			</div>
 		</div>
 	</div>
@@ -47,7 +43,7 @@
 <div class="container-fluid">
 	<div class="row design-holder">
 		<div class="col-sm-12 title text-center">
-			<h1>Состав дизайн проекта</h1>
+			<h1><?php echo label('Состав дизайн проекта');?></h1>
 		</div>
 	</div>
 	<div class="row design-holder-blue">
@@ -56,30 +52,15 @@
 				<div class="inside">
 					<div class="content question-block text-center">
 						<h1 class="bonuses">+ Бонус</h1>
-						<p>2 выезда дизайнера во время работы!</p>
-						<a href="#clientQuestion" class="app-btn btn-orange">Задать вопрос</a>
+						<p><?php echo label('2 выезда дизайнера во время работы!');?></p>
+						<a href="#clientQuestion" class="app-btn btn-orange"><?php echo label('Задать вопрос');?></a>
 					</div>
 				</div>
 			</div><!--
             --><div class="col-xs-12 col-md-7 col-md-height col-top">
 				<div class="inside">
-					<div class="content facility-block">
-						<ul class="services-list">
-							<li>Обмерный чертеж помещения</li>
-							<li>План после перепланировки с экспликацией помещений</li>
-							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
-							<li>План демонтажа перегородок</li>
-							<li>Монтажный план перегородок</li>
-							<li>План с расстоновкой мебели</li>
-							<li>План пола с указанием типов покрытий</li>
-							<li>План потолка</li>
-							<li>Разрезы потолка с указанием высот</li>
-							<li>План привязки приборов освещения</li>
-							<li>План привязки приборов освещения и выключателей по группам</li>
-							<li>План привязки элетротехнических изделий, совмещенный с мебелью</li>
-							<li>План теплых полов</li>
-							<li>Ведомость отделки по помещениям с указанием площадей, примеров, объемов</li>
-						</ul>
+					<div class="content facility-block services-list">
+						<?php echo label('Состав дизайн проекта список');?>
 					</div>
 				</div>
 			</div>
@@ -90,7 +71,7 @@
 <div id="projectsCarusel" class="container-fluid">
 	<div class="row projects-holder">
 		<div class="col-sm-12 title text-center">
-			<h1>Проекты</h1>
+			<h1><?php echo label('Projects');?></h1>
 		</div>
 	</div>
 	<div class="row projects-holder-slider">
@@ -124,15 +105,16 @@
 <div id="priceBlock" class="container-fluid">
 	<div class="row preices-holder">
 		<div class="col-sm-12 title text-center">
-			<h1>Цэны</h1>
+			<h1><?php echo label('title block Цэны');?></h1>
 		</div>
 	</div>
 	<div class="row preices-holder-content">
 		<div class="col-md-12">
-			<div class="container price-pack-holder">
-				<div class="row">
+			<div class="container price-pack-holder services-list">
+				<?php echo label('main prices цены');?>
+				<!--<div class="row">
 					<div class="col-sm-8">
-						<ul class="services-list">
+						<ul>
 							<li>Обмерный чертеж помещения</li>
 							<li>План после перепланировки с экспликацией помещений</li>
 							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
@@ -145,7 +127,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-8">
-						<ul class="services-list">
+						<ul>
 							<li>Обмерный чертеж помещения</li>
 							<li>План после перепланировки с экспликацией помещений</li>
 							<li>План после перепланировки с размерами, уровнем пола и высотами</li>
@@ -158,7 +140,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-8">
-						<ul class="services-list">
+						<ul>
 							<li>Регулярные выезды автора проекта на объект.</li>
 							<li>Регулярные выезды автора проекта в магазины.</li>
 							<li>Консультации строителей и поставщиков.</li>
@@ -169,10 +151,10 @@
 					<div class="col-sm-4 text-right">
 						<h1>1500 <span>руб.</span></h1>
 					</div>
-				</div>
+				</div>-->
 				<div class="row">
 					<div class="col-sm-12 price-list text-right">
-						<a class="app-btn btn-orange" href="">Прай-лист</a>
+						<a class="app-btn btn-orange" href=""><?php echo label('button label: Прай-лис');?></a>
 					</div>
 				</div>
 			</div>
@@ -183,7 +165,7 @@
 <div id="clientReviews" class="container-fluid">
 	<div class="row reviews-holder">
 		<div class="col-sm-12 title text-center">
-			<h1 class="color-orange">Отзывы</h1>
+			<h1 class="color-orange"><?php echo label('Отзывы');?></h1>
 		</div>
 	</div>
 	<div class="row reviews-holder-slider">
@@ -225,7 +207,7 @@
 			</a>
 		</div><!-- end of carusel-->
 		<div class="container text-right">
-			<a href="/review/" class="app-btn btn-orange">Отзывы клиентов</a>
+			<a href="/review/" class="app-btn btn-orange"><?php echo label('Отзывы клиентов');?></a>
 		</div>
 	</div>
 </div><!-- end Projects slider block -->
@@ -233,7 +215,7 @@
 <div class="container-fluid bg-gray">
 	<div class="row reviews-holder">
 		<div class="col-sm-12 title text-center">
-			<h1 class="color-orange">Видео Отзывы</h1>
+			<h1 class="color-orange"><?php echo label('Видео Отзывы');?></h1>
 		</div>
 	</div>
 	<div class="row vreviews-holder-slider">
@@ -274,7 +256,7 @@
 			</a>
 		</div><!-- end of carusel-->
 		<div class="container text-right">
-			<a href="/review/#video" class="app-btn btn-orange">Отзывы клиентов</a>
+			<a href="/review/#video" class="app-btn btn-orange"><?php echo label('Отзывы клиентов');?></a>
 		</div>
 	</div>
 </div><!-- end Projects slider block -->
@@ -291,7 +273,7 @@
 <div id="client_login" class="container-fluid stages-holder">
 	<div class="row">
 		<div class="col-sm-12 title text-center">
-			<h1>Этапы работ - Для клиентов</h1>
+			<h1><?php echo label('Block title: Этапы работ - Для клиентов');?></h1>
 		</div>
 	</div>
 	<div class="row u-form">

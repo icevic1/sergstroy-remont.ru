@@ -13,10 +13,10 @@
     <meta property="og:image" content="<?php echo base_url('/public/img/logo/logo.png');?>"/>
     <meta property="og:site_name" content="SERG-STROY"/>
     <meta property="fb:app_id" content="961073814038310"/>
-    <meta property="og:description" content="SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!"/>
+    <meta property="og:description" content="<?php echo label('about short description');?>"/>
 
-    <link rel="shortcut icon" href="<?php echo base_url('public/img/favicon.ico'); ?>">
-    <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'SergStroy';?></title>
+    <link rel="shortcut icon" href="<?php echo base_url('public/img/logo/favicon.ico'); ?>">
+    <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'Sergstroy-remont';?></title>
 
     <meta name="description" content="Source code generated Orletchi Victor">
     <meta name="author" content="Orletchi Victor">
