@@ -46,6 +46,8 @@ $route['404_override'] = 'error';
 $route['^(\w{2})/(.*)$'] = '$2';
 $route['^(\w{2})$'] = $route['default_controller'];
 
+$route['translate_uri_dashes'] = true;
+
 
 //$route['^(\w{2})/(.*)$/page/(.*)$'] = "page/index/$2";
 
