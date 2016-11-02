@@ -65,7 +65,14 @@ class Site_Controller extends My_Controller
 	function __construct() 
 	{
 		parent::__construct ();
-		
+
+        $this->load->model('SiteSettings_mod', 'SiteSettings');
+        //get your data
+        $global_data = array('siteSettings'=> $this->SiteSettings->get());
+
+        //Send the data into the current view
+        $this->load->vars($global_data);
+
 		/*if (! $this->input->is_ajax_request ()) {
 		    print "require login"; die;
 // 			var_dump($this->session->userdata ( 'visitor'));die;

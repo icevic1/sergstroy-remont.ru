@@ -1,7 +1,7 @@
 <?php $this->view('template/tmpl_header')?>
-	<div class="wraper-header">
-    	<a href="<?php echo base_url('admin/account/logout/')?>" class="btn" style="float:right; padding-top:5px"><i class="cus-lock-open"></i>Logout</a>
-<!--    	<a class="admin-logo" href="--><?php //echo base_url('admin/home')?><!--"><img src="--><?php //echo base_url('public/images/logo.png')?><!--" border="0"/></a>-->
+    <div class="wraper-header">
+        <a href="<?php echo base_url('admin/account/logout/')?>" class="pull-right" style="">Выйти <i class="cus-door-out"></i></a>
+        <a class="admin-logo" href="<?php echo base_url('admin/home')?>"><img src="<?php echo base_url('public/img/logo/logo.png')?>" border="0" /></a>
     </div>
     <div class="container-fluid">  
         <div class="row-fluid">    

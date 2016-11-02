@@ -97,6 +97,25 @@
                 window.open(url,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=626,height=436');
             }
         };
+
+        /*---- start map block -------*/
+        ymaps.ready(init);
+        var myMap, myPlacemark;
+
+        function init(){
+            myMap = new ymaps.Map ("map", {
+                center: [<?php echo $siteSettings['gps_address']?>],
+                zoom: 14
+            });
+
+            myPlacemark = new ymaps.Placemark([<?php echo $siteSettings['gps_address']?>], {
+                hintContent: '<?php echo $siteSettings['title']?>',
+                balloonContent: '<?php echo $siteSettings['address']?>'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+        }
+        /*---- end map block -------*/
     </script>
 
     <link href="<?php echo base_url('public/css/magnific-popup.css');?>" rel="stylesheet" type="text/css">

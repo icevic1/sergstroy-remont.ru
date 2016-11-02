@@ -24,10 +24,11 @@ class Site_Settings extends Admin_Controller
             $this->form_validation->set_rules('loadedSettings[site_name]', 'Название', 'trim|max_length[128]');
             $this->form_validation->set_rules('loadedSettings[title]', 'Заголовак', 'trim|max_length[256]');
             $this->form_validation->set_rules('loadedSettings[email]', 'Email', 'trim|valid_email|max_length[32]');
-            $this->form_validation->set_rules('loadedSettings[phone]', 'Телефон', 'trim|max_length[16]');
-			$this->form_validation->set_rules('loadedSettings[phone2]', 'Телефон 2', 'trim|max_length[16]');
+            $this->form_validation->set_rules('loadedSettings[phone]', 'Телефон', 'trim|max_length[32]');
+			$this->form_validation->set_rules('loadedSettings[phone2]', 'Телефон 2', 'trim|max_length[32]');
 			$this->form_validation->set_rules('loadedSettings[address]', 'Адрес', 'trim|max_length[256]');
 			$this->form_validation->set_rules('loadedSettings[address2]', '2-й Адрес', 'trim|max_length[256]');
+			$this->form_validation->set_rules('loadedSettings[gps_address]', 'GPS', 'trim|max_length[128]');
             $this->form_validation->set_rules('loadedSettings[description]', 'Аписание', 'trim|max_length[1024]');
 
 // 			var_dump($this->form_validation->run(), $this->form_validation->error_array());

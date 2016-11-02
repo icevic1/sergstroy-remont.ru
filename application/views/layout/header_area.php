@@ -7,17 +7,17 @@
                     <ul class="nav navbar-nav navbar-right social-buttons">
                         <li class="evaluate"><a href=""></a><input type="search" name="evaluate-input" class="evaluate-input" placeholder="Оцени работу" value="" /></li>
                         <li class="fb"><a href="" onclick="fbShare();return false;"></a>
-                        <li class="ok"><a href="" onclick="Share.odnoklassniki('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
-                        <li class="vk"><a href="" onclick="Share.vkontakte('<?php echo site_url();?>','Студия Ремонта','<?php echo base_url('/public/img/logo/logo.png');?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
-                        <li class="btn-google"><a href="" onclick="Share.google('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
-                        <li class="btn-twitter"><a href="" onclick="Share.twitter('<?php echo site_url();?>','SERG-STROY.RU это студия качественного и быстрого ремонта за разумную цену в Москве и Московской Области!');return false;"></a></li>
+                        <li class="ok"><a href="" onclick="Share.odnoklassniki('<?php echo site_url();?>','<?php echo $siteSettings['description']?>');return false;"></a></li>
+                        <li class="vk"><a href="" onclick="Share.vkontakte('<?php echo site_url();?>','<?php echo $siteSettings['title']?>','<?php echo base_url('/public/img/logo/logo.png');?>','<?php echo $siteSettings['description']?>');return false;"></a></li>
+                        <li class="btn-google"><a href="" onclick="Share.google('<?php echo site_url();?>','<?php echo $siteSettings['description']?>');return false;"></a></li>
+                        <li class="btn-twitter"><a href="" onclick="Share.twitter('<?php echo site_url();?>','<?php echo $siteSettings['description']?>');return false;"></a></li>
                     </ul>
 <!--                    <a class="twitter-timeline" href="https://twitter.com/TwitterDev/likes">Tweets Liked by @TwitterDev</a>-->
                 </div>
             </nav>
             <div class="clearfix"></div>
             <div class="container">
-                <h1 class="contact-phone text-right" title="Контактный телефон">+7 (926) 923-19-45</h1>
+                <h1 class="contact-phone text-right" title="Контактный телефон"><?php echo $siteSettings['phone']?></h1>
             </div>
             <nav class="navbar navbar-default navbar-static-top navbar-custom-menu">
                 <div class="container">

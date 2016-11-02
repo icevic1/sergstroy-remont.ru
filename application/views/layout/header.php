@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--  facebook SEO -->
-    <meta property="og:title" content="Студия Ремонта"/>
+    <meta property="og:title" content="<?php echo $siteSettings['title']?>" />
     <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo current_url();?>"/>
-    <meta property="og:image" content="<?php echo base_url('/public/img/logo/logo.png');?>"/>
-    <meta property="og:site_name" content="SERG-STROY"/>
+    <meta property="og:url" content="<?php echo current_url();?>" />
+    <meta property="og:image" content="<?php echo base_url('/public/img/logo/logo.png');?>" />
+    <meta property="og:site_name" content="<?php echo $siteSettings['site_name']?>"/>
     <meta property="fb:app_id" content="961073814038310"/>
-    <meta property="og:description" content="<?php echo label('about short description');?>"/>
+    <meta property="og:description" content="<?php echo $siteSettings['description']?>" />
 
     <link rel="shortcut icon" href="<?php echo base_url('public/img/logo/favicon.ico'); ?>">
     <title><?php if(isset($PAGE_TITLE)) echo $PAGE_TITLE; else 'Sergstroy-remont';?></title>

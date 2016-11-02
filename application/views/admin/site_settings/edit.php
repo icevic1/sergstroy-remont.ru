@@ -28,12 +28,12 @@
 					</tr>
 					<tr>
 						<td class="input-label">Телефон</td>
-						<td class="input-field"><input id="phone" name="loadedSettings[phone]" type="text" value="<?php echo set_value('loadedSettings[phone]', ((isset($loadedItem['phone']))? $loadedItem['phone']:'')); ?>" maxlength="16" /></td>
+						<td class="input-field"><input id="phone" name="loadedSettings[phone]" type="text" value="<?php echo set_value('loadedSettings[phone]', ((isset($loadedItem['phone']))? $loadedItem['phone']:'')); ?>" maxlength="32" /></td>
 						<td><?php echo form_error('loadedSettings[phone]'); ?></td>
 					</tr>
 					<tr>
 						<td class="input-label">Телефон 2</td>
-						<td class="input-field"><input id="phone2" name="loadedSettings[phone2]" type="text" value="<?php echo set_value('loadedSettings[phone2]', ((isset($loadedItem['phone2']))? $loadedItem['phone2']:'')); ?>" maxlength="16" /></td>
+						<td class="input-field"><input id="phone2" name="loadedSettings[phone2]" type="text" value="<?php echo set_value('loadedSettings[phone2]', ((isset($loadedItem['phone2']))? $loadedItem['phone2']:'')); ?>" maxlength="32" /></td>
 						<td><?php echo form_error('loadedSettings[phone2]'); ?></td>
 					</tr>
 					<tr>
@@ -45,6 +45,11 @@
 						<td class="input-label">Адрес 2</td>
 						<td class="input-field"><input id="address2" name="loadedSettings[address2]" type="text" value="<?php echo set_value('loadedSettings[address2]', ((isset($loadedItem['address2']))? $loadedItem['address2']:'')); ?>" maxlength="256" /></td>
 						<td><?php echo form_error('loadedSettings[address2]'); ?></td>
+					</tr>
+					<tr>
+						<td class="input-label">GPS Координаты</td>
+						<td class="input-field"><input id="gps_address" name="loadedSettings[gps_address]" type="text" value="<?php echo set_value('loadedSettings[gps_address]', ((isset($loadedItem['gps_address']))? $loadedItem['gps_address']:'')); ?>" maxlength="128" /></td>
+						<td><?php echo form_error('loadedSettings[gps_address]'); ?></td>
 					</tr>
 					<tr>
 						<td class="input-label">Описание</td>
@@ -67,7 +72,7 @@ $(document).ready(function() {
         errorClass: 'error',
         rules: {	
         	"loadedSettings[site_name]": {required: true, maxlength:128},
-        	"loadedSettings[phone]":{ maxlength:16},
+        	"loadedSettings[phone]":{ maxlength:32},
         	"loadedSettings[email]":{ email: true, maxlength:32}
         },
         errorPlacement: function (error, element) {
