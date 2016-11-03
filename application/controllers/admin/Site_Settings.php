@@ -7,7 +7,7 @@ class Site_Settings extends Admin_Controller
 		parent::__construct();
 		$this->CI = &get_instance();
 		$this->load->library('cryptastic');
-		$this->load->model('SiteSettings_mod', 'SiteSettings');
+		$this->load->model('Sitesettings_mod', 'SiteSettings');
 	}
 	
 	function index()

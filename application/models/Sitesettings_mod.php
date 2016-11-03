@@ -1,6 +1,6 @@
 <?php
 
-class SiteSettings_mod extends CI_Model
+class Sitesettings_mod extends CI_Model
 {
     function __construct()
 	{

@@ -66,7 +66,7 @@ class Site_Controller extends My_Controller
 	{
 		parent::__construct ();
 
-        $this->load->model('SiteSettings_mod', 'SiteSettings');
+        $this->load->model('Sitesettings_mod', 'SiteSettings');
         //get your data
         $global_data = array('siteSettings'=> $this->SiteSettings->get());
 
