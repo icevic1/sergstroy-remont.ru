@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Site_Settings extends Admin_Controller
+class Sitesettings extends Admin_Controller
 {
 	var $page_id=50;
 	function __construct() 
@@ -41,7 +41,7 @@ class Site_Settings extends Admin_Controller
 
                 $this->SiteSettings->update($inputData);
 
-                redirect('admin/site-settings');
+                redirect('admin/sitesettings');
             } else {
                 $data['loadedItem'] = $this->input->post('loadedSettings');
             }
