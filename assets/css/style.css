@@ -9525,18 +9525,23 @@ ul.nav.nav-login > li.collapse-btn button {
 .vreviews-holder-slider > .container .app-btn {
   margin-bottom: 30px;
 }
-#client_reviews .review-form-holder {
+#client_reviews .review-form-holder,
+#review_cnt .review-form-holder {
   overflow: hidden;
 }
 #client_reviews .review-form-holder input[type="text"],
-#client_reviews .review-form-holder textarea {
+#review_cnt .review-form-holder input[type="text"],
+#client_reviews .review-form-holder textarea,
+#review_cnt .review-form-holder textarea {
   border-radius: 0;
   border: 1px solid #cccccc;
 }
-#client_reviews .review-form-holder input[type="text"] {
+#client_reviews .review-form-holder input[type="text"],
+#review_cnt .review-form-holder input[type="text"] {
   height: 50px;
 }
-#client_reviews .review-form-holder input[type="file"] {
+#client_reviews .review-form-holder input[type="file"],
+#review_cnt .review-form-holder input[type="file"] {
   position: absolute;
   z-index: 2;
   top: 0;

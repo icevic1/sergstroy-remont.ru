@@ -789,28 +789,31 @@ ul.nav.nav-login > li.collapse-btn button {
 .vreviews-holder-slider > .container .app-btn {
 	margin-bottom: 30px;
 }
-#client_reviews .review-form-holder {
-	overflow: hidden;
+#client_reviews, #review_cnt {
+	.review-form-holder {
+		overflow: hidden;
+
+		input[type="text"], textarea {
+			border-radius: 0;
+			border: 1px solid #cccccc;
+		}
+		input[type="text"] {
+			height: 50px;
+		}
+		input[type="file"] {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			filter: alpha(opacity=0);
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+			opacity: 0;
+			background-color: transparent;
+			color: transparent;
+		}
+	}
 }
-#client_reviews .review-form-holder input[type="text"],
-#client_reviews .review-form-holder textarea {
-	border-radius: 0;
-	border: 1px solid #cccccc;
-}
-#client_reviews .review-form-holder input[type="text"] {
-	height: 50px;
-}
-#client_reviews .review-form-holder input[type="file"] {
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	filter: alpha(opacity=0);
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	opacity: 0;
-	background-color: transparent;
-	color: transparent;
-}
+
 #client_reviews .list-holder .row.circles-holder {
 	padding-bottom: 20px;
 	padding-top: 20px;

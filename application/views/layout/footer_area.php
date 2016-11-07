@@ -18,4 +18,5 @@
 		</div>
 	</div>
 </footer>
+<?php $this->view('review/add-review.modal.php');?>
 <?php $this->view('layout/footer');?>

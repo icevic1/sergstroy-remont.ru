@@ -3,6 +3,15 @@
  */
 $(document).ready(function(e) {
 
+	/* open modal popup where allow user to leave a review message */
+	$(document).on('click', '.evaluate-input', function(e) {
+		console.log('test', generalPopUp);
+		var review_cnt = review_cnt || $('#review_cnt').clone().removeClass('hide').get(0).outerHTML;
+
+		generalPopUp.set('Оцените работу', review_cnt);
+		generalPopUp.show();
+	});
+
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50) {
             $('#back-to-top').fadeIn();
