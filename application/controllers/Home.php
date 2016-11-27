@@ -48,136 +48,15 @@ class Home extends Site_Controller
 		$this->load->view('layout/layout', $data);
 	}
 
-   	function profile($ID = null)
-	{
-		$item = $this->dealer->getFullDetails($ID);
-
-		if (empty($item)) {
-			show_error('Dealer with ID #'.$ID.'# was not found!', $status_code= 500 );
-		}
-		
-// 		var_dump($item);die;
-		$data['item'] = $item;
-		$data['navBackLink'] = site_url('dealer/');
-		$data['navEditLink'] = site_url('dealer/save/'.$ID);
-		
-		
-		// add breadcrumbs
-		$this->breadcrumbs->push('Home', 'home');
-		$this->breadcrumbs->push('Dealer Registration Platform', 'dealer/');
-		$this->breadcrumbs->push('Dealer Profile', 'dealer/profile');
-	
-		$data['PAGE_TITLE'] = 'eKYC - Dealer Registration Platform';
-		$data['BODY_CLASS'] = "sts";
-		$data['CONTENT']='dealer/profile';
-		$this->load->view('layout/layout_st', $data);
-	}
-    
-	function save($ID = null)
-	{
-		$this->load->helper('text');
-		
-		$required = '';
-		if ($ID) {
-			$dbdata = $this->applicant->getFullDetails($ID);
-// 			var_dump($dbdata);die;
-			if (empty($dbdata)) {
-				show_error('Applicantion Form with ID #'.$ID.'# was not found!', $status_code= 500 );
-			}
-			$data['choosed'] = $dbdata;
-			
-			$required = '|required';
-		}
-// var_dump($data['choosed_status_id']);die;
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			
-			$this->form_validation->set_rules('applicant[applicant_id]', 'Applicant ID', 'trim|numeric|max_length[5]'.$required);
-			
-			$this->form_validation->set_rules('applicant[serial_number]', 'Serial', 'trim|required|numeric|max_length[19]');
-			$this->form_validation->set_rules('applicant[phone_number]', 'phone_number', 'trim|required|numeric');
-			$this->form_validation->set_rules('applicant[dealer_id]', 'Dealer', 'trim|required|numeric|max_length[128]');
-			
-			$this->form_validation->set_rules('applicant[sales_id]', 'sales_id', 'trim');
-			$this->form_validation->set_rules('applicant[gender]', 'gender', 'trim|max_length[3]');
-			$this->form_validation->set_rules('applicant[subscriber_name]', 'subscriber_name', 'trim|max_length[64]');
-			$this->form_validation->set_rules('applicant[date_of_birth]', 'date_of_birth', 'trim');
-			$this->form_validation->set_rules('applicant[subscriber_company]', 'subscriber_company', 'trim');
-			$this->form_validation->set_rules('applicant[contact_name]', 'contact_name', 'trim');
-			$this->form_validation->set_rules('applicant[contact_number]', 'contact_number', 'trim|numeric');
-			$this->form_validation->set_rules('applicant[fax_number]', 'fax_number', 'trim|numeric');
-			$this->form_validation->set_rules('applicant[email]', 'email', 'trim|valid_email');
-			
-			$this->form_validation->set_rules('applicant[house_number]', 'House Number', 'trim|max_length[32]');
-			$this->form_validation->set_rules('applicant[street]', 'Street', 'trim|max_length[256]');
-			$this->form_validation->set_rules('applicant[commune_id]', 'Commune', 'trim|numeric');
-			$this->form_validation->set_rules('applicant[district_id]', 'District', 'trim|numeric');
-			$this->form_validation->set_rules('applicant[city_id]', 'City', 'trim|numeric');
-			
-			$this->form_validation->set_rules('applicant[subscriber_type]', 'subscriber_type', 'trim|alpha|max_length[12]');
-			$this->form_validation->set_rules('applicant[is_foreigner]', 'is_foreigner', 'trim|numeric|max_length[1]');
-			$this->form_validation->set_rules('applicant[document_type]', 'document_type', 'trim|numeric|max_length[1]');
-			$this->form_validation->set_rules('applicant[document_number]', 'document_number', 'trim|max_length[12]');
-			$this->form_validation->set_rules('applicant[document_issue_date]', 'document_issue_date', 'trim');
-			$this->form_validation->set_rules('applicant[photo_1]', 'photo_1', 'trim');
-			$this->form_validation->set_rules('applicant[photo_2]', 'photo_2', 'trim');
-			$this->form_validation->set_rules('applicant[photo_3]', 'photo_3', 'trim');
-			
-			$this->form_validation->set_error_delimiters('<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Warning!</strong> ', '</div>');
-			
-// 			log_message('debug', 'Some variable was correctly set \n '. var_export($_FILES, true));
-// 			var_dump($ret, var_export($_FILES, true));die;
-			
-			/**
-			 * passed validation proceed to post success logic
-			 */
-// 			var_dump($_FILES,  $this->form_validation->run(), $this->form_validation->error_array());
-			if ($this->form_validation->run() == true) {
-				
-				$inputData = $this->empty2null($this->input->post('applicant'));
-				$applicant_id = $this->form_validation->set_value('applicant[applicant_id]');
-				
-				if ( ($files = $this->upload_form_images()) ) {
-					foreach ($files as $key=>$fileName) {
-						$inputData['photo_'. (string)($key+1)] = $fileName;
-					}
-				}
-				
-// 				var_dump($inputData);die;
-				if ($applicant_id) {
-					$this->applicant->update($applicant_id, $inputData);
-				} else {
-					$applicant_id = $this->applicant->insert($inputData);
-				}
-				
-				redirect('home/save/'.$applicant_id);
-			} else {
-				$data['choosed'] = $this->input->post('applicant');
-			}
-		} // end if POST
-		
-		$data['districts'] = $this->location->getDistricts(true);
-	    $data['communes'] = $this->location->getCommunes(true);
-	    $data['cities'] = $this->location->getCities(true);
-	    $data['phone_numbers'] = $this->inventory->search_numbers(null, true);
-	    $data['serial_numbers'] = $this->inventory->search(null, true);
-	    $data['dealers'] = $this->dealer->search(null, true);
-
-	    // add breadcrumbs
-		$this->breadcrumbs->push('Application Forms', 'home/');
-		if ($ID) {
-			$this->breadcrumbs->push('Change Profile', 'home/save/'.$ID);
-			$data['ACTION_TITLE'] = 'Application Form Profile';
-		} else {
-			$this->breadcrumbs->push('New Application Form', 'home/save/');
-			$data['ACTION_TITLE'] = 'New Application Form';
-		}
-	    
-		$data['navBackLink'] = site_url('home/');
-	    $data['BODY_CLASS'] = "sts";
-		$data['PAGE_TITLE'] = 'eKYC - '.$data['ACTION_TITLE'];
-		$data['CONTENT']='home/save';
-		$this->load->view('layout/layout_st', $data);
-	}// end save()
+    public function price_list()
+    {
+//        $data['itemsList'] = $this->Review_mod->all();
+        $data['titlePage'] = 'Цены - Список цен';
+        $data['PAGE_TITLE'] = 'Цены :: Прайслист';
+        $data['BODY_CLASS'] = "home";
+        $data['CONTENT']='home/price_list';
+        $this->load->view('layout/layout', $data);
+    }
 	
 	protected function upload_form_images() 
 	{

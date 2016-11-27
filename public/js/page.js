@@ -147,12 +147,15 @@ $(document).ready(function() {
 		}
 	  })
 	});
-	$('.editor').each(function(){
+	/*$('.editor').each(function(){
+		alert(123);
 		CKEDITOR.replace( $(this).attr('id'), {
 			fullPage: false,
-			allowedContent: true
+			allowedContent: true,
+			filebrowserBrowseUrl: '/browser/browse.php',
+			filebrowserUploadUrl: '/uploader/upload.php'
 		});
-	});
+	});*/
 
 	$.validator.addMethod("valueNotEquals", function(value, element, arg){
 		return arg != value;

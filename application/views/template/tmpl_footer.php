@@ -50,11 +50,15 @@
 		<?php $this->session->unset_userdata('msg');}?>
 		
         $('.calendar').datepicker();
+
 		$('.editor').each(function(){
 			CKEDITOR.replace( $(this).attr('id'), {
 				 fullPage : false,
 				 allowedContent : true,
-				 fillEmptyBlocks :false
+				 fillEmptyBlocks :false,
+                filebrowserImageBrowseUrl : '<?php echo base_url('public/filemanager/index.html');?>',
+//                filebrowserBrowseUrl: '<?php //echo base_url('public/filemanager/index.html');?>//',
+//                filebrowserUploadUrl: '<?php //echo base_url('public/filemanager/ckupload.php');?>//'
 			});
 		});
 		$('.datatable').dataTable({

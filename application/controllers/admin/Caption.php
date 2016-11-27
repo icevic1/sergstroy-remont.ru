@@ -31,6 +31,10 @@ class Caption extends Admin_Controller
 	}
 	function edit()
 	{
+        /*$CI =& get_instance();
+        $CI->load->driver('session');
+*/
+//        var_dump($_SERVER['DOCUMENT_ROOT']);die;
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		

@@ -154,7 +154,8 @@
 				</div>-->
 				<div class="row">
 					<div class="col-sm-12 price-list text-right">
-						<a class="app-btn btn-orange" href=""><?php echo label('button label: Прай-лис');?></a>
+						<a class="btn btn-link- text-success" href="<?php echo base_url('assets/upload/price-list.xlsx')?>" title="Скачать полный список цэн"><i class="icon-file-excel"></i> <?php echo label('button label: Прай-лис');?></a>
+						<a class="app-btn btn-orange" href="<?php echo site_url('home/price_list')?>">Подробнее</a>
 					</div>
 				</div>
 			</div>
@@ -312,7 +313,7 @@
 									<div class="days" data-group="days">
 
 									</div>
-								</div>
+				 				</div>
 								<!-- Responsive calendar - END -->
 							</div>
 						</div>

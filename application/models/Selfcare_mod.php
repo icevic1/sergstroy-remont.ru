@@ -47,7 +47,7 @@ class Selfcare_mod extends CI_Model
 	public function addCaption($data_update) {
 		if (!$data_update) return 0;
 		$this->db->insert('sc_caption', $data_update);
-		print $lastQuery = $this->db->last_query();
+//		print $lastQuery = $this->db->last_query();
 		return true;
 	}
 	
