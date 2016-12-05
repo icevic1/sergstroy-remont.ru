@@ -88,7 +88,8 @@ class Gallery_mod extends CI_Model
         $query = $this->db->select('p.*')
             ->from('photos as p')
             ->join("galleries as g", 'p.gallery_id = g.id', 'LEFT')->select('g.name')
-            ->where('p.gallery_id', $gallery_id);
+            ->where('p.gallery_id', $gallery_id)
+            ->order_by('p.photo_id DESC');
 
         $query = $query->get();
         if ($query && $query->num_rows() > 0) {
