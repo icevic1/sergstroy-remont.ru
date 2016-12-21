@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0cad3813-51dc-4d55-b421-aa50e257f0eb" name="sergstroy-remont.esy.es" url="http://sergstroy-remont.esy.es">
+        <fileTransfer host="31.220.16.28" port="21" rootFolder="/public_html">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

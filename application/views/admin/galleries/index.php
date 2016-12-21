@@ -36,7 +36,7 @@
                 <td><?php echo $item['id'];?></td>
                 <td><a href="<?php echo site_url('admin/galleries/view/'.$item['id'])?>"><?php echo $item['name'];?></a></td>
                 <td class="text-center"><?php echo $item['uploaded'];?></td>
-                <td class="text-center"><?php echo $item['event_date'];?></td>
+                <td class="text-center"><?php echo (($item['event_date'] && $item['event_date'] != '0000-00-00')? date('d.m.Y', strtotime($item['event_date'])):'');?></td>
                 <td><?php echo $item['user_name'];?></td>
                 <td><?php echo $item['description'];?></td>
                 <td><?php echo $item['views'];?></td>

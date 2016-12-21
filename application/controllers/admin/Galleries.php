@@ -137,7 +137,7 @@ class Galleries extends Admin_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-
+//        var_dump(ini_get('upload_max_filesize'), $_FILES);die;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $this->form_validation->set_rules('gallery_id', 'ID Галерея', "trim|required");
@@ -151,29 +151,41 @@ class Galleries extends Admin_Controller
                 $data_update = array('gallery_id' => $gallery_id);
 
                 if ( ($images_path = $this->upload_images($inputName = 'images', $gallery_id)) ) {
-//                    var_dump($images_path);die;
+//                    var_dump('success:',$images_path);die;
                     $uploadedCount = count($images_path);
                     if ($uploadedCount)
                     foreach ($images_path as $item) {
                         $data_update = array_replace(array('gallery_id' => $gallery_id), $item);
                         $this->Photo->store($data_update);
                     }
-                    $this->session->set_userdata("msg", "<strong>Поздравляем!</strong> Успешно загруженно {$uploadedCount} фотографий!");
+
+                    if ($this->input->is_ajax_request() == true)
+                        $response = array('status'=>200, 'message'=>'File uploaded');
+                    else
+                        $this->session->set_userdata("msg", "<strong>Поздравляем!</strong> Успешно загруженно {$uploadedCount} фотографий!");
 
                 } else {
-                    echo "Error: file not uploade!";die;
+                    if ($this->input->is_ajax_request() == true)
+                        $response = array('status'=>500, 'message'=>'Error: file not uploade!');
+                    else {
+                        echo "Error: file not uploade!";die;
+                    }
                 }
-//                var_dump($data_update, $image_path);die;
-
-                redirect("/admin/galleries/view/{$gallery_id}/#photo_container");
+                //success, then redirect
+                if ($this->input->is_ajax_request() == true)
+                    echo json_encode($response);
+                else
+                    redirect("/admin/galleries/view/{$gallery_id}/#photo_container");
 
             } else {
-                $this->view();
+                if ($this->input->is_ajax_request() == true)
+                    echo json_encode(array('status'=>500, 'message'=>'Form validator error!'));
+                else
+                    $this->view();
             }
             //var_dump($this->input->post());
         } else {
-            var_dump($this->form_validation->error_array());
-//            redirect(current_url());
+            redirect('/error404');
         }
 
     }
@@ -204,8 +216,14 @@ class Galleries extends Admin_Controller
             }
         }
 
-        $number_of_files_uploaded = isset($_FILES[$inputName])?count($_FILES[$inputName]['name']): 0;
-
+        if ($this->input->is_ajax_request()) {
+            $number_of_files_uploaded = count($_FILES);
+            $postInputName = key($_FILES);
+//            var_dump($postInputName, $number_of_files_uploaded);die;
+        } else {
+            $number_of_files_uploaded = isset($_FILES[$inputName])?count($_FILES[$inputName]['name']): 0;
+        }
+//        var_dump($_FILES, $_POST, $this->input->is_ajax_request(), $number_of_files_uploaded, $inputName);die;
         // Faking upload calls to $_FILE
         if ($number_of_files_uploaded)
         for ($i = 0; $i < $number_of_files_uploaded; $i++) {
@@ -216,21 +234,39 @@ class Galleries extends Admin_Controller
             $_FILES);
             die;*/
 
-            if (!isset($_FILES[$inputName]['name'][$i]) || $_FILES[$inputName]['error'][$i] != 0) {
+            if (
+                ($this->input->is_ajax_request() == true && (!isset($_FILES[$postInputName]['name']) || $_FILES[$postInputName]['error'] != 0)) ||
+                ($this->input->is_ajax_request() == false && (!isset($_FILES[$inputName]['name'][$i]) || $_FILES[$inputName]['error'][$i] != 0))
+            ) {
                 echo "Error: File $i was not found!";
                 continue;
             }
 
-            $_FILES['userfile']['name']     = $_FILES[$inputName]['name'][$i];
-            $_FILES['userfile']['type']     = $_FILES[$inputName]['type'][$i];
-            $_FILES['userfile']['tmp_name'] = $_FILES[$inputName]['tmp_name'][$i];
-            $_FILES['userfile']['error']    = $_FILES[$inputName]['error'][$i];
-            $_FILES['userfile']['size']     = $_FILES[$inputName]['size'][$i];
-//            var_dump($_FILES);die;
+            if (!$this->input->is_ajax_request()) {
+                $_FILES['userfile']['name']     = $_FILES[$inputName]['name'][$i];
+                $_FILES['userfile']['type']     = $_FILES[$inputName]['type'][$i];
+                $_FILES['userfile']['tmp_name'] = $_FILES[$inputName]['tmp_name'][$i];
+                $_FILES['userfile']['error']    = $_FILES[$inputName]['error'][$i];
+                $_FILES['userfile']['size']     = $_FILES[$inputName]['size'][$i];
+                $file_name = time(). '_' .rand(00,99999) ."_{$gallery_id}". '.' . strtolower(pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION));
+            }
+            else
+            {
+                $_FILES['userfile']['name']     = $_FILES[$postInputName]['name'];
+                $_FILES['userfile']['type']     = $_FILES[$postInputName]['type'];
+                $_FILES['userfile']['tmp_name'] = $_FILES[$postInputName]['tmp_name'];
+                $_FILES['userfile']['error']    = $_FILES[$postInputName]['error'];
+                $_FILES['userfile']['size']     = $_FILES[$postInputName]['size'];
+                $file_name = time(). '_' .rand(00,99999) ."_{$gallery_id}". '.' . strtolower(pathinfo($_FILES[$postInputName]['name'], PATHINFO_EXTENSION));
+                unset($_FILES[$postInputName]);
+            }
+
+//            var_dump($postInputName, $_FILES);die;
+//            var_dump($file_name);die;
             /*$random_digit = rand(00,99999);
             $ext = strtolower(substr($_FILES['userfile']['name'], strpos($_FILES['userfile']['name'],'.'), strlen($_FILES['userfile']['name'])-1));
             $file_name = $random_digit . $ext;*/
-            $file_name = time(). '_' .rand(00,99999) ."_{$gallery_id}". '.' . strtolower(pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION));
+//            $file_name = time(). '_' .rand(00,99999) ."_{$gallery_id}". '.' . strtolower(pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION));
 
 
 
@@ -240,6 +276,7 @@ class Galleries extends Admin_Controller
                 'max_size'      => 10000,
                 'encrypt_name'     => TRUE,
                 'overwrite'     => TRUE,
+                'file_ext_tolower'=> true,
                 'upload_path'   => FCPATH . "$uploadFolder/original"
             );
 
@@ -250,7 +287,6 @@ class Galleries extends Admin_Controller
                 var_dump($error);
                 return false; //$this->load->view('submit', $error);
             } else {
-
                 // Continue processing the uploaded data
 //                $data['upload_data'] = array('upload_data' => $this->upload->data());
                 $file_name = $this->upload->file_name;

@@ -37,6 +37,67 @@ $(document).ready(function() {
 		}
 	});
 
+    var doUpload = function (form)
+    {
+        var $files = $(form).find('input[type=file]')[0].files,
+            size  = $files.length;
+        var semaphore  = 0,     // counting semaphore for ajax requests
+            all_queued = false; // bool indicator to account for instances where the first request might finish before the second even starts
+
+        $.each($files, function (i, file) {
+            var data = new FormData();
+            semaphore++;
+            $.each($(form).find('input:not([type=file])'), function(i, fileds){
+                data.append($(fileds).attr('name'), $(fileds).val());
+            });
+
+            data.append(file.name, file);
+
+            $.ajax({
+                url: $(form).attr('action'),
+                data: data,
+                async: false,
+                cache: false,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (response) {
+                    semaphore--;
+                    if (response.status == 200)
+                        $("span.label:contains('" + file.name + "')").toggleClass("label-info label-success");
+                    else
+                        $("span.label:contains('" + file.name + "')").toggleClass("label-info label-warning");
+
+                    /* async only redirect only if all photo was pushed to the server */
+                    /*console.log("last iteration", all_queued, semaphore);
+                    if (all_queued && semaphore === 0) {
+                        $("#ajax_preloader").hide();
+                        window.location.reload(true);
+                        // console.log("last iteration", all_queued, semaphore);
+                    }*/
+                },
+                error: function (textStatus, errorThrown) {
+                    semaphore--;
+                    $("span.label:contains('" + file.name + "')").toggleClass("label-info label-warning");
+                    if (all_queued && semaphore === 0) {
+                        $("#ajax_preloader").hide();
+                        console.log("last iteration", textStatus, errorThrown);
+                    }
+                }
+            });
+
+        }); // end $.each
+
+        // non async
+        // $("#ajax_preloader").hide();
+        window.location.reload(true);
+
+        // now that all ajax requests are queued up, switch the bool to indicate it
+        all_queued = true;
+        return false;
+    }
+
 	$("#form_upload_photo").validate({
 // 		debug: true,
 		errorElement: 'span',
@@ -55,7 +116,8 @@ $(document).ready(function() {
 		},
 		submitHandler: function(form) {
 			$("#ajax_preloader").show();
-			$(form).submit();
+			// $(form).submit();
+            doUpload(form);
 		}
 	});
 	$(".category-changer").on("change", function(e) {
