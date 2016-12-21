@@ -39,59 +39,80 @@ $(document).ready(function() {
 
     var doUpload = function (form)
     {
-        var $files = $(form).find('input[type=file]')[0].files,
-            size  = $files.length;
+        var $formFiles = $(form).find('input[type=file]')[0].files,
+            size  = $formFiles.length,
+            filesArr = [];
         var semaphore  = 0,     // counting semaphore for ajax requests
             all_queued = false; // bool indicator to account for instances where the first request might finish before the second even starts
 
-        $.each($files, function (i, file) {
-            var data = new FormData();
-            semaphore++;
-            $.each($(form).find('input:not([type=file])'), function(i, fileds){
-                data.append($(fileds).attr('name'), $(fileds).val());
-            });
+        $.each($formFiles, function (i, file) {
+            filesArr.push(file);
+        });
 
-            data.append(file.name, file);
+        var pusher = function ($files) {
+            all_queued = false;
+            semaphore  = 0;
+            $("#ajax_preloader").show();
 
-            $.ajax({
-                url: $(form).attr('action'),
-                data: data,
-                async: false,
-                cache: false,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                type: 'POST',
-                success: function (response) {
-                    semaphore--;
-                    if (response.status == 200)
-                        $("span.label:contains('" + file.name + "')").toggleClass("label-info label-success");
-                    else
+            $.each($files, function (i, file) {
+                var data = new FormData();
+                semaphore++;
+                $.each($(form).find('input:not([type=file])'), function (i, fileds) {
+                    data.append($(fileds).attr('name'), $(fileds).val());
+                });
+
+                data.append(file.name, file);
+
+                $.ajax({
+                    url: $(form).attr('action'),
+                    data: data,
+                    // async: false,
+                    cache: false,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function (response) {
+                        semaphore--;
+                        if (response.status == 200)
+                            $("span.label:contains('" + file.name + "')").toggleClass("label-info label-success");
+                        else
+                            $("span.label:contains('" + file.name + "')").toggleClass("label-info label-warning");
+
+                        /* async only redirect only if all photo was pushed to the server */
+                        if (all_queued && semaphore === 0)
+                        {
+                            $("#ajax_preloader").hide();
+                            if (filesArr.length) {
+                                pusher(filesArr.splice(0, 3));
+                            } else {
+                                window.location.reload(true);
+                                // console.log("last iteration", all_queued, semaphore);
+                            }
+                        }
+                    },
+                    error: function (textStatus, errorThrown) {
+                        semaphore--;
                         $("span.label:contains('" + file.name + "')").toggleClass("label-info label-warning");
-
-                    /* async only redirect only if all photo was pushed to the server */
-                    /*console.log("last iteration", all_queued, semaphore);
-                    if (all_queued && semaphore === 0) {
-                        $("#ajax_preloader").hide();
-                        window.location.reload(true);
-                        // console.log("last iteration", all_queued, semaphore);
-                    }*/
-                },
-                error: function (textStatus, errorThrown) {
-                    semaphore--;
-                    $("span.label:contains('" + file.name + "')").toggleClass("label-info label-warning");
-                    if (all_queued && semaphore === 0) {
-                        $("#ajax_preloader").hide();
-                        console.log("last iteration", textStatus, errorThrown);
+                        if (all_queued && semaphore === 0) {
+                            $("#ajax_preloader").hide();
+                            if (filesArr.length) {
+                                pusher(filesArr.splice(0, 3));
+                            } else {
+                                window.location.reload(true);
+                                // console.log("last iteration", textStatus, errorThrown);
+                            }
+                        }
                     }
-                }
-            });
+                });
 
-        }); // end $.each
+            }); // end $.each
+            all_queued = true;
+        }
 
-        // non async
-        // $("#ajax_preloader").hide();
-        window.location.reload(true);
+        if ($formFiles.length) {
+            pusher(filesArr.splice(0, 3));
+        }
 
         // now that all ajax requests are queued up, switch the bool to indicate it
         all_queued = true;
@@ -115,7 +136,7 @@ $(document).ready(function() {
 			element.parent().next().html(error); //error.insertAfter(element);
 		},
 		submitHandler: function(form) {
-			$("#ajax_preloader").show();
+
 			// $(form).submit();
             doUpload(form);
 		}
