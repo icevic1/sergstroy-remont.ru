@@ -10,8 +10,7 @@
         <table class="table gray-head gradient-thead compact table-striped table-bordered bootstrap-datatable datatable">
           <thead>
               <tr>
-                  <th>Аватар</th>
-                  <th>Детали отзыва</th>
+                  <th width="15%">Детали отзыва</th>
                   <th>Отзыв</th>
                   <th style="width: 70px;">Действия</th>
               </tr>
@@ -20,9 +19,13 @@
           <?php if (isset($itemsList)) {?>
           	<?php foreach($itemsList as $item) :?>
             <tr>
-                <td class="text-center"><?php if($item['image']) echo '<img width="50" src="'.$item['image'].'" />';?></td>
-                <td><dl class="no-margin">
-                        <dt>Автор</dt><dd><?php echo $item['name'];?></dd>
+
+                <td>
+                    <div class="center">
+                        <?php if($item['image']) echo '<img width="50" src="'.$item['image'].'" title="Аватар пользователя" />';?>
+                        <p title="Имя автора"><?php echo $item['name'];?></p>
+                    </div>
+                    <dl class="no-margin">
                         <dt>Дата создания</dt><dd><?php echo $item['created_at'];?></dd>
                         <dt>IP Адресс</dt><dd><?php echo $item['ip_address'];?></dd>
                         <dt>Тип отзыва</dt><dd><?php echo ($item['is_video']?'Видео':'Пользовательский');?></dd>

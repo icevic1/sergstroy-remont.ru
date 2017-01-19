@@ -17,7 +17,8 @@
             </nav>
             <div class="clearfix"></div>
             <div class="container">
-                <h1 class="contact-phone text-right" title="Контактный телефон"><?php echo $siteSettings['phone']?></h1>
+                <h1 class="contact-phone text-right margin-top-0" title="Контактный телефон"><?php echo $siteSettings['phone']?></h1>
+                <h1 class="contact-phone text-right margin-top-0" title="Контактный телефон"><?php echo $siteSettings['phone2']?></h1>
             </div>
             <nav class="navbar navbar-default navbar-static-top navbar-custom-menu">
                 <div class="container">

@@ -8827,6 +8827,18 @@ http://www.minimit.com/demos/bootstrap-3-responsive-columns-of-same-height
 .col-bottom {
   vertical-align: bottom;
 }
+.margin-top-0 {
+  margin-top: 0;
+}
+.margin-left-0 {
+  margin-left: 0;
+}
+.margin-right-0 {
+  margin-right: 0;
+}
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
 @media (min-width: 480px) {
   .row-xs-height {
     display: table;
@@ -9269,9 +9281,7 @@ ul.social-buttons li.btn-google a {
 ul.social-buttons li.btn-twitter a {
   background-position: 0 -240px;
 }
-h1.contact-phone {
-  font-size: 35px;
-  margin-top: 5px;
+.contact-phone {
   color: #063551;
 }
 /* nav-bar navbar-custom-menu */
